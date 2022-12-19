@@ -1,0 +1,76 @@
+import javax.persistence.*;
+
+public class ZakEntity {
+// для заказчика
+ // потом еще дополню если что надо будет
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String Opisanie;
+    private String email;
+    private Long pass;
+    private String kogoishet;
+    
+public String getOpisanie() {
+        return Opisanie;
+    }
+
+    public void setOpisanie(String Opisanie) {
+        this.Opisanie = Opisanie;
+    }
+public Long getkogoishet() {
+        return kogoishet;
+    }
+
+    public void setkogoishet(String kogoishet) {
+        this.kogoishet = kogoishet;
+    }
+public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Long getPass() {
+        return pass;
+    }
+
+    public void setPass(Long pass) {
+        this.pass = pass;
+    }
+}
+//надеюсь ошибок не будет
