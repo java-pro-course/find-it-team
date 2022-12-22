@@ -11,7 +11,7 @@
 	<groupId>find</groupId>
 	<artifactId>itTeam</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>fina-it-team</name>
+	<name>find-it-team</name>
 	<description>Our group project called &quot;Find It Team&quot;</description>
 	<properties>
 		<java.version>1.8</java.version>

@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FinaItTeamApplication {
+public class FindItTeamApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FinaItTeamApplication.class, args);
+		SpringApplication.run(FindItTeamApplication.class, args);
 	}
 
 }
