@@ -6,12 +6,16 @@ import javax.persistence.*;
 @Table(schema = "finditteam", name = "user")
 public class UserEntity {
 
+/*
+* Советую убрать либо surname, либо lastname. Это одно и тоже!
+* Некоторые могут не понять, что это такое.
+*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String surname;
-    private String lastname;
+    private String surname; // =lastname
+    // private String lastname; // =surname
     private String email;
     private String password;
 
@@ -39,13 +43,13 @@ public class UserEntity {
         this.surname = surname;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
+//    public String getLastname() {
+//        return lastname;
+//    }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+//    public void setLastname(String lastname) {
+//        this.lastname = lastname;
+//    }
 
     public String getEmail() {
         return email;
