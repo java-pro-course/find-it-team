@@ -11,7 +11,6 @@ public class UserEntity {
     private Long id;
     private String name;
     private String surname;
-    private String lastname;
     private String email;
     private String password;
 
@@ -37,14 +36,6 @@ public class UserEntity {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
     }
 
     public String getEmail() {
