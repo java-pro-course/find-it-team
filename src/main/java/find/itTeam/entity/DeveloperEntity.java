@@ -1,6 +1,7 @@
 package find.itTeam.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 /**
  * Entity для программиста
@@ -26,7 +27,7 @@ public class DeveloperEntity {
     private String password;
 
     @Column(name = "projects")
-    private String projects;
+    private ArrayList<String> projects;
 
     @Column(name = "github_link")
     private String githubLink;
@@ -35,7 +36,7 @@ public class DeveloperEntity {
     private String devRole;
 
     @Column(name = "languages")
-    private String languages;
+    private ArrayList<String> languages;
 
     @Column(name = "development_area")
     private String developmentArea;
@@ -89,14 +90,6 @@ public class DeveloperEntity {
         this.password = password;
     }
 
-    public String getProjects() {
-        return projects;
-    }
-
-    public void setProjects(String projects) {
-        this.projects = projects;
-    }
-
     public String getGithubLink() {
         return githubLink;
     }
@@ -113,11 +106,19 @@ public class DeveloperEntity {
         this.devRole = devRole;
     }
 
-    public String getLanguages() {
+    public ArrayList<String> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(ArrayList<String> projects) {
+        this.projects = projects;
+    }
+
+    public ArrayList<String> getLanguages() {
         return languages;
     }
 
-    public void setLanguages(String languages) {
+    public void setLanguages(ArrayList<String> languages) {
         this.languages = languages;
     }
 
