@@ -57,11 +57,11 @@ public class UserService {
         return "deleted!";
     }
 
-    @Transactional
-    public String updateUser(Long id, EditUser user) {
-        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
-        return "updated!";
-    }
+//    @Transactional
+//    public String updateUser(Long id, EditUser user) {
+//        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
+//        return "updated!";
+//    }
 
 
 }
