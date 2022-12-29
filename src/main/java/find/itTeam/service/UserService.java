@@ -1,8 +1,10 @@
 package find.itTeam.service;
 
+import find.itTeam.dto.CreateUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class UserService {
@@ -16,10 +18,10 @@ public class UserService {
      * Создание пользователя
      * @param user
      */
+
     public UserEntity createNewUser(UserEntity user){
         UserEntity newUser = new UserEntity();
 
-        newUser.setId(user.getId());
         newUser.setName(user.getName());
         newUser.setSurname(user.getSurname());
         newUser.setEmail(user.getEmail());
