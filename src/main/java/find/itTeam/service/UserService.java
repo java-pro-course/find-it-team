@@ -18,7 +18,9 @@ public class UserService {
      * Создание пользователя
      * @param user
      */
+
     public UserEntity createNewUser(CreateUser user){
+
         UserEntity newUser = new UserEntity();
 
         newUser.setName(user.getName());
@@ -56,6 +58,7 @@ public class UserService {
         return "deleted!";
     }
 
+
     /**
      * Вход пользователя по email и паролю
      * @param email
@@ -71,5 +74,6 @@ public class UserService {
             return "fail";
         }
     }
+
 
 }
