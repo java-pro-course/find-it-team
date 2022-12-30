@@ -6,12 +6,6 @@ import javax.persistence.*;
 @Table(schema = "finditteam", name = "user")
 public class UserEntity {
 
-/*
-* Советую убрать либо surname, либо lastname. Это одно и тоже!
-* Некоторые могут не понять, что это такое.
-* 
-* Убрал. SH.
-*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -19,7 +19,8 @@ public class UserService {
      * @param user
      */
 
-    public UserEntity createNewUser(UserEntity user){
+    public UserEntity createNewUser(CreateUser user){
+
         UserEntity newUser = new UserEntity();
 
         newUser.setName(user.getName());
@@ -55,6 +56,23 @@ public class UserService {
         userRepository.deleteById(id);
 
         return "deleted!";
+    }
+
+
+    /**
+     * Вход пользователя по email и паролю
+     * @param email
+     * @param pass
+     * @return подтверждение действия
+     */
+    public String login(String email, String pass){
+        UserEntity user = userRepository.findByEmail(email);
+
+        if(user.getPassword() == pass){
+            return "success";
+        }else{
+            return "fail";
+        }
     }
 
 
