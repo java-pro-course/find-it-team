@@ -12,7 +12,7 @@ public class DeveloperService {
     public DeveloperService(DeveloperRepository developerRepository) {
         this.developerRepository = developerRepository;
     }
-   public DeveloperEntity createCommandDeveloper(CreateTeamDeveloper developers){
+   public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers){
         DeveloperEntity developer = new DeveloperEntity();
 
         developer.setId(developer.getId());

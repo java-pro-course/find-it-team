@@ -15,7 +15,7 @@ public class TeamDeveloperController {
         this.developerService = developerService;
     }
     @GetMapping("info-about-developer-in-team")
-    private DeveloperEntity createCommandDeveloper(@RequestBody CreateTeamDeveloper requestDeveloper){
-        return developerService.createCommandDeveloper(requestDeveloper);
+    private DeveloperEntity createTeamDeveloper(@RequestBody CreateTeamDeveloper requestDeveloper){
+        return developerService.createTeamDeveloper(requestDeveloper);
     }
 }
