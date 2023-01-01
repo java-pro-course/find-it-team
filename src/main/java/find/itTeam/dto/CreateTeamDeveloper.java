@@ -2,9 +2,9 @@ package find.itTeam.dto;
 
 import find.itTeam.entity.DeveloperEntity;
 
-public class CreateCommandDeveloper {
+public class CreateTeamDeveloper {
     private DeveloperEntity developerEntity;
-    public CreateCommandDeveloper(DeveloperEntity developerEntity){
+    public CreateTeamDeveloper(DeveloperEntity developerEntity){
         DeveloperEntity developers = new DeveloperEntity();
     }
 

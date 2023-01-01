@@ -1,6 +1,6 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateCommandDeveloper;
+import find.itTeam.dto.CreateTeamDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class DeveloperService {
     public DeveloperService(DeveloperRepository developerRepository) {
         this.developerRepository = developerRepository;
     }
-   public DeveloperEntity createCommandDeveloper(CreateCommandDeveloper developers){
+   public DeveloperEntity createCommandDeveloper(CreateTeamDeveloper developers){
         DeveloperEntity developer = new DeveloperEntity();
 
         developer.setId(developer.getId());

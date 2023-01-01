@@ -1,6 +1,6 @@
 package find.itTeam.controller;
 
-import find.itTeam.dto.CreateCommandDeveloper;
+import find.itTeam.dto.CreateTeamDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CommandDeveloperController {
+public class TeamDeveloperController {
     private final DeveloperService developerService;
 
-    public CommandDeveloperController(DeveloperService developerService) {
+    public TeamDeveloperController(DeveloperService developerService) {
         this.developerService = developerService;
     }
-    @GetMapping("info-about-command-developer")
-    private DeveloperEntity createCommandDeveloper(@RequestBody CreateCommandDeveloper requestDeveloper){
+    @GetMapping("info-about-developer-in-team")
+    private DeveloperEntity createCommandDeveloper(@RequestBody CreateTeamDeveloper requestDeveloper){
         return developerService.createCommandDeveloper(requestDeveloper);
     }
 }
