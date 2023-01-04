@@ -17,9 +17,9 @@ public class CommentService {
 public CommentEntity createNewComment(CreateComment comment){
 CommentEntity newComment = new CommentEntity();
 
-newComment.setId(newComment.getId());
-newComment.setText(newComment.getText());
-newComment.setDateTime(newComment.getDateTime());
+newComment.setId(comment.getId());
+newComment.setText(comment.getText());
+newComment.setDateTime(comment.getDateTime());
 return commentRepository.save(newComment);
 }
     /**

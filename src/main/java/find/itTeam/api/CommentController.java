@@ -1,4 +1,4 @@
-package find.itTeam.controller;
+package find.itTeam.api;
 
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @RestController
 public class CommentController {
 private final CommentService commentService;
-
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }

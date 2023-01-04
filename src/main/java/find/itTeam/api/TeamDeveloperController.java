@@ -1,4 +1,4 @@
-package find.itTeam.controller;
+package find.itTeam.api;
 
 import find.itTeam.dto.CreateTeamDeveloper;
 import find.itTeam.entity.DeveloperEntity;
