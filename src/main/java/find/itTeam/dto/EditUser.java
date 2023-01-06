@@ -2,10 +2,10 @@ package find.itTeam.dto;
 
 public class EditUser {
 
-    private String name;
-    private String surname;
-    private String email;
-    private String password;
+    private  String name;
+    private  String surname;
+    private  String email;
+    private  String password;
 
     public EditUser(String name, String surname, String email, String password) {
         this.name = name;
@@ -30,7 +30,7 @@ public class EditUser {
         return password;
     }
 
-    public void setName(String name) {
+    public void setName(String password) {
         this.name = name;
     }
 
@@ -38,7 +38,7 @@ public class EditUser {
         this.surname = surname;
     }
 
-    public void setEmail(String email) {
+    public void setEmail (String email) {
         this.email = email;
     }
 

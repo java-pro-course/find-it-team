@@ -1,5 +1,4 @@
 package find.itTeam.service;
-
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
 import find.itTeam.repository.CommentRepository;
@@ -16,8 +15,6 @@ public class CommentService {
     }
 public CommentEntity createNewComment(CreateComment comment){
 CommentEntity newComment = new CommentEntity();
-
-newComment.setId(comment.getId());
 newComment.setText(comment.getText());
 newComment.setDateTime(comment.getDateTime());
 return commentRepository.save(newComment);
@@ -25,14 +22,14 @@ return commentRepository.save(newComment);
     /**
      * Изменение комментария по id
      * @param id
-     * @param text
-     * @param dateTime
+     * @param comment
      */
-public CommentEntity updateComment(Long id, String text, LocalDate dateTime){
-    CommentEntity changeComment = commentRepository.findById(id).get();
-    changeComment.setText(text);
-    changeComment.setDateTime(dateTime);
-    return changeComment;
+    public CommentEntity updateComment(Long id, CommentEntity comment){
+        CommentEntity changeComment = commentRepository.findById(id).get();
+        changeComment.setText(comment.getText());
+        changeComment.setDateTime(comment.getDateTime());
+        return commentRepository.save(changeComment);
+
     }
     /**
      * Удаление коммента по id
@@ -44,3 +41,4 @@ public CommentEntity updateComment(Long id, String text, LocalDate dateTime){
         return "comment has been deleted...";
     }
 }
+

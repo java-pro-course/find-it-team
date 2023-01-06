@@ -12,23 +12,26 @@ public class DeveloperService {
     public DeveloperService(DeveloperRepository developerRepository) {
         this.developerRepository = developerRepository;
     }
-   public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers){
+
+    public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
+        developer.setName(developers.getName());
+        developer.setSurname(developers.getSurname());
+        developer.setEmail(developers.getEmail());
+        developer.setProjects(developers.getProjects());
+        developer.setGithubLink(developers.getGithubLink());
+        developer.setDevRole(developers.getDevRole());
+        developer.setLanguages(developers.getLanguages());
+        developer.setDevelopmentArea(developers.getDevelopmentArea());
+        developer.setExperience(developers.getExperience());
+        developer.setCity(developers.getCity());
+        developer.setMainJob(developers.getMainJob());
 
-        developer.setId(developer.getId());
-        developer.setName(developer.getName());
-        developer.setSurname(developer.getSurname());
-        developer.setEmail(developer.getEmail());
-        developer.setProjects(developer.getProjects());
-        developer.setGithubLink(developer.getGithubLink());
-        developer.setDevRole(developer.getDevRole());
-        developer.setLanguages(developer.getLanguages());
-       developer.setDevelopmentArea(developer.getDevelopmentArea());
-       developer.setExperience(developer.getExperience());
-       developer.setCity(developer.getCity());
-       developer.setMainJob(developer.getMainJob());
+        return developerRepository.save(developer);
+    }
 
-       return developerRepository.save(developer);
+    public DeveloperEntity infoAboutTeamDeveloper(CreateTeamDeveloper developers) {
+        DeveloperEntity developer = new DeveloperEntity();
+        return developerRepository.save(createTeamDeveloper(developers));
     }
 }
-
