@@ -1,5 +1,6 @@
 package find.itTeam.service;
 
+import find.itTeam.dto.ChangeComment;
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
 import find.itTeam.repository.CommentRepository;
@@ -23,13 +24,12 @@ return commentRepository.save(newComment);
     /**
      * Изменение комментария по id
      * @param id
-     * @param text
-     * @param dateTime
+     * @param comment
      */
-public CommentEntity updateComment(Long id, String text, LocalDate dateTime){
+public CommentEntity updateComment(Long id, CommentEntity comment){
     CommentEntity changeComment = commentRepository.findById(id).get();
-    changeComment.setText(text);
-    changeComment.setDateTime(dateTime);
+    changeComment.setText(comment.getText());
+    changeComment.setDateTime(comment.getDateTime());
     return commentRepository.save(changeComment);
     }
     /**
