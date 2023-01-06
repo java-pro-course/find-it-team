@@ -18,7 +18,7 @@ private final CommentService commentService;
         this.commentService = commentService;
     }
     @PostMapping("create-comment")
-    public CommentEntity createComment(@RequestBody CreateComment newComment){
+    public CommentEntity createComment(@RequestBody CreateComment   newComment){
         return commentService.createNewComment(newComment);
     }
     @GetMapping("edit-comment/{id}/{text}/{dateTime}")
