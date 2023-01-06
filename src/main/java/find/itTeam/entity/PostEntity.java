@@ -10,14 +10,8 @@ public class PostEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "content")
     private String content;
-
-    @Column(name = "datetime")
     private LocalDate dateTime;
-
-    @Column(name = "post_status")
     private String postStatus;
 
     public Long getId() {
