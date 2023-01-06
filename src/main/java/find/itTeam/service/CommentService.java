@@ -30,7 +30,7 @@ public CommentEntity updateComment(Long id, String text, LocalDate dateTime){
     CommentEntity changeComment = commentRepository.findById(id).get();
     changeComment.setText(text);
     changeComment.setDateTime(dateTime);
-    return changeComment;
+    return commentRepository.save(changeComment);
     }
     /**
      * Удаление коммента по id
