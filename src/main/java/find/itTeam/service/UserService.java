@@ -5,6 +5,8 @@ import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 
 @Service
 public class UserService {
@@ -18,9 +20,7 @@ public class UserService {
      * Создание пользователя
      * @param user
      */
-
     public UserEntity createNewUser(CreateUser user){
-
         UserEntity newUser = new UserEntity();
 
         newUser.setName(user.getName());
@@ -35,16 +35,13 @@ public class UserService {
      * Обновление пользователя по id
      * @param id
      * @param user
+     * @return подтверждение действия
      */
-    public UserEntity updateUser(Long id, UserEntity user){
-        UserEntity updUser = userRepository.findById(id).get();
+    @Transactional
+    public String updateUser(Long id, CreateUser user){
+        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
-        updUser.setName(user.getName());
-        updUser.setSurname(user.getSurname());
-        updUser.setEmail(user.getEmail());
-        updUser.setPassword(user.getPassword());
-
-        return userRepository.save(updUser);
+        return "user updated!";
     }
 
     /**
@@ -55,7 +52,7 @@ public class UserService {
     public String deleteUser(Long id){
         userRepository.deleteById(id);
 
-        return "deleted!";
+        return "user deleted!";
     }
 
 
@@ -69,7 +66,7 @@ public class UserService {
         UserEntity user = userRepository.findByEmail(email);
 
         if(user.getPassword() == pass){
-            return "success";
+            return "successfully logined";
         }else{
             return "fail";
         }
