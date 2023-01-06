@@ -1,5 +1,6 @@
 package find.itTeam.api;
 
+import find.itTeam.dto.ChangeComment;
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
 import find.itTeam.service.CommentService;
@@ -18,12 +19,12 @@ private final CommentService commentService;
         this.commentService = commentService;
     }
     @PostMapping("create-comment")
-    public CommentEntity createComment(@RequestBody CreateComment   newComment){
+    public CommentEntity createComment(@RequestBody CreateComment newComment){
         return commentService.createNewComment(newComment);
     }
     @GetMapping("edit-comment/{id}/{text}/{dateTime}")
-    public CommentEntity changeComment(@PathVariable Long id, @PathVariable String text, @PathVariable LocalDate dateTime){
-        return commentService.updateComment(id, text, dateTime);
+    public CommentEntity updateComment(@PathVariable Long id, @RequestBody CommentEntity changeComment){
+        return commentService.updateComment(id, changeComment);
     }
     @GetMapping("delete-comment/{id}")
     public String deleteComment(@PathVariable Long id){
