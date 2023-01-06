@@ -5,7 +5,7 @@ public class CreateUser {
     private String surname;
     private String email;
     private String password;
-    
+
     public CreateUser(String name, String surname, String email, String password){
         this.name = name;
         this.surname = surname;

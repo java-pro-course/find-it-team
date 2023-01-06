@@ -1,7 +1,6 @@
-package find.itTeam.controller;
+package find.itTeam.api;
 
 import find.itTeam.dto.CreateUser;
-import find.itTeam.dto.EditUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.service.UserService;
 import org.springframework.web.bind.annotation.*;

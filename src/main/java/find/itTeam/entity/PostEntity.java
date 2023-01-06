@@ -17,6 +17,9 @@ public class PostEntity {
     @Column(name = "datetime")
     private LocalDate dateTime;
 
+    @Column(name = "post_status")
+    private String postStatus;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +43,12 @@ public class PostEntity {
     public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
     }
-}
 
+    public String getPostStatus() {
+        return postStatus;
+    }
+
+    public void setPostStatus(String postStatus) {
+        this.postStatus = postStatus;
+    }
+}
