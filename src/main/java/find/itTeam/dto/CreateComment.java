@@ -6,7 +6,8 @@ public class CreateComment {
     private Long Id;
     private String text;
     private LocalDate dateTime;
-    public CreateComment(String text, LocalDate dateTime){
+    public CreateComment(Long Id, String text, LocalDate dateTime){
+        this.Id = Id;
         this.text = text;
         this.dateTime = dateTime;
     }
