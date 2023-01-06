@@ -18,12 +18,12 @@ private final CommentService commentService;
         this.commentService = commentService;
     }
     @PostMapping("create-comment")
-    public CommentEntity createComment(@RequestBody CreateComment requestComment){
-        return commentService.createNewComment(requestComment);
+    public CommentEntity createComment(@RequestBody CreateComment newComment){
+        return commentService.createNewComment(newComment);
     }
     @GetMapping("edit-comment/{id}/{text}/{dateTime}")
     public CommentEntity changeComment(@PathVariable Long id, @PathVariable String text, @PathVariable LocalDate dateTime){
-        return commentService.updateComment(id,text, dateTime);
+        return commentService.updateComment(id, text, dateTime);
     }
     @GetMapping("delete-comment/{id}")
     public String deleteComment(@PathVariable Long id){
