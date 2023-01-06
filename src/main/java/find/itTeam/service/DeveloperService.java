@@ -12,7 +12,7 @@ public class DeveloperService {
     public DeveloperService(DeveloperRepository developerRepository) {
         this.developerRepository = developerRepository;
     }
-   public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers){
+    public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers){
         DeveloperEntity developer = new DeveloperEntity();
 
         developer.setId(developer.getId());
@@ -23,12 +23,11 @@ public class DeveloperService {
         developer.setGithubLink(developer.getGithubLink());
         developer.setDevRole(developer.getDevRole());
         developer.setLanguages(developer.getLanguages());
-       developer.setDevelopmentArea(developer.getDevelopmentArea());
-       developer.setExperience(developer.getExperience());
-       developer.setCity(developer.getCity());
-       developer.setMainJob(developer.getMainJob());
+        developer.setDevelopmentArea(developer.getDevelopmentArea());
+        developer.setExperience(developer.getExperience());
+        developer.setCity(developer.getCity());
+        developer.setMainJob(developer.getMainJob());
 
-       return developerRepository.save(developer);
+        return developerRepository.save(developer);
     }
 }
-
