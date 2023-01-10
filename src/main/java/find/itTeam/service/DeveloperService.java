@@ -42,7 +42,19 @@ public class DeveloperService {
      * @param developers
      * @return команда разработчиков
      */
-    public DeveloperEntity infoAboutTeamDeveloper(CreateTeamDeveloper developers) {
-        return developerRepository.save(createTeamDeveloper(developers));
+    public DeveloperEntity infoAboutTeamDeveloper(Long id, CreateTeamDeveloper developers) {
+        DeveloperEntity developer = developerRepository.findById(id).get();
+        developer.setName(developers.getName());
+        developer.setSurname(developers.getSurname());
+        developer.setEmail(developers.getEmail());
+        developer.setProjects(developers.getProjects());
+        developer.setGithubLink(developers.getGithubLink());
+        developer.setDevRole(developers.getDevRole());
+        developer.setLanguages(developers.getLanguages());
+        developer.setDevelopmentArea(developers.getDevelopmentArea());
+        developer.setExperience(developers.getExperience());
+        developer.setCity(developers.getCity());
+        developer.setMainJob(developers.getMainJob());
+        return developer;
     }
 }
