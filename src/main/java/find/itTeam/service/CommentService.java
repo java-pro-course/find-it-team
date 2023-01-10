@@ -1,6 +1,4 @@
 package find.itTeam.service;
-
-import find.itTeam.dto.ChangeComment;
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
 import find.itTeam.repository.CommentRepository;
@@ -42,3 +40,4 @@ public CommentEntity updateComment(Long id, CommentEntity comment){
         return "comment has been deleted...";
     }
 }
+

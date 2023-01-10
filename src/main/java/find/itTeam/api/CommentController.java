@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 @RestController
 public class CommentController {
-private final CommentService commentService;
+    private final CommentService commentService;
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
@@ -31,3 +31,4 @@ private final CommentService commentService;
         return commentService.deleteComment(id);
     }
 }
+

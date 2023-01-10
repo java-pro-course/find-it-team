@@ -28,7 +28,8 @@ public class PostController {
     }
 
     @GetMapping("update-post/{id}/{content}/{dateTime}")
-        public PostEntity updatePost (@RequestBody PostEntity requestPost){
+    public PostEntity updatePost (@RequestBody PostEntity requestPost){
         return postService.updatePost(requestPost);
-        }
+    }
+       
 }

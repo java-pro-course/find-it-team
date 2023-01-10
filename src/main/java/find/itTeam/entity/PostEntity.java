@@ -52,4 +52,3 @@ public class PostEntity {
         this.postStatus = postStatus;
     }
 }
-
