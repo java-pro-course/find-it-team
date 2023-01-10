@@ -24,12 +24,11 @@ return commentRepository.save(newComment);
      * @param id
      * @param comment
      */
-    public CommentEntity updateComment(Long id, CommentEntity comment){
-        CommentEntity changeComment = commentRepository.findById(id).get();
-        changeComment.setText(comment.getText());
-        changeComment.setDateTime(comment.getDateTime());
-        return commentRepository.save(changeComment);
-
+public CommentEntity updateComment(Long id, CommentEntity comment){
+    CommentEntity changeComment = commentRepository.findById(id).get();
+    changeComment.setText(comment.getText());
+    changeComment.setDateTime(comment.getDateTime());
+    return commentRepository.save(changeComment);
     }
     /**
      * Удаление коммента по id

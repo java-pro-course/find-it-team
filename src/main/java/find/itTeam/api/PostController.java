@@ -31,4 +31,5 @@ public class PostController {
     public PostEntity updatePost (@RequestBody PostEntity requestPost){
         return postService.updatePost(requestPost);
     }
+       
 }

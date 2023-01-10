@@ -50,6 +50,7 @@ public class  PostService {
      */
     public String deletePost (Long postId){
         postRepository.deleteById(postId);
-        return "deleted!";
+    return "deleted!";
     }
 }
+

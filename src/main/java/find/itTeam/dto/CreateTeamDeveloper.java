@@ -29,7 +29,7 @@ public class CreateTeamDeveloper {
         this.devRole = devRole;
         this.languages = languages;
         this.developmentArea = developmentArea;
-        this.experience=experience;
+        this.experience = experience;
         this.city = city;
         this.mainJob = mainJob;
     }
@@ -40,93 +40,93 @@ public class CreateTeamDeveloper {
 
     public void setName(String name) {
         this.name = name;
-    }
 
-    public String getSurname() {
-        return surname;
     }
+    public String getSurname () {
+            return surname;
+        }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+        public void setSurname (String surname){
+            this.surname = surname;
+        }
 
-    public String getEmail() {
-        return email;
-    }
+        public String getEmail () {
+            return email;
+        }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+        public void setEmail (String email){
+            this.email = email;
+        }
 
-    public String getPassword() {
-        return password;
-    }
+        public String getPassword () {
+            return password;
+        }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+        public void setPassword (String password){
+            this.password = password;
+        }
 
-    public ArrayList<String> getProjects() {
-        return projects;
-    }
+        public ArrayList<String> getProjects () {
+            return projects;
+        }
 
-    public void setProjects(ArrayList<String> projects) {
-        this.projects = projects;
-    }
+        public void setProjects (ArrayList < String > projects) {
+            this.projects = projects;
+        }
 
-    public String getGithubLink() {
-        return githubLink;
-    }
+        public String getGithubLink () {
+            return githubLink;
+        }
 
-    public void setGithubLink(String githubLink) {
-        this.githubLink = githubLink;
-    }
+        public void setGithubLink (String githubLink){
+            this.githubLink = githubLink;
+        }
 
-    public String getDevRole() {
-        return devRole;
-    }
+        public String getDevRole () {
+            return devRole;
+        }
 
-    public void setDevRole(String devRole) {
-        this.devRole = devRole;
-    }
+        public void setDevRole (String devRole){
+            this.devRole = devRole;
+        }
 
-    public ArrayList<String> getLanguages() {
-        return languages;
-    }
+        public ArrayList<String> getLanguages () {
+            return languages;
+        }
 
-    public void setLanguages(ArrayList<String> languages) {
-        this.languages = languages;
-    }
+        public void setLanguages (ArrayList < String > languages) {
+            this.languages = languages;
+        }
 
-    public String getDevelopmentArea() {
-        return developmentArea;
-    }
+        public String getDevelopmentArea () {
+            return developmentArea;
+        }
 
-    public void setDevelopmentArea(String developmentArea) {
-        this.developmentArea = developmentArea;
-    }
+        public void setDevelopmentArea (String developmentArea){
+            this.developmentArea = developmentArea;
+        }
 
-    public String getCity() {
-        return city;
-    }
+        public String getCity () {
+            return city;
+        }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+        public void setCity (String city){
+            this.city = city;
+        }
 
-    public String getMainJob() {
-        return mainJob;
-    }
+        public String getMainJob () {
+            return mainJob;
+        }
 
-    public void setMainJob(String mainJob) {
-        this.mainJob = mainJob;
-    }
+        public void setMainJob (String mainJob){
+            this.mainJob = mainJob;
+        }
 
-    public String getExperience() {
-        return experience;
-    }
+        public String getExperience () {
+            return experience;
+        }
 
-    public void setExperience(String experience) {
-        this.experience = experience;
+        public void setExperience (String experience){
+            this.experience = experience;
+        }
     }
-}

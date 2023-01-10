@@ -15,12 +15,13 @@ public class TeamDeveloperController {
     public TeamDeveloperController(DeveloperService developerService) {
         this.developerService = developerService;
     }
-    @PostMapping("create-developer-in-team")
-    public DeveloperEntity createTeamDeveloper(@RequestBody CreateTeamDeveloper requestDeveloper){
+   @PostMapping("create-developer-in-team")
+   public DeveloperEntity createTeamDeveloper(@RequestBody CreateTeamDeveloper requestDeveloper){
         return developerService.createTeamDeveloper(requestDeveloper);
     }
-    @PostMapping("info-about-developer-in-team")
+@PostMapping("info-about-developer-in-team")
     public DeveloperEntity infoAboutTeamDeveloper(@RequestBody CreateTeamDeveloper createTeamDeveloper){
         return developerService.infoAboutTeamDeveloper(createTeamDeveloper);
-    }
 }
+}
+
