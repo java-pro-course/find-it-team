@@ -26,7 +26,7 @@ public class  PostService {
         newPost.setDateTime(post.getDateTime());
         newPost.setPostStatus(post.getPostStatus());
 
-        return postRepository.save (newPost);
+        return postRepository.save(newPost);
     }
 
     /**
