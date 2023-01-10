@@ -20,7 +20,7 @@ public class TeamDeveloperController {
    public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper){
         return developerService.createTeamDeveloper(requestDeveloper);
     }
-@PostMapping("info-about-developer-in-team/{id}")
+@GetMapping("info-about-developer-in-team/{id}")
     public DeveloperEntity infoAboutDeveloper(@PathVariable Long id, @RequestBody CreateDeveloper dev){
         return developerService.infoAboutDeveloperInTeam(id, dev);
 }
