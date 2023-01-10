@@ -1,6 +1,6 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateTeamDeveloper;
+import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class DeveloperService {
      * @param developers
      * @return разработчик
      */
-    public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers) {
+    public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
         developer.setName(developers.getName());
@@ -38,12 +38,11 @@ public class DeveloperService {
     }
 
     /**
-     * информация о разработчиках в команде
-     *
+     * информация о разработчике в команде
      * @param developers
      * @return команда разработчиков
      */
-    public DeveloperEntity infoAboutTeamDeveloper(Long id, CreateTeamDeveloper developers) {
+    public DeveloperEntity infoAboutDeveloperInTeam(Long id, CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
         developer.setName(developers.getName());
