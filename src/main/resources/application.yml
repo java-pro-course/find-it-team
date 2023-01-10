@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://rc1b-0ckq9oilrgugcaer.mdb.yandexcloud.net:6432/javapro
+    username: javapro
+    password: ELncWdLB
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog-master.yml
+    default-schema: kazakov # использовать свою схему!
