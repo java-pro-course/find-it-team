@@ -1,6 +1,6 @@
 package find.itTeam.api;
 
-import find.itTeam.dto.CreateTeamDeveloper;
+import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -17,12 +17,12 @@ public class TeamDeveloperController {
         this.developerService = developerService;
     }
    @PostMapping("create-developer-in-team")
-   public DeveloperEntity createTeamDeveloper(@RequestBody CreateTeamDeveloper requestDeveloper){
+   public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper){
         return developerService.createTeamDeveloper(requestDeveloper);
     }
-@PostMapping("info-about-developer-in-team")
-    public DeveloperEntity infoAboutTeamDeveloper(@PathVariable Long id, @RequestBody CreateTeamDeveloper dev){
-        return developerService.infoAboutTeamDeveloper(id, dev);
+@PostMapping("info-about-developer-in-team/{id}")
+    public DeveloperEntity infoAboutDeveloper(@PathVariable Long id, @RequestBody CreateDeveloper dev){
+        return developerService.infoAboutDeveloperInTeam(id, dev);
 }
 }
 
