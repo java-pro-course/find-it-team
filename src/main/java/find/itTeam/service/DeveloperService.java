@@ -13,6 +13,11 @@ public class DeveloperService {
         this.developerRepository = developerRepository;
     }
 
+    /**
+     * создание разработчика в команде
+     * @param developers
+     * @return разработчик
+     */
     public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
         developer.setName(developers.getName());
@@ -30,8 +35,12 @@ public class DeveloperService {
         return developerRepository.save(developer);
     }
 
+    /**
+     * информация о разработчиках в команде
+     * @param developers
+     * @return команда разработчиков
+     */
     public DeveloperEntity infoAboutTeamDeveloper(CreateTeamDeveloper developers) {
-        DeveloperEntity developer = new DeveloperEntity();
         return developerRepository.save(createTeamDeveloper(developers));
     }
 }
