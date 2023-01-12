@@ -16,13 +16,16 @@ public class TeamDeveloperController {
     public TeamDeveloperController(DeveloperService developerService) {
         this.developerService = developerService;
     }
-   @PostMapping("create-developer-in-team")
-   public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper){
+
+    @PostMapping("create-developer-in-team")
+    public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper) {
         return developerService.createTeamDeveloper(requestDeveloper);
     }
-@GetMapping("info-about-developer-in-team/{id}")
-    public DeveloperEntity infoAboutDeveloper(@PathVariable Long id, @RequestBody CreateDeveloper dev){
+
+    // todo
+    @GetMapping("info-about-developer-in-team/{id}")
+    public DeveloperEntity infoAboutDeveloper(@PathVariable Long id, @RequestBody CreateDeveloper dev) {
         return developerService.infoAboutDeveloperInTeam(id, dev);
-}
+    }
 }
 

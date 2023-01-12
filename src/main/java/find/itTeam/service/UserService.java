@@ -18,9 +18,10 @@ public class UserService {
 
     /**
      * Создание пользователя
+     *
      * @param user
      */
-    public UserEntity createNewUser(CreateUser user){
+    public UserEntity createNewUser(CreateUser user) {
         UserEntity newUser = new UserEntity();
 
         newUser.setName(user.getName());
@@ -33,23 +34,25 @@ public class UserService {
 
     /**
      * Обновление пользователя по id
+     *
      * @param id
      * @param user
      * @return подтверждение действия
      */
     @Transactional
-    public String updateUser(Long id, CreateUser user){
-        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
+    public String updateUser(Long id, CreateUser user) {
+//        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
         return "user updated!";
     }
 
     /**
      * Удаление пользователя по id
+     *
      * @param id
      * @return подтверждение действия
      */
-    public String deleteUser(Long id){
+    public String deleteUser(Long id) {
         userRepository.deleteById(id);
 
         return "user deleted!";
@@ -58,16 +61,17 @@ public class UserService {
 
     /**
      * Вход пользователя по email и паролю
+     *
      * @param email
      * @param pass
      * @return подтверждение действия
      */
-    public String login(String email, String pass){
+    public String login(String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
 
-        if(user.getPassword() == pass){
+        if (user.getPassword() == pass) {
             return "successfully logined";
-        }else{
+        } else {
             return "fail";
         }
     }

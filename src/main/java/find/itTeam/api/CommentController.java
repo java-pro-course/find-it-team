@@ -15,19 +15,25 @@ import java.time.LocalDate;
 @RestController
 public class CommentController {
     private final CommentService commentService;
+
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
+
+    // todo к какому посту?
     @PostMapping("create-comment")
-    public CommentEntity createComment(@RequestBody CreateComment requestComment){
+    public CommentEntity createComment(@RequestBody CreateComment requestComment) {
         return commentService.createNewComment(requestComment);
     }
+
+    // todo
     @GetMapping("edit-comment/{id}/{text}/{dateTime}")
-    public CommentEntity updateComment(@PathVariable Long id, @RequestBody CommentEntity changeComment){
+    public CommentEntity updateComment(@PathVariable Long id, @RequestBody CommentEntity changeComment) {
         return commentService.updateComment(id, changeComment);
     }
+
     @GetMapping("delete-comment/{id}")
-    public String deleteComment(@PathVariable Long id){
+    public String deleteComment(@PathVariable Long id) {
         return commentService.deleteComment(id);
     }
 }

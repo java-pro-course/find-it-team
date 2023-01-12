@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - logicalFilePath: 1.0/test-table
+  - changeSet:
+      id: test-table-0
+      author: koritskiy-ay
+      changes:
+        - createTable:
+            schemaName: koritskiy # вот это надо менять
+            tableName: test
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: value
+                  type: bigint
+                  constraints:
+                    nullable: false

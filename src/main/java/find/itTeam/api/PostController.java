@@ -27,9 +27,10 @@ public class PostController {
         return postService.createNewPost(requestPost);
     }
 
+    // todo
     @GetMapping("update-post/{id}/{content}/{dateTime}")
-    public PostEntity updatePost (@RequestBody PostEntity requestPost){
+    public PostEntity updatePost(@RequestBody PostEntity requestPost) {
         return postService.updatePost(requestPost);
     }
-       
+
 }

@@ -39,6 +39,7 @@ public class DeveloperService {
 
     /**
      * информация о разработчике в команде
+     *
      * @param developers
      * @return команда разработчиков
      */

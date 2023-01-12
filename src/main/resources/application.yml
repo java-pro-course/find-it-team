@@ -7,4 +7,4 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog-master.yml
-    default-schema: kazakov # использовать свою схему!
+    default-schema: koritskiy # использовать свою схему!
