@@ -8,6 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface DeveloperRepository extends JpaRepository<DeveloperEntity, Long> {
-    // todo
-    public Optional<DeveloperEntity> findById(Long id);
 }

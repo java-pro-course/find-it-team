@@ -3,11 +3,7 @@ package find.itTeam.api;
 import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TeamDeveloperController {
@@ -22,10 +18,9 @@ public class TeamDeveloperController {
         return developerService.createTeamDeveloper(requestDeveloper);
     }
 
-    // todo
-    @GetMapping("info-about-developer-in-team/{id}")
-    public DeveloperEntity infoAboutDeveloper(@PathVariable Long id, @RequestBody CreateDeveloper dev) {
-        return developerService.infoAboutDeveloperInTeam(id, dev);
+    @GetMapping("get-info-about-developer-in-team/{id}")
+    public DeveloperEntity infoAboutDeveloper(@PathVariable Long id) {
+        return developerService.infoAboutDeveloperInTeam(id);
     }
 }
 

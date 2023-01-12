@@ -5,6 +5,8 @@ import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DeveloperService {
     private final DeveloperRepository developerRepository;
@@ -43,21 +45,8 @@ public class DeveloperService {
      * @param developers
      * @return команда разработчиков
      */
-    public DeveloperEntity infoAboutDeveloperInTeam(Long id, CreateDeveloper developers) {
-        DeveloperEntity developer = new DeveloperEntity();
-
-        developer.setName(developers.getName());
-        developer.setSurname(developers.getSurname());
-        developer.setEmail(developers.getEmail());
-        developer.setProjects(developers.getProjects());
-        developer.setGithubLink(developers.getGithubLink());
-        developer.setDevRole(developers.getDevRole());
-        developer.setLanguages(developers.getLanguages());
-        developer.setDevelopmentArea(developers.getDevelopmentArea());
-        developer.setExperience(developers.getExperience());
-        developer.setCity(developers.getCity());
-        developer.setMainJob(developers.getMainJob());
-
-        return developer;
+    public DeveloperEntity infoAboutDeveloperInTeam(Long id) {
+        Optional<DeveloperEntity> developer = developerRepository.findById(id);
+        return developer.get();
     }
 }

@@ -5,6 +5,8 @@ import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PostService {
     private final PostRepository postRepository;
@@ -36,9 +38,15 @@ public class PostService {
      * @param post - пост, который хочет изменить пользователь
      * @return - изменённый пост
      */
-    public PostEntity updatePost(PostEntity post) {
-        PostEntity updPost = new PostEntity();
+    public PostEntity updatePost(CreateNewPost post, Long id) {
+        Optional<PostEntity> postEntity = postRepository.findById(id);
+        if (!postEntity.isPresent()) {
+            // Делать что-то, пока поста с таким ID не существует
+            return null;
+        }
 
+        // todo (для учеников) сделать метод в репозитории для обновления поста
+        PostEntity updPost = new PostEntity();
         updPost.setContent(post.getContent());
         updPost.setDateTime(post.getDateTime());
         updPost.setPostStatus("Изменён");

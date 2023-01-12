@@ -22,6 +22,12 @@ public class UserService {
      * @param user
      */
     public UserEntity createNewUser(CreateUser user) {
+        // Проверка того, что все обязательные поля заполнены
+        if (user.getName() == null || user.getSurname() == null
+                || user.getEmail() == null || user.getPassword() == null) {
+            return null;
+        }
+
         UserEntity newUser = new UserEntity();
 
         newUser.setName(user.getName());
@@ -41,7 +47,7 @@ public class UserService {
      */
     @Transactional
     public String updateUser(Long id, CreateUser user) {
-//        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
+        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
         return "user updated!";
     }

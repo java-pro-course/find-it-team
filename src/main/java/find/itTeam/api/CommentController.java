@@ -21,15 +21,15 @@ public class CommentController {
     }
 
     // todo к какому посту?
-    @PostMapping("create-comment")
-    public CommentEntity createComment(@RequestBody CreateComment requestComment) {
-        return commentService.createNewComment(requestComment);
+    @PostMapping("create-comment/{postId}")
+    public CommentEntity createComment(@RequestBody CreateComment requestComment,
+                                       @PathVariable Long postId) {
+        return commentService.createNewComment(requestComment, postId);
     }
 
-    // todo
-    @GetMapping("edit-comment/{id}/{text}/{dateTime}")
-    public CommentEntity updateComment(@PathVariable Long id, @RequestBody CommentEntity changeComment) {
-        return commentService.updateComment(id, changeComment);
+    @GetMapping("edit-comment/{id}")
+    public CommentEntity updateComment(@PathVariable Long id, @RequestBody CreateComment comment) {
+        return commentService.updateComment(id, comment);
     }
 
     @GetMapping("delete-comment/{id}")
