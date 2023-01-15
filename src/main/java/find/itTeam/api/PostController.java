@@ -3,11 +3,7 @@ package find.itTeam.api;
 import find.itTeam.dto.CreateNewPost;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.service.PostService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostController {
@@ -27,9 +23,10 @@ public class PostController {
         return postService.createNewPost(requestPost);
     }
 
-    @GetMapping("update-post/{id}/{content}/{dateTime}")
-    public PostEntity updatePost (@RequestBody PostEntity requestPost){
-        return postService.updatePost(requestPost);
+    @PutMapping("update-post/{id}")
+    public PostEntity updatePost(@RequestBody CreateNewPost post,
+                                 @PathVariable Long id) {
+        return postService.updatePost(post, id);
     }
-       
+
 }

@@ -2,6 +2,7 @@ package find.itTeam.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(schema = "finditteam", name = "post")
@@ -19,6 +20,10 @@ public class PostEntity {
 
     @Column(name = "post_status")
     private String postStatus;
+
+    // todo (для учеников) здесь колонку НЕ добавляем, пишем только ответную часть
+    @OneToMany(mappedBy = "post")
+    private List<CommentEntity> comments;
 
     public Long getId() {
         return id;

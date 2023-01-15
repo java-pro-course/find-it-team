@@ -14,6 +14,11 @@ public class CommentEntity {
     @Column(name = "date")
     private LocalDate dateTime;
 
+    // todo (для учеников) создать колонку post_id в таблице comment, сделать foreign_key
+    @JoinColumn(name = "post_id")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private PostEntity post;
+
     public Long getId() {
         return id;
     }
@@ -36,5 +41,9 @@ public class CommentEntity {
 
     public void setDateTime(LocalDate dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public void setPost(PostEntity post) {
+        this.post = post;
     }
 }

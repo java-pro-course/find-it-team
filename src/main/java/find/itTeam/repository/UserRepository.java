@@ -13,14 +13,14 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     /**
      * Метод для обработки запроса на обновление пользователя
-     * @param name
-     * @param surname
+     * @param name новое имя пользователя
+     * @param surname новая фамилия пользователя
      * @param email
      * @param password
      * @param id
      */
     @Modifying
-    @Query("UPDATE user SET user.name = ?1, user.surname = ?2, user.email = ?3, " +
+    @Query("UPDATE UserEntity user SET user.name = ?1, user.surname = ?2, user.email = ?3, " +
             "user.password = ?4 WHERE user.id = ?5")
     void updateById(String name, String surname, String email, String password, Long id);
 }

@@ -1,9 +1,11 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateTeamDeveloper;
+import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class DeveloperService {
@@ -19,8 +21,9 @@ public class DeveloperService {
      * @param developers
      * @return разработчик
      */
-    public DeveloperEntity createTeamDeveloper(CreateTeamDeveloper developers) {
+    public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
+
         developer.setName(developers.getName());
         developer.setSurname(developers.getSurname());
         developer.setEmail(developers.getEmail());
@@ -37,24 +40,13 @@ public class DeveloperService {
     }
 
     /**
-     * информация о разработчиках в команде
+     * информация о разработчике в команде
      *
-     * @param developers
      * @return команда разработчиков
      */
-    public DeveloperEntity infoAboutTeamDeveloper(Long id, CreateTeamDeveloper developers) {
-        DeveloperEntity developer = developerRepository.findById(id).get();
-        developer.setName(developers.getName());
-        developer.setSurname(developers.getSurname());
-        developer.setEmail(developers.getEmail());
-        developer.setProjects(developers.getProjects());
-        developer.setGithubLink(developers.getGithubLink());
-        developer.setDevRole(developers.getDevRole());
-        developer.setLanguages(developers.getLanguages());
-        developer.setDevelopmentArea(developers.getDevelopmentArea());
-        developer.setExperience(developers.getExperience());
-        developer.setCity(developers.getCity());
-        developer.setMainJob(developers.getMainJob());
-        return developer;
+
+    public DeveloperEntity infoAboutDeveloperInTeam(Long id) {
+        Optional<DeveloperEntity> developer = developerRepository.findById(id);
+        return developer.get();
     }
 }
