@@ -3,11 +3,8 @@ package find.itTeam.api;
 import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TeamDeveloperController {
