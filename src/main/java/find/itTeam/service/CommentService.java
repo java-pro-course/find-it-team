@@ -27,6 +27,7 @@ public class CommentService {
         if (!post.isPresent()) {
             return null;
         }
+        if(comment.getText() == null | comment.getDateTime() == null) return null;
 
         CommentEntity newComment = new CommentEntity();
         newComment.setText(comment.getText());
@@ -46,8 +47,7 @@ public class CommentService {
         if (!commentEntity.isPresent()) {
             return null;
         }
-
-
+        if (comment.getText() == null | comment.getDateTime() == null) return null;
         // todo (для учеников) сделать метод в репозитории для обновления
         commentEntity.get().setText(comment.getText());
         commentEntity.get().setDateTime(comment.getDateTime());

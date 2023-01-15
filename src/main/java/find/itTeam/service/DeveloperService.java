@@ -18,15 +18,19 @@ public class DeveloperService {
     /**
      * создание разработчика в команде
      *
-     * @param developers
+     * @param id
      * @return разработчик
      */
     public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
+        //это огромная строчка - проверка на null
+        if(developers.getName() == null | developers.getSurname() == null | developers.getEmail() == null | developers.getProjects() == null | developers.getGithubLink() == null | developers.getDevRole() == null | developers.getLanguages() == null | developers.getDevelopmentArea() == null | developers.getExperience() == null | developers.getCity() == null | developers.getMainJob() == null) return null;
+
         developer.setName(developers.getName());
         developer.setSurname(developers.getSurname());
         developer.setEmail(developers.getEmail());
+        developer.setPassword(developers.getPassword());
         developer.setProjects(developers.getProjects());
         developer.setGithubLink(developers.getGithubLink());
         developer.setDevRole(developers.getDevRole());
@@ -36,6 +40,7 @@ public class DeveloperService {
         developer.setCity(developers.getCity());
         developer.setMainJob(developers.getMainJob());
 
+        System.out.print(developer.getEmail());
         return developerRepository.save(developer);
     }
 
