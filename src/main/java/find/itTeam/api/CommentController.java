@@ -2,6 +2,7 @@ package find.itTeam.api;
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
 import find.itTeam.service.CommentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,12 +21,12 @@ public class CommentController {
     }
 
     @GetMapping("edit-comment/{id}")
-    public CommentEntity updateComment(@PathVariable Long id, @RequestBody CreateComment comment) {
+    public ResponseEntity<?> updateComment(@PathVariable Long id, @RequestBody CreateComment comment) {
         return commentService.updateComment(id, comment);
     }
 
     @GetMapping("delete-comment/{id}")
-    public String deleteComment(@PathVariable Long id) {
+    public ResponseEntity<?> deleteComment(@PathVariable Long id) {
         return commentService.deleteComment(id);
     }
 }

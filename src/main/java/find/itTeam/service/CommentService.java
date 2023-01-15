@@ -5,6 +5,9 @@ import find.itTeam.entity.CommentEntity;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.CommentRepository;
 import find.itTeam.repository.PostRepository;
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -42,16 +45,28 @@ public class CommentService {
      * @param id
      * @param comment
      */
-    public CommentEntity updateComment(Long id, CreateComment comment) {
+    public ResponseEntity<?> updateComment(Long id, CreateComment comment) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(id);
+
         if (!commentEntity.isPresent()) {
-            return null;
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(String.format("Comment with id = %s is not found.", id));
         }
-        if (comment.getText() == null | comment.getDateTime() == null) return null;
+
+        if (comment.getText() == null | comment.getDateTime() == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Text and date-time fields are null.");
+        }
         // todo (для учеников) сделать метод в репозитории для обновления
         commentEntity.get().setText(comment.getText());
         commentEntity.get().setDateTime(comment.getDateTime());
-        return commentRepository.save(commentEntity.get());
+        CommentEntity newComment = commentRepository.save(commentEntity.get());
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(newComment);
     }
 
     /**
@@ -60,9 +75,11 @@ public class CommentService {
      * @param id
      * @return фраза про удаление коммента
      */
-    public String deleteComment(Long id) {
+    public ResponseEntity<?> deleteComment(Long id) {
         commentRepository.deleteById(id);
-        return "comment has been deleted...";
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("Comment with id = %s was deleted.", id));
     }
 }
 

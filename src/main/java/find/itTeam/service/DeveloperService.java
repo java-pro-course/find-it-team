@@ -3,44 +3,46 @@ package find.itTeam.service;
 import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Data
+@Slf4j
 public class DeveloperService {
     private final DeveloperRepository developerRepository;
-
-    public DeveloperService(DeveloperRepository developerRepository) {
-        this.developerRepository = developerRepository;
-    }
 
     /**
      * создание разработчика в команде
      *
-     * @param id
+     * @param developers
      * @return разработчик
      */
     public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
         //это огромная строчка - проверка на null
-        if(developers.getName() == null | developers.getSurname() == null | developers.getEmail() == null | developers.getProjects() == null | developers.getGithubLink() == null | developers.getDevRole() == null | developers.getLanguages() == null | developers.getDevelopmentArea() == null | developers.getExperience() == null | developers.getCity() == null | developers.getMainJob() == null) return null;
+        if (developers.getName() == null | developers.getSurname() == null | developers.getEmail() == null | developers.getProjects() == null | developers.getGithubLink() == null | developers.getDevRole() == null | developers.getLanguages() == null | developers.getDevelopmentArea() == null | developers.getExperience() == null | developers.getCity() == null | developers.getMainJob() == null)
+            return null;
 
-        developer.setName(developers.getName());
-        developer.setSurname(developers.getSurname());
-        developer.setEmail(developers.getEmail());
-        developer.setPassword(developers.getPassword());
-        developer.setProjects(developers.getProjects());
-        developer.setGithubLink(developers.getGithubLink());
-        developer.setDevRole(developers.getDevRole());
-        developer.setLanguages(developers.getLanguages());
-        developer.setDevelopmentArea(developers.getDevelopmentArea());
-        developer.setExperience(developers.getExperience());
-        developer.setCity(developers.getCity());
-        developer.setMainJob(developers.getMainJob());
+        developer
+                .setName(developers.getName())
+                .setSurname(developers.getSurname())
+                .setEmail(developers.getEmail())
+                .setPassword(developers.getPassword())
+                .setProjects(developers.getProjects())
+                .setGithubLink(developers.getGithubLink())
+                .setDevRole(developers.getDevRole())
+                .setLanguages(developers.getLanguages())
+                .setDevelopmentArea(developers.getDevelopmentArea())
+                .setExperience(developers.getExperience())
+                .setCity(developers.getCity())
+                .setMainJob(developers.getMainJob());
 
-        System.out.print(developer.getEmail());
+        log.info("All is ok!");
         return developerRepository.save(developer);
     }
 
