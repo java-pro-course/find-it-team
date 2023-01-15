@@ -3,6 +3,7 @@ package find.itTeam.api;
 import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,6 @@ public class TeamDeveloperController {
     public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper) {
         return developerService.createTeamDeveloper(requestDeveloper);
     }
-
     @GetMapping("get-info-about-developer-in-team/{id}")
     public DeveloperEntity infoAboutDeveloper(@PathVariable Long id) {
         return developerService.infoAboutDeveloperInTeam(id);

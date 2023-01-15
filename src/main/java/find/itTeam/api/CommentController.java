@@ -1,16 +1,8 @@
 package find.itTeam.api;
-
-import find.itTeam.dto.ChangeComment;
 import find.itTeam.dto.CreateComment;
 import find.itTeam.entity.CommentEntity;
 import find.itTeam.service.CommentService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDate;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CommentController {

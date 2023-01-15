@@ -42,9 +42,9 @@ public class DeveloperService {
     /**
      * информация о разработчике в команде
      *
-     * @param developers
      * @return команда разработчиков
      */
+
     public DeveloperEntity infoAboutDeveloperInTeam(Long id) {
         Optional<DeveloperEntity> developer = developerRepository.findById(id);
         return developer.get();
