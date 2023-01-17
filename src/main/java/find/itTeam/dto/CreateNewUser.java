@@ -1,12 +1,12 @@
 package find.itTeam.dto;
 
-public class CreateUser {
+public class CreateNewUser {
     private String name;
     private String surname;
     private String email;
     private String password;
 
-    public CreateUser(String name, String surname, String email, String password){
+    public CreateNewUser(String name, String surname, String email, String password){
         this.name = name;
         this.surname = surname;
         this.email = email;

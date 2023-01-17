@@ -5,7 +5,7 @@ databaseChangeLog:
       author: koritskiy-ay
       changes:
         - createTable:
-            schemaName: koritskiy # вот это надо менять
+            schemaName: kazakov # вот это надо менять
             tableName: test
             columns:
               - column:
