@@ -5,12 +5,10 @@ import find.itTeam.entity.CommentEntity;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.CommentRepository;
 import find.itTeam.repository.PostRepository;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -30,7 +28,7 @@ public class CommentService {
         if (!post.isPresent()) {
             return null;
         }
-        if(comment.getText() == null | comment.getDateTime() == null) return null;
+        if (comment.getText() == null | comment.getDateTime() == null) return null;
 
         CommentEntity newComment = new CommentEntity();
         newComment.setText(comment.getText());

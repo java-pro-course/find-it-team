@@ -3,6 +3,7 @@ package find.itTeam.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+// todo lombok
 @Entity
 @Table(schema = "finditteam", name = "comment")
 public class CommentEntity {
@@ -13,6 +14,8 @@ public class CommentEntity {
     private String text;
     @Column(name = "date")
     private LocalDate dateTime;
+
+    // todo автор комментария
 
     // todo (для учеников) создать колонку post_id в таблице comment, сделать foreign_key
     @JoinColumn(name = "post_id")

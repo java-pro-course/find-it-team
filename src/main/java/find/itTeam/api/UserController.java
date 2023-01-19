@@ -15,16 +15,19 @@ public class UserController {
         this.userService = userService;
     }
 
+    // todo ResponseEntity<?>
     @GetMapping("delete-user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
 
+    // todo ResponseEntity<?>
     @PostMapping("create-user")
     public UserEntity createUser(@RequestBody CreateNewUser requestUser) {
         return userService.createNewUser(requestUser);
     }
 
+    // todo ResponseEntity<?>
     @PutMapping("update-user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody CreateNewUser user) {
         return userService.updateUser(id, user);

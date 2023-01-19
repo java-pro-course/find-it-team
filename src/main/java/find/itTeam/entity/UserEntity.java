@@ -5,6 +5,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+// todo lombok
 @Entity
 @Table(schema = "finditteam", name = "user")
 @Data

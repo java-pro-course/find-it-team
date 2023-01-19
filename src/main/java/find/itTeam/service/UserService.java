@@ -29,7 +29,7 @@ public class UserService {
                 || user.getEmail().equals("") || user.getPassword().equals("")) {
 
             return null;
-        }else{
+        } else {
             UserEntity newUser = new UserEntity();
 
             newUser.setName(user.getName())
@@ -56,7 +56,7 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        }else {
+        } else {
             userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
             return ResponseEntity

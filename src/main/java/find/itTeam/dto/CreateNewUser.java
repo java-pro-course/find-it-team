@@ -8,5 +8,4 @@ public class CreateNewUser {
     private String surname;
     private String email;
     private String password;
-
 }

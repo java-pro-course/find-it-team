@@ -13,16 +13,19 @@ public class PostController {
         this.postService = postService;
     }
 
+    // todo ResponseEntity<?>
     @GetMapping("delete-post/{id}")
     public String deletePost(@PathVariable Long id) {
         return postService.deletePost(id);
     }
 
+    // todo ResponseEntity<?>
     @PostMapping("create-post")
     public PostEntity createNewPost(@RequestBody CreateNewPost requestPost) {
         return postService.createNewPost(requestPost);
     }
 
+    // todo ResponseEntity<?>
     @PutMapping("update-post/{id}")
     public PostEntity updatePost(@RequestBody CreateNewPost post,
                                  @PathVariable Long id) {
