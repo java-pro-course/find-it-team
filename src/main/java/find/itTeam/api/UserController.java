@@ -23,7 +23,7 @@ public class UserController {
 
     // todo ResponseEntity<?>
     @PostMapping("create-user")
-    public UserEntity createUser(@RequestBody CreateNewUser requestUser) {
+    public ResponseEntity<?> createUser(@RequestBody CreateNewUser requestUser) {
         return userService.createNewUser(requestUser);
     }
 

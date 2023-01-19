@@ -23,7 +23,7 @@ public class UserService {
      *
      * @param user
      */
-    public UserEntity createNewUser(CreateNewUser user) {
+    public ResponseEntity<?> createNewUser(CreateNewUser user) {
         // Проверка того, что все обязательные поля заполнены
         if (user.getName().equals("") || user.getSurname().equals("")
                 || user.getEmail().equals("") || user.getPassword().equals("")) {
@@ -36,8 +36,9 @@ public class UserService {
                 .setSurname(user.getSurname())
                 .setEmail(user.getEmail())
                 .setPassword(user.getPassword());
+            UserEntity userEn = userRepository.save(newUser);
+            return ResponseEntity.status(HttpStatus.CREATED).body(userEn);
 
-            return userRepository.save(newUser);
         }
     }
 
