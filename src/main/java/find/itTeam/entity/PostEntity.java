@@ -1,13 +1,15 @@
 package find.itTeam.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
 @Entity
 @Table(schema = "finditteam", name = "post")
 public class PostEntity {
-
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,36 +27,5 @@ public class PostEntity {
     @OneToMany(mappedBy = "post")
     private List<CommentEntity> comments;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDate getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDate dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getPostStatus() {
-        return postStatus;
-    }
-
-    public void setPostStatus(String postStatus) {
-        this.postStatus = postStatus;
-    }
 }
 

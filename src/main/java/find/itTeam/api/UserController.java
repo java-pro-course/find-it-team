@@ -1,6 +1,7 @@
 package find.itTeam.api;
 
-import find.itTeam.dto.CreateUser;
+import find.itTeam.dto.CreateNewUser;
+import find.itTeam.entity.PostEntity;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,12 @@ public class UserController {
     }
 
     @PostMapping("create-user")
-    public UserEntity createUser(@RequestBody CreateUser requestUser) {
+    public UserEntity createUser(@RequestBody CreateNewUser requestUser) {
         return userService.createNewUser(requestUser);
     }
 
+    @PutMapping("update-user/{id}")
+    public String updateUser(@PathVariable Long id, @RequestBody CreateNewUser user) {
+        return userService.updateUser(id, user);
+    }
 }

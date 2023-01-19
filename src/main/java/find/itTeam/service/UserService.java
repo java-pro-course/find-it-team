@@ -1,6 +1,6 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateUser;
+import find.itTeam.dto.CreateNewUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -21,21 +21,22 @@ public class UserService {
      *
      * @param user
      */
-    public UserEntity createNewUser(CreateUser user) {
+    public UserEntity createNewUser(CreateNewUser user) {
         // Проверка того, что все обязательные поля заполнены
-        if (user.getName() == null || user.getSurname() == null
-                || user.getEmail() == null || user.getPassword() == null) {
+        if (user.getName().equals("") || user.getSurname().equals("")
+                || user.getEmail().equals("") || user.getPassword().equals("")) {
+
             return null;
+        }else{
+            UserEntity newUser = new UserEntity();
+
+            newUser.setName(user.getName());
+            newUser.setSurname(user.getSurname());
+            newUser.setEmail(user.getEmail());
+            newUser.setPassword(user.getPassword());
+
+            return userRepository.save(newUser);
         }
-
-        UserEntity newUser = new UserEntity();
-
-        newUser.setName(user.getName());
-        newUser.setSurname(user.getSurname());
-        newUser.setEmail(user.getEmail());
-        newUser.setPassword(user.getPassword());
-
-        return userRepository.save(newUser);
     }
 
     /**
@@ -46,10 +47,16 @@ public class UserService {
      * @return подтверждение действия
      */
     @Transactional
-    public String updateUser(Long id, CreateUser user) {
-        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
+    public String updateUser(Long id, CreateNewUser user) {
+        if (user.getName().equals("") || user.getSurname().equals("")
+                || user.getEmail().equals("") || user.getPassword().equals("")) {
 
-        return "user updated!";
+            return "failed!";
+        }else {
+            userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
+
+            return "user updated!";
+        }
     }
 
     /**
