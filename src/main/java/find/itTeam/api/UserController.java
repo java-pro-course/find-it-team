@@ -4,6 +4,7 @@ import find.itTeam.dto.CreateNewUser;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +16,7 @@ public class UserController {
     }
 
     @GetMapping("delete-user/{id}")
-    public String deleteUser(@PathVariable Long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
 
@@ -25,7 +26,12 @@ public class UserController {
     }
 
     @PutMapping("update-user/{id}")
-    public String updateUser(@PathVariable Long id, @RequestBody CreateNewUser user) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody CreateNewUser user) {
         return userService.updateUser(id, user);
+    }
+
+    @GetMapping("get-user-info/{id}")
+    public ResponseEntity<?> getUserInfo(@PathVariable Long id){
+        return userService.getUserInfo(id);
     }
 }
