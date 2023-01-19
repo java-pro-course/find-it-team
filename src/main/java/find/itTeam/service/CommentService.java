@@ -5,15 +5,16 @@ import find.itTeam.entity.CommentEntity;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.CommentRepository;
 import find.itTeam.repository.PostRepository;
-import org.apache.catalina.connector.Response;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
+@Data
+@Slf4j
 public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
@@ -24,24 +25,24 @@ public class CommentService {
     }
 
     public CommentEntity createNewComment(CreateComment comment, Long postId) {
-        // todo (для учеников) проверка на обязательные поля
-
+        CommentEntity newComment = new CommentEntity();
         Optional<PostEntity> post = postRepository.findById(postId);
         if (!post.isPresent()) {
             return null;
         }
+        /** проверка пустые поля или нет
+         */
         if(comment.getText() == null | comment.getDateTime() == null) return null;
-
-        CommentEntity newComment = new CommentEntity();
-        newComment.setText(comment.getText());
-        newComment.setDateTime(comment.getDateTime());
-        newComment.setPost(post.get());
+        newComment
+                .setText(comment.getText())
+                .setDateTime(comment.getDateTime())
+                .setPost(post.get());
+        log.info("Congratulations! Comment left.");
         return commentRepository.save(newComment);
     }
 
     /**
      * Изменение комментария по id
-     *
      * @param id
      * @param comment
      */
@@ -71,7 +72,6 @@ public class CommentService {
 
     /**
      * Удаление коммента по id
-     *
      * @param id
      * @return фраза про удаление коммента
      */
