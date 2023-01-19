@@ -9,3 +9,4 @@ public class CreateNewPost {
     private String content;
     private LocalDate dateTime;
     private String postStatus;
+}
