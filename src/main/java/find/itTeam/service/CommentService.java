@@ -22,7 +22,6 @@ public class CommentService {
     }
 
     public CommentEntity createNewComment(CreateComment comment, Long postId) {
-        // todo (для учеников) проверка на обязательные поля
 
         Optional<PostEntity> post = postRepository.findById(postId);
         if (!post.isPresent()) {
