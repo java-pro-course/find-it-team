@@ -44,7 +44,7 @@ public class PostService {
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if (!postEntity.isPresent()) {
             // Делать что-то, пока поста с таким ID не существует
-            return null;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("😰Сей пост не существует...😰");
         }
 
         // todo (для учеников) сделать метод в репозитории для обновления поста
