@@ -18,6 +18,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
      * @param postStatus
      * @param id
      */
+    
     @Modifying
     @Query("UPDATE PostEntity post SET post.content = ?1, post.datetime = ?2, post.post_status = ?3" +
             "WHERE post.id = ?4")
