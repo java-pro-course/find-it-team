@@ -4,13 +4,11 @@ import find.itTeam.dto.CreateNewUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.HTML;
 import javax.transaction.Transactional;
-
 
 @Service
 @Data
@@ -88,13 +86,17 @@ public class UserService {
      * @param pass
      * @return подтверждение действия
      */
-    public String login(String email, String pass) {
+    public ResponseEntity<?> login(String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
 
         if (user.getPassword().equals(pass)) {
-            return "successfully logined";
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body("login successfully!");
         } else {
-            return "fail";
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
         }
     }
 
@@ -117,6 +119,4 @@ public class UserService {
                 .status(HttpStatus.OK)
                 .body(result);
     }
-
-
 }

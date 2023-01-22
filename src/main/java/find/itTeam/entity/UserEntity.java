@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Data
 @Accessors(chain = true)
 public class UserEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,5 +18,4 @@ public class UserEntity {
     private String surname;
     private String email;
     private String password;
-
 }
