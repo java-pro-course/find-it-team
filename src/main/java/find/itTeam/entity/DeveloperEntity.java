@@ -31,6 +31,7 @@ public class DeveloperEntity {
     @Column(name = "password")
     private String password;
 
+    // todo как хранить массив?
     @Column(name = "projects")
     private ArrayList<String> projects;
 
@@ -40,6 +41,7 @@ public class DeveloperEntity {
     @Column(name = "dev_role")
     private String devRole;
 
+    // todo как хранить массив?
     @Column(name = "languages")
     private ArrayList<String> languages;
 

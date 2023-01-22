@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Entity для заказчика
  */
 
+// todo lombok
 @Entity
 @Table(schema = "finditteam", name = "client")
 public class ClientEntity {

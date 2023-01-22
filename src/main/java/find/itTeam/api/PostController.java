@@ -1,8 +1,8 @@
 package find.itTeam.api;
 
-import find.itTeam.dto.CreateNewPost;
-import find.itTeam.entity.PostEntity;
+import find.itTeam.dto.CreatePost;
 import find.itTeam.service.PostService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,17 +14,18 @@ public class PostController {
     }
 
     @GetMapping("delete-post/{id}")
-    public String deletePost(@PathVariable Long id) {
+    public ResponseEntity<?> deletePost(@PathVariable Long id) {
         return postService.deletePost(id);
     }
 
+    // todo ResponseEntity<?>
     @PostMapping("create-post")
-    public PostEntity createNewPost(@RequestBody CreateNewPost requestPost) {
+    public ResponseEntity<?> createNewPost(@RequestBody CreatePost requestPost) {
         return postService.createNewPost(requestPost);
     }
 
     @PutMapping("update-post/{id}")
-    public PostEntity updatePost(@RequestBody CreateNewPost post,
+    public ResponseEntity<?> updatePost(@RequestBody CreatePost post,
                                  @PathVariable Long id) {
         return postService.updatePost(post, id);
     }

@@ -7,6 +7,4 @@ import java.time.LocalDate;
 public class CreateComment {
     private String text;
     private LocalDate dateTime;
-
-
 }

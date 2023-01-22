@@ -6,7 +6,6 @@ import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.CommentRepository;
 import find.itTeam.repository.PostRepository;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,35 +13,46 @@ import java.util.Optional;
 
 @Service
 @Data
-@Slf4j
 public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
-    public CommentService(CommentRepository commentRepository, PostRepository postRepository) {
-        this.commentRepository = commentRepository;
-        this.postRepository = postRepository;
-    }
-
-    public CommentEntity createNewComment(CreateComment comment, Long postId) {
-        CommentEntity newComment = new CommentEntity();
+    /**
+     * Создание нового комментария
+     *
+     * @param comment
+     * @param postId
+     * @return
+     */
+    public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
+
         if (!post.isPresent()) {
-            return null;
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Post doesn't exist!");
         }
-        /** проверка пустые поля или нет
-         */
-        if(comment.getText() == null | comment.getDateTime() == null) return null;
-        newComment
-                .setText(comment.getText())
-                .setDateTime(comment.getDateTime())
-                .setPost(post.get());
-        log.info("Congratulations! Comment left.");
-        return commentRepository.save(newComment);
+        if (comment.getText().equals("") || comment.getDateTime() == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
+        } else {
+
+            CommentEntity newComment = new CommentEntity()
+                    .setText(comment.getText())
+                    .setDateTime(comment.getDateTime())
+                    .setPost(post.get());
+
+            CommentEntity commentSave = commentRepository.save(newComment);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(commentSave);
+        }
     }
 
     /**
      * Изменение комментария по id
+     *
      * @param id
      * @param comment
      */
@@ -51,35 +61,34 @@ public class CommentService {
 
         if (!commentEntity.isPresent()) {
             return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(String.format("Comment with id = %s is not found.", id));
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(String.format("comment %s doesn't exist!", id));
         }
-
-        if (comment.getText() == null | comment.getDateTime() == null) {
+        if (comment.getText().equals("") || comment.getDateTime() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Text and date-time fields are null.");
+                    .body("fail");
+        } else {
+            // todo (для учеников) сделать метод в репозитории для обновления
+            commentEntity.setText(comment.getText())
+                    .setDateTime(comment.getDateTime());
+            CommentEntity newComment = commentRepository.save(commentEntity);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(newComment);
         }
-        // todo (для учеников) сделать метод в репозитории для обновления
-        commentEntity.get().setText(comment.getText());
-        commentEntity.get().setDateTime(comment.getDateTime());
-        CommentEntity newComment = commentRepository.save(commentEntity.get());
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(newComment);
     }
 
-    /**
-     * Удаление коммента по id
-     * @param id
-     * @return фраза про удаление коммента
-     */
-    public ResponseEntity<?> deleteComment(Long id) {
-        commentRepository.deleteById(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(String.format("Comment with id = %s was deleted.", id));
-    }
-}
+        /**
+         * Удаление комментария по id
+         * @param id
+         * @return результат
+         */
+        public ResponseEntity<?> deleteComment(Long id){
+            commentRepository.deleteById(id);
 
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(String.format("deleted comment %s", id));
+        }
+    }

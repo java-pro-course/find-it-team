@@ -14,12 +14,17 @@ public class PostEntity {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
+
+    @Column(name = "datetime")
     private LocalDate dateTime;
+
+    @Column(name = "post_status")
     private String postStatus;
+
+    // todo автор поста
 
     // todo (для учеников) здесь колонку НЕ добавляем, пишем только ответную часть
     @OneToMany(mappedBy = "post")
     private List<CommentEntity> comments;
-
 }
 

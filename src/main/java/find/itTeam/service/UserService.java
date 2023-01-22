@@ -1,41 +1,43 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateNewUser;
+import find.itTeam.dto.CreateUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
+import lombok.Data;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 
-
 @Service
+@Data
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
+//TODO: проверки на существование
     /**
      * Создание пользователя
      *
      * @param user
      */
-    public UserEntity createNewUser(CreateNewUser user) {
-        // Проверка того, что все обязательные поля заполнены
+    public ResponseEntity<?> createNewUser(CreateUser user) {
         if (user.getName().equals("") || user.getSurname().equals("")
                 || user.getEmail().equals("") || user.getPassword().equals("")) {
 
-            return null;
-        }else{
-            UserEntity newUser = new UserEntity();
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
+        } else {
+            UserEntity newUser = new UserEntity()
+                    .setName(user.getName())
+                    .setSurname(user.getSurname())
+                    .setEmail(user.getEmail())
+                    .setPassword(user.getPassword());
 
-            newUser.setName(user.getName());
-            newUser.setSurname(user.getSurname());
-            newUser.setEmail(user.getEmail());
-            newUser.setPassword(user.getPassword());
-
-            return userRepository.save(newUser);
+            UserEntity userSave = userRepository.save(newUser);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(userSave);
         }
     }
 
@@ -47,15 +49,19 @@ public class UserService {
      * @return подтверждение действия
      */
     @Transactional
-    public String updateUser(Long id, CreateNewUser user) {
+    public ResponseEntity<?> updateUser(Long id, CreateUser user) {
         if (user.getName().equals("") || user.getSurname().equals("")
                 || user.getEmail().equals("") || user.getPassword().equals("")) {
 
-            return "failed!";
-        }else {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
+        } else {
             userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
-            return "user updated!";
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(String.format("updated user %s", id));
         }
     }
 
@@ -65,10 +71,12 @@ public class UserService {
      * @param id
      * @return подтверждение действия
      */
-    public String deleteUser(Long id) {
+    public ResponseEntity<?> deleteUser(Long id) {
         userRepository.deleteById(id);
 
-        return "user deleted!";
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("deleted user %s", id));
     }
 
 
@@ -79,15 +87,37 @@ public class UserService {
      * @param pass
      * @return подтверждение действия
      */
-    public String login(String email, String pass) {
+    public ResponseEntity<?> login(String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
 
-        if (user.getPassword() == pass) {
-            return "successfully logined";
+        if (user.getPassword().equals(pass)) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body("login successfully!");
         } else {
-            return "fail";
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
         }
     }
 
+    /** Вывод публичной информации пользователя по id
+     *
+     * @param id
+     * @return информация
+     */
+    public ResponseEntity<?> getUserInfo(Long id){
+        UserEntity user = userRepository.findById(id).get();
 
+        String result = String.format(
+                "Name: %s\n" +
+                "Surname: %s\n" +
+                "Email: %s",
+                user.getName(), user.getSurname(), user.getEmail()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(result);
+    }
 }
