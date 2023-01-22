@@ -16,9 +16,9 @@ public class DeveloperService {
     private final DeveloperRepository developerRepository;
 
     /**
-     * Cоздание разработчика
+     * Создание разработчика
      *
-     * @param developers
+     * @param developers данные нового разработчика
      * @return разработчик
      */
     public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {

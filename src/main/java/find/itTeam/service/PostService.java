@@ -46,7 +46,7 @@ public class PostService {
             // Делать что-то, пока поста с таким ID не существует
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("😰Сей пост не существует...😰");
         } else {
-            if (post.getContent().equals("") || post.getDateTime().equals("") || post.getPostStatus().equals("")) {
+            if (post.getContent().equals("") || post.getDateTime() == null || post.getPostStatus().equals("")) {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
                         .body("fail");
