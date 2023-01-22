@@ -32,7 +32,7 @@ public class CommentService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Post doesn't exist!");
         }
-        if (comment.getText().equals("") || comment.getDateTime() == null) {
+        if (comment.getText().equals("") || comment.getDate() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
@@ -40,7 +40,7 @@ public class CommentService {
 
             CommentEntity newComment = new CommentEntity()
                     .setText(comment.getText())
-                    .setDateTime(comment.getDateTime())
+                    .setDate(comment.getDate())
                     .setPost(post.get());
 
             CommentEntity commentSave = commentRepository.save(newComment);
@@ -64,31 +64,31 @@ public class CommentService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body(String.format("comment %s doesn't exist!", id));
         }
-        if (comment.getText().equals("") || comment.getDateTime() == null) {
+
+        if (comment.getText().equals("") || comment.getDate() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
         } else {
-            // todo (для учеников) сделать метод в репозитории для обновления
-            commentEntity.setText(comment.getText())
-                    .setDateTime(comment.getDateTime());
-            CommentEntity newComment = commentRepository.save(commentEntity);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(newComment);
-        }
-    }
 
-        /**
-         * Удаление комментария по id
-         * @param id
-         * @return результат
-         */
-        public ResponseEntity<?> deleteComment(Long id){
-            commentRepository.deleteById(id);
+            commentRepository.updateById(comment.getText(), comment.getDate(), id);
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(String.format("deleted comment %s", id));
+                    .body(String.format("updated comment %s", id));
         }
     }
+
+    /**
+     * Удаление комментария по id
+     * @param id
+     * @return результат
+     */
+    public ResponseEntity<?> deleteComment(Long id){
+        commentRepository.deleteById(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("deleted comment %s", id));
+    }
+}

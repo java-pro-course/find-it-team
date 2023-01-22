@@ -45,15 +45,19 @@ public class PostService {
         if (!postEntity.isPresent()) {
             // Делать что-то, пока поста с таким ID не существует
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("😰Сей пост не существует...😰");
-        }
+        } else {
+            if (post.getContent().equals("") || post.getDateTime().equals("") || post.getPostStatus().equals("")) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body("fail");
 
-        // todo (для учеников) сделать метод в репозитории для обновления поста
-        PostEntity updPost = new PostEntity();
-        updPost.setContent(post.getContent());
-        updPost.setDateTime(post.getDateTime());
-        updPost.setPostStatus("Изменён");
-        postRepository.save(updPost);
-        return ResponseEntity.status(HttpStatus.OK).body(updPost);
+            } else {
+                postRepository.updateById(post.getContent(), post.getDateTime(), post.getPostStatus(), id);
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(String.format("updated user %s", id));
+            }
+        }
     }
 
     /**
@@ -66,4 +70,5 @@ public class PostService {
         return ResponseEntity.status(HttpStatus.OK).body("Deleted!");
     }
 }
+
 
