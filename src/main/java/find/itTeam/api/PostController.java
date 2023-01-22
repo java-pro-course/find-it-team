@@ -1,31 +1,31 @@
 package find.itTeam.api;
 
-import find.itTeam.dto.CreateNewPost;
-import find.itTeam.entity.PostEntity;
+import find.itTeam.dto.CreatePost;
 import find.itTeam.service.PostService;
+import lombok.Data;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller для поста
+ */
 @RestController
+@Data
 public class PostController {
     private final PostService postService;
 
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
-
     @GetMapping("delete-post/{id}")
-    public String deletePost(@PathVariable Long id) {
+    public ResponseEntity<?> deletePost(@PathVariable Long id) {
         return postService.deletePost(id);
     }
 
     @PostMapping("create-post")
-    public PostEntity createNewPost(@RequestBody CreateNewPost requestPost) {
+    public ResponseEntity<?> createNewPost(@RequestBody CreatePost requestPost) {
         return postService.createNewPost(requestPost);
     }
 
     @PutMapping("update-post/{id}")
-    public PostEntity updatePost(@RequestBody CreateNewPost post,
-                                 @PathVariable Long id) {
+    public ResponseEntity<?> updatePost(@RequestBody CreatePost post, @PathVariable Long id) {
         return postService.updatePost(post, id);
     }
 

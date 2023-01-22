@@ -16,7 +16,7 @@ public class DeveloperService {
     private final DeveloperRepository developerRepository;
 
     /**
-     * создание разработчика в команде
+     * Cоздание разработчика
      *
      * @param developers
      * @return разработчик
@@ -24,8 +24,12 @@ public class DeveloperService {
     public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
-        //это огромная строчка - проверка на null
-        if (developers.getName() == null | developers.getSurname() == null | developers.getEmail() == null | developers.getProjects() == null | developers.getGithubLink() == null | developers.getDevRole() == null | developers.getLanguages() == null | developers.getDevelopmentArea() == null | developers.getExperience() == null | developers.getCity() == null | developers.getMainJob() == null)
+        //проверка на null
+        if (developers.getName() == null || developers.getSurname() == null
+                || developers.getEmail() == null || developers.getProjects() == null
+                || developers.getGithubLink() == null || developers.getDevRole() == null
+                || developers.getLanguages() == null || developers.getDevelopmentArea() == null
+                || developers.getExperience() == null || developers.getCity() == null || developers.getMainJob() == null)
             return null;
 
         developer
@@ -47,7 +51,7 @@ public class DeveloperService {
     }
 
     /**
-     * информация о разработчике в команде
+     * Информация о разработчике
      *
      * @return команда разработчиков
      */
