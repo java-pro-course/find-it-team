@@ -6,6 +6,9 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Entity для комментария
+ */
 @Entity
 @Table(schema = "finditteam", name = "comment")
 @Data
@@ -17,7 +20,7 @@ public class CommentEntity {
     @Column(name = "text")
     private String text;
     @Column(name = "date")
-    private LocalDate dateTime;
+    private LocalDate date;
 
     // todo автор комментария
 

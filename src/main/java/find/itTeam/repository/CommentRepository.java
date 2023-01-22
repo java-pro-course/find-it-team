@@ -11,6 +11,12 @@ import java.time.LocalDate;
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Long>{
 
+    /**
+     * Метод для обработки запроса на обновление комментария
+     * @param text
+     * @param date
+     * @param id
+     */
     @Modifying
     @Query("UPDATE CommentEntity comment SET comment.text = ?1, comment.date = ?2" +
             "WHERE comment.id = ?3")

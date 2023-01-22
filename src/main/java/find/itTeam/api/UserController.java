@@ -6,6 +6,9 @@ import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller для пользователя
+ */
 @RestController
 @Data
 public class UserController {

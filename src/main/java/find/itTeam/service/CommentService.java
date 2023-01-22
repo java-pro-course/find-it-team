@@ -19,6 +19,7 @@ public class CommentService {
 
     /**
      * Создание нового комментария
+     *
      * @param comment
      * @param postId
      * @return
@@ -26,20 +27,20 @@ public class CommentService {
     public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
 
-        if (!post.isPresent()){
+        if (!post.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Post doesn't exist!");
         }
-        if (comment.getText().equals("") || comment.getDateTime() == null) {
+        if (comment.getText().equals("") || comment.getDate() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        }else{
+        } else {
 
             CommentEntity newComment = new CommentEntity()
                     .setText(comment.getText())
-                    .setDateTime(comment.getDateTime())
+                    .setDate(comment.getDate())
                     .setPost(post.get());
 
             CommentEntity commentSave = commentRepository.save(newComment);
@@ -51,43 +52,44 @@ public class CommentService {
 
     /**
      * Изменение комментария по id
+     *
      * @param id
      * @param comment
      */
     public ResponseEntity<?> updateComment(Long id, CreateComment comment) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(id);
 
-        if (!commentEntity.isPresent()){
+        if (!commentEntity.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(String.format("comment %s doesn't exist!", id));
         }
-        if (comment.getText().equals("") || comment.getDateTime() == null) {
+
+        if (comment.getText().equals("") || comment.getDate() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        }else{
-        // todo (для учеников) сделать метод в репозитории для обновления
-        commentEntity.setText(comment.getText())
-                           .setDateTime(comment.getDateTime());
-        CommentEntity newComment = commentRepository.save(commentEntity);
+        } else {
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(newComment);
+            commentRepository.updateById(comment.getText(), comment.getDate(), id);
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(String.format("updated comment %s", id));
+        }
     }
 
-    /**
-     * Удаление комментария по id
-     * @param id
-     * @return результат
-     */
-    public ResponseEntity<?> deleteComment(Long id) {
-        commentRepository.deleteById(id);
+        /**
+         * Удаление комментария по id
+         * @param id
+         * @return результат
+         */
+        public ResponseEntity<?> deleteComment(Long id){
+            commentRepository.deleteById(id);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(String.format("deleted comment %s", id));
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(String.format("deleted comment %s", id));
     }
 }
 
