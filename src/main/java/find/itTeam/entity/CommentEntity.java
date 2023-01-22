@@ -4,11 +4,9 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.time.LocalDate;
-import lombok.Data;
 
 // скажите че не так потому что у меня не показывает ошибки
 
-@Data
 @Entity
 @Table(schema = "finditteam", name = "comment")
 @Data
