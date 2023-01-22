@@ -21,8 +21,8 @@ public class PostService {
     /**
      * Создание нового поста
      *
-     * @param post - пост, который хочет создать пользователь
-     * @return - созданный пост
+     * @param post пост, который хочет создать пользователь
+     * @return созданный пост
      */
     public ResponseEntity<?> createNewPost(CreatePost post) {
         PostEntity newPost = new PostEntity();
@@ -37,8 +37,8 @@ public class PostService {
     /**
      * Изменение поста
      *
-     * @param post - пост, который хочет изменить пользователь
-     * @return - изменённый пост
+     * @param post пост, который хочет изменить пользователь
+     * @return изменённый пост
      */
     public ResponseEntity<?> updatePost(CreatePost post, Long id) {
         Optional<PostEntity> postEntity = postRepository.findById(id);
@@ -63,7 +63,7 @@ public class PostService {
     /**
      * Удаление поста по id
      *
-     * @param postId - id поста
+     * @param postId id поста
      */
     public ResponseEntity<?> deletePost(Long postId) {
         postRepository.deleteById(postId);

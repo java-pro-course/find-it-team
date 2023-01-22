@@ -4,24 +4,25 @@ import find.itTeam.dto.CreateDeveloper;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
 
+import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller для программиста
+ */
 @RestController
+@Data
 public class DeveloperController {
     private final DeveloperService developerService;
 
-    public DeveloperController(DeveloperService developerService) {
-        this.developerService = developerService;
-    }
-
     // todo ResponseEntity<?>
-    @PostMapping("create-developer-in-team")
+    @PostMapping("create-developer")
     public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper) {
         return developerService.createTeamDeveloper(requestDeveloper);
     }
 
     // todo ResponseEntity<?>
-    @GetMapping("get-info-about-developer-in-team/{id}")
+    @GetMapping("get-developer-info/{id}")
     public DeveloperEntity infoAboutDeveloper(@PathVariable Long id) {
         return developerService.infoAboutDeveloperInTeam(id);
     }

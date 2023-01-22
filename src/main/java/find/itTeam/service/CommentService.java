@@ -78,7 +78,6 @@ public class CommentService {
                     .body(String.format("updated comment %s", id));
         }
     }
-
     /**
      * Удаление комментария по id
      * @param id
@@ -87,8 +86,9 @@ public class CommentService {
     public ResponseEntity<?> deleteComment(Long id){
         commentRepository.deleteById(id);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(String.format("deleted comment %s", id));
+
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(String.format("deleted comment %s", id));
     }
 }

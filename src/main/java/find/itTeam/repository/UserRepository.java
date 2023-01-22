@@ -14,8 +14,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     /**
      * Метод для обработки запроса на обновление пользователя
      *
-     * @param name     новое имя пользователя
-     * @param surname  новая фамилия пользователя
+     * @param name
+     * @param surname
      * @param email
      * @param password
      * @param id
