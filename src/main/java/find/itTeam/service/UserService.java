@@ -18,7 +18,7 @@ public class UserService {
     /**
      * Создание пользователя
      *
-     * @param user
+     * @param user данные нового пользователя
      */
     public ResponseEntity<?> createNewUser(CreateUser user) {
         if (user.getName().equals("") || user.getSurname().equals("")
@@ -44,8 +44,8 @@ public class UserService {
     /**
      * Обновление пользователя по id
      *
-     * @param id
-     * @param user
+     * @param id ID обновляемого пользователя
+     * @param user обновляемый пользователь
      * @return подтверждение действия
      */
     @Transactional
@@ -68,7 +68,7 @@ public class UserService {
     /**
      * Удаление пользователя по id
      *
-     * @param id
+     * @param id ID удаляемого пользователя
      * @return подтверждение действия
      */
     public ResponseEntity<?> deleteUser(Long id) {
@@ -83,8 +83,8 @@ public class UserService {
     /**
      * Вход пользователя по email и паролю
      *
-     * @param email
-     * @param pass
+     * @param email эл. почта пользователя, который входит в свой аккаунт
+     * @param pass пароль, того же пользователя
      * @return подтверждение действия
      */
     public ResponseEntity<?> login(String email, String pass) {
