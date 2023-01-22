@@ -1,7 +1,6 @@
 package find.itTeam.api;
 
 import find.itTeam.dto.CreateComment;
-import find.itTeam.entity.CommentEntity;
 import find.itTeam.service.CommentService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
