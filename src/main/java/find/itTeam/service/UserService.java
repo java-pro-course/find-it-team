@@ -1,10 +1,9 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateNewUser;
+import find.itTeam.dto.CreateUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,28 +14,30 @@ import javax.transaction.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
-
+//TODO: проверки на существование
     /**
      * Создание пользователя
      *
      * @param user
      */
-    public ResponseEntity<?> createNewUser(CreateNewUser user) {
-        // Проверка того, что все обязательные поля заполнены
+    public ResponseEntity<?> createNewUser(CreateUser user) {
         if (user.getName().equals("") || user.getSurname().equals("")
                 || user.getEmail().equals("") || user.getPassword().equals("")) {
 
-            return null;
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
         } else {
-            UserEntity newUser = new UserEntity();
+            UserEntity newUser = new UserEntity()
+                    .setName(user.getName())
+                    .setSurname(user.getSurname())
+                    .setEmail(user.getEmail())
+                    .setPassword(user.getPassword());
 
-            newUser.setName(user.getName())
-                .setSurname(user.getSurname())
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword());
-            UserEntity userEn = userRepository.save(newUser);
-            return ResponseEntity.status(HttpStatus.CREATED).body(userEn);
-
+            UserEntity userSave = userRepository.save(newUser);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(userSave);
         }
     }
 
@@ -48,7 +49,7 @@ public class UserService {
      * @return подтверждение действия
      */
     @Transactional
-    public ResponseEntity<?> updateUser(Long id, CreateNewUser user) {
+    public ResponseEntity<?> updateUser(Long id, CreateUser user) {
         if (user.getName().equals("") || user.getSurname().equals("")
                 || user.getEmail().equals("") || user.getPassword().equals("")) {
 

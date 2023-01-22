@@ -1,14 +1,10 @@
 package find.itTeam.api;
 
-import find.itTeam.dto.CreateNewUser;
-import find.itTeam.entity.PostEntity;
-import find.itTeam.entity.UserEntity;
+import find.itTeam.dto.CreateUser;
 import find.itTeam.service.UserService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.soap.SAAJResult;
 
 @RestController
 @Data
@@ -21,12 +17,12 @@ public class UserController {
     }
 
     @PostMapping("create-user")
-    public ResponseEntity<?> createUser(@RequestBody CreateNewUser requestUser) {
+    public ResponseEntity<?> createUser(@RequestBody CreateUser requestUser) {
         return userService.createNewUser(requestUser);
     }
 
     @PutMapping("update-user/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody CreateNewUser user) {
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody CreateUser user) {
         return userService.updateUser(id, user);
     }
 

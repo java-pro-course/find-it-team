@@ -1,6 +1,6 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.CreateNewPost;
+import find.itTeam.dto.CreatePost;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.PostRepository;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class PostService {
      * @param post - пост, который хочет создать пользователь
      * @return - созданный пост
      */
-    public ResponseEntity<?> createNewPost(CreateNewPost post) {
+    public ResponseEntity<?> createNewPost(CreatePost post) {
         PostEntity newPost = new PostEntity();
 
         newPost.setContent(post.getContent());
@@ -40,7 +40,7 @@ public class PostService {
      * @param post - пост, который хочет изменить пользователь
      * @return - изменённый пост
      */
-    public ResponseEntity<?> updatePost(CreateNewPost post, Long id) {
+    public ResponseEntity<?> updatePost(CreatePost post, Long id) {
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if (!postEntity.isPresent()) {
             // Делать что-то, пока поста с таким ID не существует

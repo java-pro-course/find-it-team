@@ -16,12 +16,12 @@ public class CommentController {
 
     // todo поменять на ResponseEntity<?>
     @PostMapping("create-comment/{postId}")
-    public CommentEntity createComment(@RequestBody CreateComment requestComment,
+    public ResponseEntity<?> createComment(@RequestBody CreateComment requestComment,
                                        @PathVariable Long postId) {
         return commentService.createNewComment(requestComment, postId);
     }
 
-    @GetMapping("edit-comment/{id}")
+    @GetMapping("update-comment/{id}")
     public ResponseEntity<?> updateComment(@PathVariable Long id, @RequestBody CreateComment comment) {
         return commentService.updateComment(id, comment);
     }

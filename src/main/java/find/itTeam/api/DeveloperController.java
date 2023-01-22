@@ -7,10 +7,10 @@ import find.itTeam.service.DeveloperService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class TeamDeveloperController {
+public class DeveloperController {
     private final DeveloperService developerService;
 
-    public TeamDeveloperController(DeveloperService developerService) {
+    public DeveloperController(DeveloperService developerService) {
         this.developerService = developerService;
     }
 
