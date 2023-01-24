@@ -5,6 +5,8 @@ import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,7 +23,7 @@ public class DeveloperService {
      * @param developers данные нового разработчика
      * @return разработчик
      */
-    public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
+    public ResponseEntity<?> createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
         //проверка на null
@@ -30,24 +32,26 @@ public class DeveloperService {
                 || developers.getGithubLink() == null || developers.getDevRole() == null
                 || developers.getLanguages() == null || developers.getDevelopmentArea() == null
                 || developers.getExperience() == null || developers.getCity() == null || developers.getMainJob() == null)
-            return null;
-
-        developer
-                .setName(developers.getName())
-                .setSurname(developers.getSurname())
-                .setEmail(developers.getEmail())
-                .setPassword(developers.getPassword())
-                .setProjects(developers.getProjects())
-                .setGithubLink(developers.getGithubLink())
-                .setDevRole(developers.getDevRole())
-                .setLanguages(developers.getLanguages())
-                .setDevelopmentArea(developers.getDevelopmentArea())
-                .setExperience(developers.getExperience())
-                .setCity(developers.getCity())
-                .setMainJob(developers.getMainJob());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail");
+        else {
+            developer
+                    .setName(developers.getName())
+                    .setSurname(developers.getSurname())
+                    .setEmail(developers.getEmail())
+                    .setPassword(developers.getPassword())
+                    .setProjects(developers.getProjects())
+                    .setGithubLink(developers.getGithubLink())
+                    .setDevRole(developers.getDevRole())
+                    .setLanguages(developers.getLanguages())
+                    .setDevelopmentArea(developers.getDevelopmentArea())
+                    .setExperience(developers.getExperience())
+                    .setCity(developers.getCity())
+                    .setMainJob(developers.getMainJob());
+        }
 
         log.info("All is ok!");
-        return developerRepository.save(developer);
+        DeveloperEntity developerSave = developerRepository.save(developer);
+        return ResponseEntity.status(200).body(developerSave);
     }
 
     /**
@@ -56,8 +60,8 @@ public class DeveloperService {
      * @return команда разработчиков
      */
 
-    public DeveloperEntity infoAboutDeveloperInTeam(Long id) {
+    public ResponseEntity<?> infoAboutDeveloperInTeam(Long id) {
         Optional<DeveloperEntity> developer = developerRepository.findById(id);
-        return developer.get();
+        return ResponseEntity.status(200).body(developer.get());
     }
 }
