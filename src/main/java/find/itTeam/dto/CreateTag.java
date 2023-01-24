@@ -3,4 +3,5 @@ import lombok.Data;
 @Data
 public class CreateTag {
     private String tag;
+    private int developer_id;
 }
