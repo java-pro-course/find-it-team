@@ -30,6 +30,6 @@ public class TagsService {
         tagsRepository.deleteById(tagId);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(String.format("deleted tag %s", tagId));
+                .body(String.format("deleted tag %d", tagId));
     }
 }
