@@ -18,13 +18,12 @@ public class TagsService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("failed");
-        } else {
-            TagsEntity newTag = new TagsEntity()
+        }
+        TagsEntity newTag = new TagsEntity()
                     .setTag(tag.getTag());
-            return ResponseEntity
+        return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(newTag);
-        }
     }
     public ResponseEntity<?> deleteTag(Long tagId){
         tagsRepository.deleteById(tagId);
