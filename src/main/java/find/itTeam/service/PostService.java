@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 @Data
-
 public class PostService {
     private final PostRepository postRepository;
 
@@ -23,10 +22,10 @@ public class PostService {
      * @return созданный пост
      */
     public ResponseEntity<?> createNewPost(CreatePost post) {
-        PostEntity newPost = new PostEntity();
-        newPost.setContent(post.getContent());
-        newPost.setDateTime(post.getDateTime());
-        newPost.setPostStatus(post.getPostStatus());
+        PostEntity newPost = new PostEntity()
+                .setContent(post.getContent())
+                .setDateTime(post.getDateTime())
+                .setPostStatus(post.getPostStatus());
 
         postRepository.save(newPost);
         return ResponseEntity.status(HttpStatus.OK).body(newPost);
@@ -43,19 +42,19 @@ public class PostService {
         if (!postEntity.isPresent()) {
             // Делать что-то, пока поста с таким ID не существует
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("😰Сей пост не существует...😰");
-        } else {
-            if (post.getContent().equals("") || post.getDateTime() == null || post.getPostStatus().equals("")) {
-                return ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body("fail");
-
-            } else {
-                postRepository.updateById(post.getContent(), post.getDateTime(), post.getPostStatus(), id);
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body(String.format("Updated post %s", id));
-            }
         }
+
+        if (post.getContent().equals("") || post.getDateTime() == null || post.getPostStatus().equals("")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("fail");
+
+        }
+
+        postRepository.updateById(post.getContent(), post.getDateTime(), post.getPostStatus(), id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("Updated post %s", id));
     }
 
     /**

@@ -1,6 +1,7 @@
 package find.itTeam.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(schema = "finditteam", name = "post")
+@Accessors(chain = true)
 public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
