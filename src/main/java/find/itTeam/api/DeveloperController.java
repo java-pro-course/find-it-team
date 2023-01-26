@@ -7,6 +7,7 @@ import find.itTeam.service.DeveloperService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 /**
  * Controller для программиста
@@ -24,6 +25,11 @@ public class DeveloperController {
     @GetMapping("get-developer-info/{id}")
     public ResponseEntity<?> infoAboutDeveloper(@PathVariable Long id) {
         return developerService.infoAboutDeveloperInTeam(id);
+    }
+
+    @GetMapping("get-all-developers")
+    public List<DeveloperEntity> getAllDev() {
+        return developerService.getAllDev();
     }
 }
 
