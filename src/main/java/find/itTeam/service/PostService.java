@@ -26,10 +26,10 @@ public class PostService {
      */
     public ResponseEntity<?> createNewPost(CreatePost post) {
         PostEntity newPost = new PostEntity();
-
         newPost.setContent(post.getContent());
         newPost.setDateTime(post.getDateTime());
         newPost.setPostStatus(post.getPostStatus());
+
         postRepository.save(newPost);
         return ResponseEntity.status(HttpStatus.OK).body(newPost);
     }

@@ -32,26 +32,26 @@ public class DeveloperService {
                 || developers.getGithubLink() == null || developers.getDevRole() == null
                 || developers.getLanguages() == null || developers.getDevelopmentArea() == null
                 || developers.getExperience() == null || developers.getCity() == null || developers.getMainJob() == null)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("fail");
-        else {
-            developer
-                    .setName(developers.getName())
-                    .setSurname(developers.getSurname())
-                    .setEmail(developers.getEmail())
-                    .setPassword(developers.getPassword())
-                    .setProjects(developers.getProjects())
-                    .setGithubLink(developers.getGithubLink())
-                    .setDevRole(developers.getDevRole())
-                    .setLanguages(developers.getLanguages())
-                    .setDevelopmentArea(developers.getDevelopmentArea())
-                    .setExperience(developers.getExperience())
-                    .setCity(developers.getCity())
-                    .setMainJob(developers.getMainJob());
-        }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ни одно из полей не должно быть пустым!!!");
+
+        developer
+                .setName(developers.getName())
+                .setSurname(developers.getSurname())
+                .setEmail(developers.getEmail())
+                .setPassword(developers.getPassword())
+                .setProjects(developers.getProjects())
+                .setGithubLink(developers.getGithubLink())
+                .setDevRole(developers.getDevRole())
+                .setLanguages(developers.getLanguages())
+                .setDevelopmentArea(developers.getDevelopmentArea())
+                .setExperience(developers.getExperience())
+                .setCity(developers.getCity())
+                .setMainJob(developers.getMainJob());
 
         log.info("All is ok!");
-        DeveloperEntity developerSave = developerRepository.save(developer);
-        return ResponseEntity.status(200).body(developerSave);
+        developerRepository.save(developer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(developer);
     }
 
     /**
