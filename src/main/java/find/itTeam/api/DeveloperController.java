@@ -21,7 +21,6 @@ public class DeveloperController {
         return developerService.createTeamDeveloper(requestDeveloper);
     }
 
-    // todo ResponseEntity<?>
     @GetMapping("get-developer-info/{id}")
     public ResponseEntity<?> infoAboutDeveloper(@PathVariable Long id) {
         return developerService.infoAboutDeveloperInTeam(id);

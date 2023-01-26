@@ -20,35 +20,34 @@ public class DeveloperService {
     /**
      * Создание разработчика
      *
-     * @param developers данные нового разработчика
+     * @param rq данные нового разработчика
      * @return разработчик
      */
-    public ResponseEntity<?> createTeamDeveloper(CreateDeveloper developers) {
-        DeveloperEntity developer = new DeveloperEntity();
-
+    public ResponseEntity<?> createTeamDeveloper(CreateDeveloper rq) {
         //проверка на null
-        if (developers.getName() == null || developers.getSurname() == null
-                || developers.getEmail() == null || developers.getProjects() == null
-                || developers.getGithubLink() == null || developers.getDevRole() == null
-                || developers.getLanguages() == null || developers.getDevelopmentArea() == null
-                || developers.getExperience() == null || developers.getCity() == null || developers.getMainJob() == null)
-
+        if (rq.getName() == null || rq.getSurname() == null
+                || rq.getEmail() == null || rq.getProjects() == null
+                || rq.getGithubLink() == null || rq.getDevRole() == null
+                || rq.getLanguages() == null || rq.getDevelopmentArea() == null
+                || rq.getExperience() == null || rq.getCity() == null || rq.getMainJob() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ни одно из полей не должно быть пустым!!!");
+        }
 
-        developer
-                .setName(developers.getName())
-                .setSurname(developers.getSurname())
-                .setEmail(developers.getEmail())
-                .setPassword(developers.getPassword())
-                .setProjects(developers.getProjects())
-                .setGithubLink(developers.getGithubLink())
-                .setDevRole(developers.getDevRole())
-                .setLanguages(developers.getLanguages())
-                .setDevelopmentArea(developers.getDevelopmentArea())
-                .setExperience(developers.getExperience())
-                .setCity(developers.getCity())
-                .setMainJob(developers.getMainJob());
+        DeveloperEntity developer = new DeveloperEntity()
+                .setName(rq.getName())
+                .setSurname(rq.getSurname())
+                .setEmail(rq.getEmail())
+                .setPassword(rq.getPassword())
+                .setProjects(rq.getProjects())
+                .setGithubLink(rq.getGithubLink())
+                .setDevRole(rq.getDevRole())
+                .setLanguages(rq.getLanguages())
+                .setDevelopmentArea(rq.getDevelopmentArea())
+                .setExperience(rq.getExperience())
+                .setCity(rq.getCity())
+                .setMainJob(rq.getMainJob());
 
+        developer = developerRepository.save(developer);
         log.info("All is ok!");
 
         return ResponseEntity
