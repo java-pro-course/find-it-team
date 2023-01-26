@@ -50,8 +50,10 @@ public class DeveloperService {
                 .setMainJob(developers.getMainJob());
 
         log.info("All is ok!");
-        developerRepository.save(developer);
-        return ResponseEntity.status(HttpStatus.CREATED).body(developer);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(developer);
     }
 
     /**
@@ -62,6 +64,9 @@ public class DeveloperService {
 
     public ResponseEntity<?> infoAboutDeveloperInTeam(Long id) {
         Optional<DeveloperEntity> developer = developerRepository.findById(id);
-        return ResponseEntity.status(200).body(developer.get());
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(developer);
     }
 }
