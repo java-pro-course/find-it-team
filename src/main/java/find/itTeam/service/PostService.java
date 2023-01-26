@@ -3,6 +3,7 @@ package find.itTeam.service;
 import find.itTeam.dto.CreatePost;
 import find.itTeam.entity.PostEntity;
 import find.itTeam.repository.PostRepository;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Data
+
 public class PostService {
     private final PostRepository postRepository;
-
-
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
 
     /**
      * Создание нового поста
@@ -55,7 +53,7 @@ public class PostService {
                 postRepository.updateById(post.getContent(), post.getDateTime(), post.getPostStatus(), id);
                 return ResponseEntity
                         .status(HttpStatus.OK)
-                        .body(String.format("updated user %s", id));
+                        .body(String.format("Updated post %s", id));
             }
         }
     }
@@ -67,7 +65,7 @@ public class PostService {
      */
     public ResponseEntity<?> deletePost(Long postId) {
         postRepository.deleteById(postId);
-        return ResponseEntity.status(HttpStatus.OK).body("Deleted!");
+        return ResponseEntity.status(HttpStatus.OK).body("Post deleted!");
     }
 }
 

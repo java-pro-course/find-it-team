@@ -14,7 +14,6 @@ import javax.transaction.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
-//TODO: проверки на существование
     /**
      * Создание пользователя
      *
@@ -103,7 +102,7 @@ public class UserService {
 
     /** Вывод публичной информации пользователя по id
      *
-     * @param id
+     * @param id ID пользователя
      * @return информация
      */
     public ResponseEntity<?> getUserInfo(Long id){
