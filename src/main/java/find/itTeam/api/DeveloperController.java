@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class DeveloperController {
     private final DeveloperService developerService;
 
-    // todo ResponseEntity<?>
     @PostMapping("create-developer")
     public ResponseEntity<?> createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper) {
         return developerService.createTeamDeveloper(requestDeveloper);
@@ -24,7 +23,7 @@ public class DeveloperController {
 
     // todo ResponseEntity<?>
     @GetMapping("get-developer-info/{id}")
-    public DeveloperEntity infoAboutDeveloper(@PathVariable Long id) {
+    public ResponseEntity<?> infoAboutDeveloper(@PathVariable Long id) {
         return developerService.infoAboutDeveloperInTeam(id);
     }
 }
