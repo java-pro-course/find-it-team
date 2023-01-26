@@ -5,6 +5,8 @@ import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.repository.DeveloperRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,7 +23,7 @@ public class DeveloperService {
      * @param developers данные нового разработчика
      * @return разработчик
      */
-    public DeveloperEntity createTeamDeveloper(CreateDeveloper developers) {
+    public ResponseEntity<?> createTeamDeveloper(CreateDeveloper developers) {
         DeveloperEntity developer = new DeveloperEntity();
 
         //проверка на null
@@ -30,7 +32,7 @@ public class DeveloperService {
                 || developers.getGithubLink() == null || developers.getDevRole() == null
                 || developers.getLanguages() == null || developers.getDevelopmentArea() == null
                 || developers.getExperience() == null || developers.getCity() == null || developers.getMainJob() == null)
-            return null;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ни одно из полей не должно быть пустым!!!");
 
         developer
                 .setName(developers.getName())
@@ -47,7 +49,8 @@ public class DeveloperService {
                 .setMainJob(developers.getMainJob());
 
         log.info("All is ok!");
-        return developerRepository.save(developer);
+        developerRepository.save(developer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(developer);
     }
 
     /**

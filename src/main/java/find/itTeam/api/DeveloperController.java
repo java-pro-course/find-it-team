@@ -5,6 +5,7 @@ import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
 
 import lombok.Data;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,7 +18,7 @@ public class DeveloperController {
 
     // todo ResponseEntity<?>
     @PostMapping("create-developer")
-    public DeveloperEntity createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper) {
+    public ResponseEntity<?> createTeamDeveloper(@RequestBody CreateDeveloper requestDeveloper) {
         return developerService.createTeamDeveloper(requestDeveloper);
     }
 
