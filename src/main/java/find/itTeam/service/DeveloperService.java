@@ -32,7 +32,8 @@ public class DeveloperService {
                 || developers.getGithubLink() == null || developers.getDevRole() == null
                 || developers.getLanguages() == null || developers.getDevelopmentArea() == null
                 || developers.getExperience() == null || developers.getCity() == null || developers.getMainJob() == null)
-            return null;
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ни одно из полей не должно быть пустым!!!");
 
         developer
                 .setName(developers.getName())
@@ -49,6 +50,7 @@ public class DeveloperService {
                 .setMainJob(developers.getMainJob());
 
         log.info("All is ok!");
+
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(developer);
@@ -62,6 +64,7 @@ public class DeveloperService {
 
     public ResponseEntity<?> infoAboutDeveloperInTeam(Long id) {
         Optional<DeveloperEntity> developer = developerRepository.findById(id);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(developer);
