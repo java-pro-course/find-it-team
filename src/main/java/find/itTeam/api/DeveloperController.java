@@ -1,13 +1,10 @@
 package find.itTeam.api;
 
 import find.itTeam.dto.CreateDeveloper;
-import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.service.DeveloperService;
-
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 /**
  * Controller для программиста
@@ -28,7 +25,7 @@ public class DeveloperController {
     }
 
     @GetMapping("get-all-developers")
-    public List<DeveloperEntity> getAllDev() {
+    public ResponseEntity<?> getAllDev() {
         return developerService.getAllDev();
     }
 }

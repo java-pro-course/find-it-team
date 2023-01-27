@@ -2,7 +2,6 @@ package find.itTeam.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,6 @@ public class DeveloperEntity {
     private String city;
     @Column(name = "main_job")
     private String mainJob;
-
     @OneToMany(mappedBy = "developer")
     private List<TagsEntity> tags;
 }
