@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("login-user")
-    public ResponseEntity<?> loginUser(@RequestBody String email, @RequestBody String pass){
+    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String pass){
         return userService.login(email, pass);
     }
 }

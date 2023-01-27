@@ -29,7 +29,9 @@ public class DeveloperService {
                 || rq.getGithubLink() == null || rq.getDevRole() == null
                 || rq.getLanguages() == null || rq.getDevelopmentArea() == null
                 || rq.getExperience() == null || rq.getCity() == null || rq.getMainJob() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ни одно из полей не должно быть пустым!!!");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Ни одно из полей не должно быть пустым!!!");
         }
 
         DeveloperEntity developer = new DeveloperEntity()
@@ -69,6 +71,8 @@ public class DeveloperService {
     }
 
     public ResponseEntity<?> getAllDev() {
-        return ResponseEntity.status(HttpStatus.OK).body(developerRepository.findAll());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(developerRepository.findAll());
     }
 }
