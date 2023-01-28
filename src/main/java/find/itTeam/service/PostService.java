@@ -28,7 +28,7 @@ public class PostService {
                 .setContent(post.getContent())
                 .setDateTime(LocalDate.now())
                 .setPostStatus("Not edited")
-                .setAuthor());//todo как-то добавлять автора
+                .setAuthor(new UserEntity());//todo как-то добавлять автора
 
         postRepository.save(newPost);
         return ResponseEntity.status(HttpStatus.OK).body(newPost);
