@@ -1,6 +1,5 @@
 package find.itTeam.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;

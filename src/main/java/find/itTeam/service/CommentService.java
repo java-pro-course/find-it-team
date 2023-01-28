@@ -20,9 +20,9 @@ public class CommentService {
     /**
      * Создание нового комментария
      *
-     * @param comment
-     * @param postId
-     * @return
+     * @param comment dto для создания комментария
+     * @param postId id поста, под которым создаётся комментарий
+     * @return в
      */
     public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
@@ -35,7 +35,7 @@ public class CommentService {
         if (comment.getText().equals("") || comment.getDate() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("fail");
+                    .body("Fail");
         } else {
 
             CommentEntity newComment = new CommentEntity()
@@ -53,8 +53,9 @@ public class CommentService {
     /**
      * Изменение комментария по id
      *
-     * @param id
-     * @param comment
+     * @param id id обновляемого комментария
+     * @param comment dto для создания комментария
+     * @return  Строка "Update comment id-комментария"
      */
     public ResponseEntity<?> updateComment(Long id, CreateComment comment) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(id);
@@ -62,7 +63,7 @@ public class CommentService {
         if (!commentEntity.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(String.format("comment %s doesn't exist!", id));
+                    .body(String.format("Comment %s doesn't exist!", id));
         }
 
         if (comment.getText().equals("") || comment.getDate() == null) {
@@ -75,20 +76,20 @@ public class CommentService {
 
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(String.format("updated comment %s", id));
+                    .body(String.format("Updated comment %s", id));
         }
     }
     /**
      * Удаление комментария по id
-     * @param id
-     * @return результат
+     * @param id идентификатор удаляемого комментария
+     * @return строка "Delete comment id-комментария"
      */
     public ResponseEntity<?> deleteComment(Long id){
         commentRepository.deleteById(id);
 
 
-            return ResponseEntity
+        return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(String.format("deleted comment %s", id));
+                    .body(String.format("Deleted comment %s", id));
     }
 }

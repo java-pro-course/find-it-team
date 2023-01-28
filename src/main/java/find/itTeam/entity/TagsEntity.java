@@ -2,7 +2,6 @@ package find.itTeam.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import javax.persistence.*;
 
 @Entity
