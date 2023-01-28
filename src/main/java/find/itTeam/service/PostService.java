@@ -2,12 +2,14 @@ package find.itTeam.service;
 
 import find.itTeam.dto.CreatePost;
 import find.itTeam.entity.PostEntity;
+import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.PostRepository;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -24,8 +26,9 @@ public class PostService {
     public ResponseEntity<?> createNewPost(CreatePost post) {
         PostEntity newPost = new PostEntity()
                 .setContent(post.getContent())
-                .setDateTime(post.getDateTime())
-                .setPostStatus(post.getPostStatus());
+                .setDateTime(LocalDate.now())
+                .setPostStatus("Not edited")
+                .setAuthor());//todo как-то добавлять автора
 
         postRepository.save(newPost);
         return ResponseEntity.status(HttpStatus.OK).body(newPost);
@@ -47,11 +50,11 @@ public class PostService {
         if (post.getContent().equals("") || post.getDateTime() == null || post.getPostStatus().equals("")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("fail");
+                    .body("None of the fields must be null!");
 
         }
 
-        postRepository.updateById(post.getContent(), post.getDateTime(), post.getPostStatus(), id);
+        postRepository.updateById(post.getContent(), LocalDate.now(), "Edited", id);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(String.format("Updated post %s", id));
