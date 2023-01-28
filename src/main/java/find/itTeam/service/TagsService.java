@@ -14,13 +14,14 @@ public class TagsService {
     final private TagsRepository tagsRepository;
 
     public ResponseEntity<?> createNewTag(CreateTag tag){
-        if (tag.getTag() == "") {
+        if (tag.getTag() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("failed");
         }
         TagsEntity newTag = new TagsEntity()
                     .setTag(tag.getTag());
+        tagsRepository.save(newTag);
         return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(newTag);
