@@ -66,8 +66,27 @@ public class PostService {
      * @param postId id поста
      */
     public ResponseEntity<?> deletePost(Long postId) {
+        if(!postRepository.findById(postId).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The post is not exist");
+        }
         postRepository.deleteById(postId);
-        return ResponseEntity.status(HttpStatus.OK).body("Post was deleted!");
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Post was deleted!");
+    }
+
+    public ResponseEntity<?> getAllPosts() {
+        if (postRepository.findAll().isEmpty()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("There is not a single post here yet...");
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(postRepository.findAll());
     }
 }
 

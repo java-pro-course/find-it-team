@@ -29,4 +29,9 @@ public class PostController {
         return postService.updatePost(post, id);
     }
 
+    @GetMapping("get-all-posts")
+    private ResponseEntity<?> getAllPosts(){
+        return postService.getAllPosts();
+    }
+
 }
