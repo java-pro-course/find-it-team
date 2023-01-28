@@ -34,8 +34,8 @@ public class UserController {
         return userService.getUserInfo(id);
     }
 
-    @GetMapping("login-user")
-    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String pass){
+    @GetMapping("login")
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String pass){
         return userService.login(email, pass);
     }
 }
