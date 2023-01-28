@@ -32,4 +32,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<PostEntity> posts;
+
+    @OneToOne(mappedBy = "user")
+    private RatingEntity rating;
 }
