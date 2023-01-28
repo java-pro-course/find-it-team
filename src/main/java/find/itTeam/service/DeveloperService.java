@@ -75,4 +75,16 @@ public class DeveloperService {
                 .status(HttpStatus.OK)
                 .body(developerRepository.findAll());
     }
+
+    public ResponseEntity<?> deleteDevById(Long id) {
+        if (!developerRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The developer is not exist");
+        }
+        developerRepository.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Developer was deleted!");
+    }
 }

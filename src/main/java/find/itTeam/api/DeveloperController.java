@@ -28,5 +28,10 @@ public class DeveloperController {
     public ResponseEntity<?> getAllDev() {
         return developerService.getAllDev();
     }
+
+    @GetMapping("delete-developer-by-id/{id}")
+    public ResponseEntity<?> deleteDevById(@PathVariable Long id){
+        return developerService.deleteDevById(id);
+    }
 }
 
