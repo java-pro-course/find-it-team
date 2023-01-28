@@ -19,9 +19,11 @@ public class TagsService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The tag must not be equals null!");
         }
-        TagsEntity newTag = new TagsEntity()
-                    .setTag(tag.getTag());
+
+        TagsEntity newTag = new TagsEntity().setTag(tag.getTag());
+
         tagsRepository.save(newTag);
+
         return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(newTag);
@@ -34,6 +36,7 @@ public class TagsService {
         }
 
         tagsRepository.deleteById(tagId);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(String.format("Deleted tag %d", tagId));

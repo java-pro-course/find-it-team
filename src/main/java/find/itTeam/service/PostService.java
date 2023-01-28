@@ -8,7 +8,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -31,6 +30,7 @@ public class PostService {
                 .setAuthor(new UserEntity());//todo как-то добавлять автора
 
         postRepository.save(newPost);
+
         return ResponseEntity.status(HttpStatus.OK).body(newPost);
     }
 
@@ -55,6 +55,7 @@ public class PostService {
         }
 
         postRepository.updateById(post.getContent(), LocalDate.now(), "Edited", id);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(String.format("Updated post %s", id));
@@ -72,6 +73,7 @@ public class PostService {
                     .body("The post is not exist");
         }
         postRepository.deleteById(postId);
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Post was deleted!");

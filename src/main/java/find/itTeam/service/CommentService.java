@@ -36,18 +36,17 @@ public class CommentService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Fail");
-        } else {
-
-            CommentEntity newComment = new CommentEntity()
+        }
+        CommentEntity newComment = new CommentEntity()
                     .setText(comment.getText())
                     .setDate(comment.getDate())
                     .setPost(post.get());
 
-            CommentEntity commentSave = commentRepository.save(newComment);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(commentSave);
-        }
+        CommentEntity commentSave = commentRepository.save(newComment);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(commentSave);
     }
 
     /**
@@ -70,14 +69,12 @@ public class CommentService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        } else {
-
-            commentRepository.updateById(comment.getText(), comment.getDate(), id);
-
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(String.format("Updated comment %s", id));
         }
+        commentRepository.updateById(comment.getText(), comment.getDate(), id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("Updated comment %s", id));
     }
     /**
      * Удаление комментария по id
@@ -86,7 +83,6 @@ public class CommentService {
      */
     public ResponseEntity<?> deleteComment(Long id){
         commentRepository.deleteById(id);
-
 
         return ResponseEntity
                     .status(HttpStatus.OK)

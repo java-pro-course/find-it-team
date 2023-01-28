@@ -26,18 +26,17 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        } else {
-            UserEntity newUser = new UserEntity()
-                    .setName(user.getName())
-                    .setSurname(user.getSurname())
-                    .setEmail(user.getEmail())
-                    .setPassword(user.getPassword());
+        }
+        UserEntity newUser = new UserEntity()
+                                        .setName(user.getName())
+                                        .setSurname(user.getSurname())
+                                        .setEmail(user.getEmail())
+                                        .setPassword(user.getPassword());
 
-            UserEntity userSave = userRepository.save(newUser);
-            return ResponseEntity
+        UserEntity userSave = userRepository.save(newUser);
+        return ResponseEntity
                     .status(HttpStatus.CREATED)
                     .body(userSave);
-        }
     }
 
     /**
@@ -55,13 +54,12 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        } else {
-            userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
-
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(String.format("updated user %s", id));
         }
+        userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("updated user %s", id));
     }
 
     /**
@@ -93,11 +91,10 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body("Successful login!");
-        } else {
-            return ResponseEntity
+        }
+        return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("fail");
-        }
     }
 
     /** Вывод публичной информации пользователя по id
