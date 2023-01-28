@@ -17,7 +17,7 @@ public class TagsService {
         if (tag.getTag() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("failed");
+                    .body("The tag must not be equals null!");
         }
         TagsEntity newTag = new TagsEntity()
                     .setTag(tag.getTag());
@@ -27,9 +27,15 @@ public class TagsService {
                     .body(newTag);
     }
     public ResponseEntity<?> deleteTag(Long tagId){
+        if(!tagsRepository.findById(tagId).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The tag is not exist!");
+        }
+
         tagsRepository.deleteById(tagId);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(String.format("deleted tag %d", tagId));
+                .body(String.format("Deleted tag %d", tagId));
     }
 }

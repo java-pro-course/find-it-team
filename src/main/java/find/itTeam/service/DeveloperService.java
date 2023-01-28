@@ -31,7 +31,7 @@ public class DeveloperService {
                 || rq.getExperience() == null || rq.getCity() == null || rq.getMainJob() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Ни одно из полей не должно быть пустым!!!");
+                    .body("None of the fields must be null!");
         }
 
         DeveloperEntity developer = new DeveloperEntity()

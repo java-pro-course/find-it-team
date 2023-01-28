@@ -92,7 +92,7 @@ public class UserService {
         if (user.getPassword().equals(pass)) {
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body("login successfully!");
+                    .body("Successful login!");
         } else {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -106,6 +106,12 @@ public class UserService {
      * @return информация
      */
     public ResponseEntity<?> getUserInfo(Long id){
+        if(!userRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The user is not exist!");
+        }
+
         UserEntity user = userRepository.findById(id).get();
 
         String result = String.format(

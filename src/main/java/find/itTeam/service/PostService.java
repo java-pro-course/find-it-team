@@ -41,7 +41,7 @@ public class PostService {
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if (!postEntity.isPresent()) {
             // Делать что-то, пока поста с таким ID не существует
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("😰Сей пост не существует...😰");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The post is not exist!");
         }
 
         if (post.getContent().equals("") || post.getDateTime() == null || post.getPostStatus().equals("")) {
@@ -64,7 +64,7 @@ public class PostService {
      */
     public ResponseEntity<?> deletePost(Long postId) {
         postRepository.deleteById(postId);
-        return ResponseEntity.status(HttpStatus.OK).body("Post deleted!");
+        return ResponseEntity.status(HttpStatus.OK).body("Post was deleted!");
     }
 }
 
