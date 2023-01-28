@@ -44,6 +44,6 @@ public class DeveloperEntity {
     @OneToMany(mappedBy = "developer")
     private List<TagsEntity> tags;
 
-    @OneToOne(mappedBy = "dev_id")
+    @OneToOne(mappedBy = "developer")
     private RatingEntity rating;
 }
