@@ -25,7 +25,7 @@ public class UserService {
 
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("fail");
+                    .body("Fail");
         }
         UserEntity newUser = new UserEntity()
                                         .setName(user.getName())
@@ -36,7 +36,7 @@ public class UserService {
         UserEntity userSave = userRepository.save(newUser);
         return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(userSave);
+                    .body(userSave + "");
     }
 
     /**
@@ -59,7 +59,7 @@ public class UserService {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(String.format("updated user %s", id));
+                .body(String.format("Updated user %s", id));
     }
 
     /**
@@ -73,7 +73,7 @@ public class UserService {
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(String.format("deleted user %s", id));
+                .body(String.format("Deleted user %s", id));
     }
 
 
@@ -84,17 +84,22 @@ public class UserService {
      * @param pass пароль, того же пользователя
      * @return подтверждение действия
      */
-    public ResponseEntity<?> login(String email, String pass) {
+    public ResponseEntity<?> login(Long id, String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
 
+        if (!userRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The user is not exist!");
+        }
         if (user.getPassword().equals(pass)) {
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body("Successful login!");
+                    .body("Successful login! Don't forget your id!");
         }
         return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("fail");
+                    .body("Password or  is wrong!");
     }
 
     /** Вывод публичной информации пользователя по id
@@ -112,10 +117,11 @@ public class UserService {
         UserEntity user = userRepository.findById(id).get();
 
         String result = String.format(
+                "Id: %d\n" +
                 "Name: %s\n" +
                 "Surname: %s\n" +
                 "Email: %s",
-                user.getName(), user.getSurname(), user.getEmail()
+                id, user.getName(), user.getSurname(), user.getEmail()
         );
 
         return ResponseEntity
