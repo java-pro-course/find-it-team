@@ -3,5 +3,5 @@ import lombok.Data;
 @Data
 public class CreateTag {
     private String tag;
-    private Long developer_id;
+    //Id разработчика тут не нужно, т.к. это лишь создание, а не присвоение тега.
 }
