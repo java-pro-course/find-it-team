@@ -3,12 +3,13 @@ package find.itTeam.entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
 
+import javax.persistence.*;
 @Entity
 @Table(schema = "finditteam", name = "rating")
 @Data
 @Accessors(chain = true)
+
 public class RatingEntity {
 
     @Id
@@ -26,3 +27,4 @@ public class RatingEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     private DeveloperEntity developer;
 }
+
