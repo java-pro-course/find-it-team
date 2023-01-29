@@ -9,6 +9,8 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -26,22 +28,20 @@ public class CommentService {
      */
     public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
-        /**
-         * проверка на существование поста, под который добавляют комментарий
-         */
+        //проверка на существование поста, под который добавляют комментарий
         if (!post.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Post doesn't exist!");
         }
-        if (comment.getText().equals("") || comment.getDate() == null) {
+        if (comment.getText().equals("")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Fail");
         }
         CommentEntity newComment = new CommentEntity()
                     .setText(comment.getText())
-                    .setDate(comment.getDate())
+                    .setDate(LocalDate.now())
                     .setPost(post.get());
 
         CommentEntity commentSave = commentRepository.save(newComment);
@@ -64,19 +64,19 @@ public class CommentService {
         if (!commentEntity.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(String.format("Comment %s doesn't exist!", id));
+                    .body(String.format("Comment %d doesn't exist!", id));
         }
 
-        if (comment.getText().equals("") || comment.getDate() == null) {
+        if (comment.getText().equals("")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("fail");
+                    .body("Fail");
         }
-        commentRepository.updateById(comment.getText(), comment.getDate(), id);
+        commentRepository.updateById(comment.getText(), LocalDate.now(), id);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(String.format("Updated comment %s", id));
+                .body(String.format("Updated comment %d", id));
     }
     /**
      * Удаление комментария по id
@@ -84,6 +84,11 @@ public class CommentService {
      * @return строка "Delete comment id-комментария"
      */
     public ResponseEntity<?> deleteComment(Long id){
+        if (!commentRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The post does not exist!");
+        }
         commentRepository.deleteById(id);
 
         return ResponseEntity
