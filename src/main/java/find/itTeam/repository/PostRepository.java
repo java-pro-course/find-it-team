@@ -10,7 +10,13 @@ import java.time.LocalDate;
 @Repository
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
-
+    /**
+     * Метод для обработки запроса н6а изменение поста
+     * @param content контент (текст и т.п.)
+     * @param dateTime дата нписания
+     * @param postStatus статус поста
+     * @param id его id
+     */
     @Modifying
     @Query("UPDATE PostEntity post SET post.content = ?1, post.dateTime = ?2, post.postStatus = ?3" +
             "WHERE post.id = ?4")
