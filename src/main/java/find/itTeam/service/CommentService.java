@@ -27,7 +27,7 @@ public class CommentService {
     public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
         /**
-         * проверка есть ли пост, под который добавляют комментарий
+         * проверка на существование поста, под который добавляют комментарий
          */
         if (!post.isPresent()) {
             return ResponseEntity
