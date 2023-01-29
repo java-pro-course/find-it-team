@@ -15,4 +15,5 @@ public interface RatingRepository extends JpaRepository <RatingEntity, Long> {
     @Modifying
     @Query("UPDATE RatingEntity rating SET rating.rating = ?1" + "WHERE rating.id = ?2")
     void updateById(int rating, Long id);
+    
 }
