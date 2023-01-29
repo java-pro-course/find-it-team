@@ -30,13 +30,19 @@ public class RatingService {
      */
     public ResponseEntity<?> addRating(Rating rating, Long userId, Long devId){
         Optional<UserEntity> user = userRepository.findById(userId);
+        /**
+         * проверка на существование пользователя (на всякий)
+         */
         if (!user.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Fail");
         }
         Optional<DeveloperEntity> dev = developerRepository.findById(devId);
-            if (!dev.isPresent()) {
+        /**
+         * проверка на существование разработчика
+         */
+        if (!dev.isPresent()) {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
                         .body("Fail");
@@ -65,7 +71,6 @@ public class RatingService {
      */
     public ResponseEntity<?> updateRating(Long id, Rating rating){
        Optional<RatingEntity> ratingEntity = ratingRepository.findById(id);
-
        if (!ratingEntity.isPresent()){
            return ResponseEntity
                    .status(HttpStatus.BAD_REQUEST)
