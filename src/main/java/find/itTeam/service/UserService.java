@@ -239,9 +239,9 @@ public class UserService {
 
         String result = String.format(
                 "Id: %d\n" +
-                        "Name: %s\n" +
-                        "Surname: %s\n" +
-                        "Email: %s",
+                "Name: %s\n" +
+                "Surname: %s\n" +
+                "Email: %s",
                 id, user.getName(), user.getSurname(), user.getEmail()
         );
 
@@ -249,4 +249,35 @@ public class UserService {
                 .status(HttpStatus.OK)
                 .body(result);
     }
+
+    /**
+     * Регистрация пользователя
+     *
+     * @param name
+     * @param surname
+     * @param email
+     * @param pass
+     * @return результат
+     */
+    public ResponseEntity<?> registration(String name, String surname, String email, String pass){
+//        if(userRepository.findByEmail(email).getEmail().equals(email)){
+//            return ResponseEntity
+//                    .status(HttpStatus.NOT_FOUND)
+//                    .body("Fail!");
+//        }
+
+        CreateUser user = new CreateUser()
+                        .setName(name)
+                        .setSurname(surname)
+                        .setEmail(email)
+                        .setPassword(pass);
+
+        createNewUser(user);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Successful registration!");
+    }
+
+    //Не нужно слишком подробно расписывать каждый элемент!
 }
