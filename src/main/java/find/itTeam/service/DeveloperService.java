@@ -25,13 +25,51 @@ public class DeveloperService {
     public ResponseEntity<?> createTeamDeveloper(CreateDeveloper rq) {
         //проверка на null
         if (rq.getName() == null || rq.getSurname() == null
-                || rq.getEmail() == null || rq.getProjects() == null
-                || rq.getGithubLink() == null || rq.getDevRole() == null
-                || rq.getLanguages() == null || rq.getDevelopmentArea() == null
-                || rq.getExperience() == null || rq.getCity() == null || rq.getMainJob() == null) {
+                || rq.getEmail() == null ||rq.getPassword() == null
+                || rq.getProjects() == null || rq.getGithubLink() == null
+                || rq.getDevRole() == null || rq.getLanguages() == null
+                || rq.getDevelopmentArea() == null || rq.getExperience() == null
+                || rq.getCity() == null || rq.getMainJob() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must be null!");
+        }
+        //Проверки(куча проверок)
+        if (!rq.getEmail().contains("@") || !rq.getEmail().contains(".")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid email!");
+        }
+        if (developerRepository.findByEmail(rq.getEmail()) != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("User with that email already exists!");
+        }
+        //Мы заботимся о безопасности наших разрабов)))
+        if (rq.getPassword().toLowerCase().contains(rq.getName().toLowerCase())
+                || rq.getPassword().toLowerCase().contains(rq.getSurname().toLowerCase())) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must not contains your name or your surname! It's not secure!");
+        }
+        if (rq.getPassword().equals(rq.getPassword().toLowerCase()) || rq.getPassword().equals(rq.getPassword().toUpperCase())) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain uppercase and lowercase letter!");
+        }
+        if (!rq.getPassword().contains("0")
+                && !rq.getPassword().contains("1")
+                && !rq.getPassword().contains("2")
+                && !rq.getPassword().contains("3")
+                && !rq.getPassword().contains("4")
+                && !rq.getPassword().contains("5")
+                && !rq.getPassword().contains("6")
+                && !rq.getPassword().contains("7")
+                && !rq.getPassword().contains("8")
+                && !rq.getPassword().contains("9") ){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain numbers!");
         }
 
         DeveloperEntity developer = new DeveloperEntity()
@@ -63,6 +101,11 @@ public class DeveloperService {
      */
 
     public ResponseEntity<?> infoAboutDeveloperInTeam(Long id) {
+        if (!developerRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The developer does not exist!");
+        }
         Optional<DeveloperEntity> developer = developerRepository.findById(id);
 
         return ResponseEntity
