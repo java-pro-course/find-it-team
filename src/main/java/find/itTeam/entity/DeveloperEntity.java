@@ -43,7 +43,6 @@ public class DeveloperEntity {
     private String mainJob;
     @OneToMany(mappedBy = "developer")
     private List<TagsEntity> tags;
-
     @OneToOne(mappedBy = "developer")
     private RatingEntity rating;
 }
