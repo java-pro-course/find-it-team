@@ -15,4 +15,8 @@ public class TeamController {
     public ResponseEntity<?> createTeam(@RequestBody TeamCommand cq){
         return teamService.createTeam(cq);
     }
+    @GetMapping("get-all-teams")
+    public ResponseEntity<?> getAllTeams(){
+        return teamService.getAllTeams();
+    }
 }

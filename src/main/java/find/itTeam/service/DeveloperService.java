@@ -74,7 +74,7 @@ public class DeveloperService {
         if (developerRepository.findAll().isEmpty()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("There is not a single developer here yet...");
+                    .body("No developers yet...");
         }
         return ResponseEntity
                 .status(HttpStatus.OK)

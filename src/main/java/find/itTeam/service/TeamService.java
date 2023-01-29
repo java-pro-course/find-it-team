@@ -46,4 +46,11 @@ public class TeamService {
                 .status(HttpStatus.CREATED)
                 .body(newCommand);
     }
+
+    public ResponseEntity<?> getAllTeams() {
+        if(teamRepository.findAll().isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No team yet...");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(teamRepository.findAll());
+    }
 }
