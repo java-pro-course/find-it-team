@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: test-table.yml
+      relativeToChangelogFile: true

@@ -38,4 +38,9 @@ public class UserController {
     public ResponseEntity<?> login(@RequestParam Long id, @RequestParam String email, @RequestParam String pass){
         return userService.login(id, email, pass);
     }
+
+    @PostMapping("register-user")
+    public ResponseEntity<?> register(@RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String pass){
+        return userService.registration(name, surname, email, pass);
+    }
 }

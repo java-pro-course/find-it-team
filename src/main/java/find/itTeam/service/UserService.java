@@ -141,11 +141,11 @@ public class UserService {
      * @return результат
      */
     public ResponseEntity<?> registration(String name, String surname, String email, String pass){
-        if(userRepository.findByEmail(email).getEmail().equals(email)){
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Fail!");
-        }
+//        if(userRepository.findByEmail(email).getEmail().equals(email)){
+//            return ResponseEntity
+//                    .status(HttpStatus.NOT_FOUND)
+//                    .body("Fail!");
+//        }
 
         CreateUser user = new CreateUser()
                         .setName(name)
