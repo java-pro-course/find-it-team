@@ -24,7 +24,7 @@ public class TeamService {
         if (teamRepository.findByTitle(cq.getTitle()) != null){
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body("A team with that title is already exists!");
+                    .body("A team with that title already exists!");
         }
         if(cq.getDevelopers_id() == null || cq.getDevelopers_id().size() < 1){
             return ResponseEntity
@@ -35,7 +35,7 @@ public class TeamService {
             if(!devRepository.findById(dev_id).isPresent()){
                 return ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
-                        .body(String.format("A developer with id = %d is not exist!", dev_id));
+                        .body(String.format("A developer with id = %d does not exist!", dev_id));
             }
         }
         TeamEntity newCommand = new TeamEntity()
@@ -62,7 +62,7 @@ public class TeamService {
         if(!teamRepository.findById(id).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The team is not exist!");
+                    .body("The team does not exist!");
         }
         teamRepository.deleteById(id);
         return ResponseEntity

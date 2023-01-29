@@ -32,7 +32,7 @@ public class TagsService {
         if(!tagsRepository.findById(tagId).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The tag is not exist!");
+                    .body("The tag does not exist!");
         }
 
         tagsRepository.deleteById(tagId);

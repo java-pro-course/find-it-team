@@ -187,7 +187,7 @@ public class UserService {
         if (!userRepository.findById(id).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The user is not exist!");
+                    .body("The user does not exist!");
         }
         userRepository.deleteById(id);
 
@@ -210,7 +210,7 @@ public class UserService {
         if (!userRepository.findById(id).isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The user is not exist!");
+                    .body("The user does not exist!");
         }
         if (user.getPassword().equals(pass)) {
             return ResponseEntity
@@ -219,7 +219,7 @@ public class UserService {
         }
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body("Password or  is wrong!");
+                .body("Password or email is wrong!");
     }
 
     /**
@@ -232,7 +232,7 @@ public class UserService {
         if (!userRepository.findById(id).isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The user is not exist!");
+                    .body("The user does not exist!");
         }
 
         UserEntity user = userRepository.findById(id).get();

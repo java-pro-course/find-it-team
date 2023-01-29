@@ -44,7 +44,7 @@ public class PostService {
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if (!postEntity.isPresent()) {
             // Делать что-то, пока поста с таким ID не существует
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The post is not exist!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The post does not exist!");
         }
 
         if (post.getContent().equals("") || post.getDateTime() == null || post.getPostStatus().equals("")) {
@@ -70,7 +70,7 @@ public class PostService {
         if(!postRepository.findById(postId).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The post is not exist");
+                    .body("The post does not exist");
         }
         postRepository.deleteById(postId);
 
@@ -83,7 +83,7 @@ public class PostService {
         if (postRepository.findAll().isEmpty()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("There is not a single post here yet...");
+                    .body("No posts yet...");
         }
 
         return ResponseEntity

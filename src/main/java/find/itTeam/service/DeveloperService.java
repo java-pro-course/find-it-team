@@ -85,7 +85,7 @@ public class DeveloperService {
         if (!developerRepository.findById(id).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The developer is not exist");
+                    .body("The developer does not exist");
         }
         developerRepository.deleteById(id);
 
