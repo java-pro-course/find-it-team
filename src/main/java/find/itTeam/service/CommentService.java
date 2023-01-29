@@ -26,7 +26,9 @@ public class CommentService {
      */
     public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
-
+        /**
+         * проверка на существование поста, под который добавляют комментарий
+         */
         if (!post.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
