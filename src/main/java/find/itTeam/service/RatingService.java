@@ -28,7 +28,7 @@ public class RatingService {
      * @param devId id разработчика
      * @return
      */
-    public ResponseEntity<?> Rating(Rating rating, Long userId, Long devId){
+    public ResponseEntity<?> addRating(Rating rating, Long userId, Long devId){
         Optional<UserEntity> user = userRepository.findById(userId);
         if (!user.isPresent()) {
             return ResponseEntity
