@@ -25,7 +25,7 @@ public class UserService {
 
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Fail");
+                    .body("Fail!");
         }
         UserEntity newUser = new UserEntity()
                                         .setName(user.getName())
@@ -42,9 +42,9 @@ public class UserService {
     /**
      * Обновление пользователя по id
      *
-     * @param id ID обновляемого пользователя
-     * @param user обновляемый пользователь
-     * @return подтверждение действия
+     * @param id
+     * @param user
+     * @return результат
      */
     @Transactional
     public ResponseEntity<?> updateUser(Long id, CreateUser user) {
@@ -53,7 +53,7 @@ public class UserService {
 
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("fail");
+                    .body("Fail!");
         }
         userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
@@ -65,8 +65,8 @@ public class UserService {
     /**
      * Удаление пользователя по id
      *
-     * @param id ID удаляемого пользователя
-     * @return подтверждение действия
+     * @param id
+     * @return результат
      */
     public ResponseEntity<?> deleteUser(Long id) {
         userRepository.deleteById(id);
@@ -80,9 +80,9 @@ public class UserService {
     /**
      * Вход пользователя по email и паролю
      *
-     * @param email эл. почта пользователя, который входит в свой аккаунт
-     * @param pass пароль, того же пользователя
-     * @return подтверждение действия
+     * @param email
+     * @param pass
+     * @return результат
      */
     public ResponseEntity<?> login(Long id, String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
@@ -92,20 +92,22 @@ public class UserService {
                     .status(HttpStatus.NOT_FOUND)
                     .body("The user is not exist!");
         }
+
         if (user.getPassword().equals(pass)) {
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body("Successful login! Don't forget your id!");
+                    .body("Successful login!");
         }
+
         return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Password or  is wrong!");
+                    .body("Password or email is wrong!");
     }
 
     /** Вывод публичной информации пользователя по id
      *
-     * @param id ID пользователя
-     * @return информация
+     * @param id
+     * @return результат
      */
     public ResponseEntity<?> getUserInfo(Long id){
         if(!userRepository.findById(id).isPresent()){
@@ -128,4 +130,36 @@ public class UserService {
                 .status(HttpStatus.OK)
                 .body(result);
     }
+
+    /**
+     * Регистрация пользователя
+     *
+     * @param name
+     * @param surname
+     * @param email
+     * @param pass
+     * @return результат
+     */
+    public ResponseEntity<?> registration(String name, String surname, String email, String pass){
+        if(userRepository.findByEmail(email).getEmail().equals(email)){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Fail!");
+        }
+
+        CreateUser user = new CreateUser()
+                        .setName(name)
+                        .setSurname(surname)
+                        .setEmail(email)
+                        .setPassword(pass);
+
+        createNewUser(user);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Successful registration!");
+    }
+
+    //Не нужно слишком подробно расписывать каждый элемент!
 }
+
