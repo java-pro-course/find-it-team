@@ -1,6 +1,5 @@
 package find.itTeam.dto;
 
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
