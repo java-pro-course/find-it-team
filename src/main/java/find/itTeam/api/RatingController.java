@@ -21,5 +21,6 @@ public class RatingController {
     @GetMapping("update-rating/{id}")
     public ResponseEntity<?> updateRating(@PathVariable Long id, @RequestBody Rating rating){
         return ratingService.updateRating(id, rating);
+
     }
 }
