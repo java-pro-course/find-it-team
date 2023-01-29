@@ -49,8 +49,24 @@ public class TeamService {
 
     public ResponseEntity<?> getAllTeams() {
         if(teamRepository.findAll().isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No team yet...");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No team yet...");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(teamRepository.findAll());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(teamRepository.findAll());
+    }
+
+    public ResponseEntity<?> deleteTeam(Long id) {
+        if(!teamRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The team is not exist!");
+        }
+        teamRepository.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("The team was deleted!");
     }
 }
