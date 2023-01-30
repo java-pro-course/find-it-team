@@ -16,11 +16,10 @@ public class UserService {
 
     /**
      * Создание пользователя
-     *
      * @param user Данные нового пользователя
      */
     public ResponseEntity<?> createNewUser(CreateUser user) {
-        //Проверки(куча проверок)
+        //Проверки всех данных на null
         if (user.getName() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -48,17 +47,20 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Проверка email на содержание @(Почтовой собаки) и .(точки)
         if (!user.getEmail().contains("@") || !user.getEmail().contains(".")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Invalid email!");
         }
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+        //Проверка, не используется ли этот email у другого пользователя
+        if (!userRepository.existByEmail(user.getEmail())) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
                     .body("User with that email already exists!");
         }
         //Мы заботимся о безопасности наших пользователей)))
+        //Проверка пароля на содержание в нём имени или фамилии пользователя
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
                 || user.getPassword().toLowerCase().contains(user.getSurname().toLowerCase())) {
             return ResponseEntity
@@ -70,6 +72,7 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain uppercase and lowercase letter!");
         }
+        //Проверка пароля на содержание цифр(0-9)
         if (!user.getPassword().contains("0")
                 && !user.getPassword().contains("1")
                 && !user.getPassword().contains("2")
@@ -83,30 +86,6 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
-        }
-        if (!user.getPassword().contains("+")
-                && !user.getPassword().contains("-")
-                && !user.getPassword().contains("=")
-                && !user.getPassword().contains("\\")
-                && !user.getPassword().contains("|")
-                && !user.getPassword().contains("?")
-                && !user.getPassword().contains("&")
-                && !user.getPassword().contains("(")
-                && !user.getPassword().contains(")")
-                && !user.getPassword().contains("/")
-                && !user.getPassword().contains("*")
-                && !user.getPassword().contains(">")
-                && !user.getPassword().contains("<")
-                && !user.getPassword().contains("!")
-                && !user.getPassword().contains("~")
-                && !user.getPassword().contains("@")
-                && !user.getPassword().contains("#")
-                && !user.getPassword().contains("$")
-                && !user.getPassword().contains("^")
-                && !user.getPassword().contains("%") ){
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("The password must contain special characters!");
         }
 
         UserEntity newUser = new UserEntity()
@@ -130,7 +109,7 @@ public class UserService {
      */
     @Transactional
     public ResponseEntity<?> updateUser(Long id, CreateUser user) {
-        //Проверки(куча проверок)
+        //Проверки всех данных на null
         if (user.getName() == null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -158,17 +137,20 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Проверка email на содержание @(Почтовой собаки) и .(точки)
         if (!user.getEmail().contains("@") || !user.getEmail().contains(".")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Invalid email!");
         }
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+        //Проверка, не используется ли этот email у другого пользователя
+        if (!userRepository.existByEmail(user.getEmail())) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
                     .body("User with that email already exists!");
         }
         //Мы заботимся о безопасности наших пользователей)))
+        //Проверка пароля на содержание в нём имени или фамилии пользователя
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
                 || user.getPassword().toLowerCase().contains(user.getSurname().toLowerCase())) {
             return ResponseEntity
@@ -180,6 +162,7 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain uppercase and lowercase letter!");
         }
+        //Проверка пароля на содержание цифр(0-9)
         if (!user.getPassword().contains("0")
                 && !user.getPassword().contains("1")
                 && !user.getPassword().contains("2")
@@ -194,8 +177,10 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
         }
+        //Обновление пользователя
         userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
+        //Пользователь (id) обновлён
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(String.format("Updated user %s", id));
@@ -208,13 +193,16 @@ public class UserService {
      * @return подтверждение действия
      */
     public ResponseEntity<?> deleteUser(Long id) {
+        //Проверка на существование пользователя с таким id
         if (!userRepository.findById(id).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("The user does not exist!");
         }
+        //Удаление пользователя из бд
         userRepository.deleteById(id);
 
+        //Пользователь (id) удалён
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(String.format("Deleted user %s", id));
@@ -229,21 +217,30 @@ public class UserService {
      * @return Успешный/Неуспешный вход
      */
     public ResponseEntity<?> login(Long id, String email, String pass) {
-        UserEntity user = userRepository.findByEmail(email);
-
-        if (!userRepository.findById(id).isPresent()) {
+        //Проверка на существование пользователя с таким id
+        if (!userRepository.findById(id).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("The user does not exist!");
+                    .body("The user with that id does not exist!");
         }
-        if (user.getPassword().equals(pass)) {
+        //Проверка на существование пользователя с таким email
+        if (!userRepository.existByEmail(email)) {
             return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body("Successful login! Don't forget your id!");
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The user with that email does not exist!");
         }
+        //Создание UserEntity
+        UserEntity user = userRepository.findById(id).get();
+        //Проверка правильности пароля
+        if (!user.getPassword().equals(pass)) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Password or email is wrong!");
+        }
+        //Успешный логин
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("Password or email is wrong!");
+                .status(HttpStatus.OK)
+                .body("Successful login! Don't forget your id!");
     }
 
     /**
@@ -253,6 +250,7 @@ public class UserService {
      * @return Информация об пользователе
      */
     public ResponseEntity<?> getUserInfo(Long id) {
+        //Проверка на существование пользователя с таким id
         if (!userRepository.findById(id).isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
@@ -261,6 +259,7 @@ public class UserService {
 
         UserEntity user = userRepository.findById(id).get();
 
+        //Формирование результата
         String result = String.format(
                 "Id: %d\n" +
                 "Name: %s\n" +
@@ -268,7 +267,7 @@ public class UserService {
                 "Email: %s",
                 id, user.getName(), user.getSurname(), user.getEmail()
         );
-
+        //Вывод результата
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(result);
@@ -302,8 +301,10 @@ public class UserService {
                         .setEmail(email)
                         .setPassword(pass);
 
+        //Создание нового пользователя
         createNewUser(user);
 
+        //Успешная регистрация!
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Successful registration!");

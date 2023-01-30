@@ -9,16 +9,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findByEmail(String email);
+    boolean existByEmail(String email);
 
     /**
      * Метод для обработки запроса на обновление пользователя
      *
-     * @param name имя пользователя
-     * @param surname фамилия пользователя
-     * @param email эл. почта пользователя
-     * @param password пароль пользователя
-     * @param id id пользователя
+     * @param name Имя пользователя
+     * @param surname Фамилия пользователя
+     * @param email Эл. почта пользователя
+     * @param password Пароль пользователя
+     * @param id Id пользователя
      */
     @Modifying
     @Query("UPDATE UserEntity user SET user.name = ?1, user.surname = ?2, user.email = ?3, " +

@@ -13,7 +13,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
     /**
      * Метод для обработки запроса н6а изменение поста
      * @param content контент (текст и т.п.)
-     * @param dateTime дата нписания
+     * @param dateTime дата написания
      * @param postStatus статус поста
      * @param id его id
      */
