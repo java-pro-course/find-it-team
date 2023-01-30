@@ -23,25 +23,21 @@ public class RatingService {
 
     /**
      * Создание рейтинга
-     * @param rating dto для рейтинга
-     * @param userId id пользователя
-     * @param devId id разработчика
-     * @return
+     * @param rating Dto для рейтинга
+     * @param userId Id пользователя
+     * @param devId Id разработчика
+     * @return Успешное/Неуспешное оценвание
      */
     public ResponseEntity<?> addRating(Rating rating, Long userId, Long devId){
         Optional<UserEntity> user = userRepository.findById(userId);
-        /**
-         * проверка на существование пользователя (на всякий)
-         */
+        //проверка на существование пользователя (на всякий)
         if (!user.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Fail");
         }
         Optional<DeveloperEntity> dev = developerRepository.findById(devId);
-        /**
-         * проверка на существование разработчика
-         */
+        //Проверка на существование разработчика
         if (!dev.isPresent()) {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
@@ -65,26 +61,26 @@ public class RatingService {
 
     /**
      * Изменение рейтинга по id
-     * @param id id рейтинга
-     * @param rating dto для рейтинга
-     * @return поддтверждение об обновлении
+     * @param id Id рейтинга
+     * @param rating Dto для рейтинга
+     * @return Подтверждение об обновлении
      */
     public ResponseEntity<?> updateRating(Long id, Rating rating){
        Optional<RatingEntity> ratingEntity = ratingRepository.findById(id);
        if (!ratingEntity.isPresent()){
            return ResponseEntity
                    .status(HttpStatus.BAD_REQUEST)
-                   .body(String.format("Rating %s doesn't exist...", id));
+                   .body(String.format("Rating %d doesn't exist...", id));
        }
         if (rating.getRating() == 0){
            return ResponseEntity
                    .status(HttpStatus.BAD_REQUEST)
                    .body("Fail");
        }
-       ratingRepository.updateById(rating.getRating(), rating.getId());
+       ratingRepository.updateById(rating.getRating(), id);
 
        return ResponseEntity
                .status(HttpStatus.OK)
-               .body(String.format("Update rating %s", id));
+               .body(String.format("Update rating %d", id));
     }
 }

@@ -9,7 +9,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -22,9 +21,9 @@ public class CommentService {
     /**
      * Создание нового комментария
      *
-     * @param comment dto для создания комментария
-     * @param postId id поста, под которым создаётся комментарий
-     * @return в
+     * @param comment Dto для создания комментария
+     * @param postId Id поста, под которым создаётся комментарий
+     * @return Успешное/Неуспешное создание комментария
      */
     public ResponseEntity<?> createNewComment(CreateComment comment, Long postId) {
         Optional<PostEntity> post = postRepository.findById(postId);
@@ -54,8 +53,8 @@ public class CommentService {
     /**
      * Изменение комментария по id
      *
-     * @param id id обновляемого комментария
-     * @param comment dto для создания комментария
+     * @param id Id обновляемого комментария
+     * @param comment Dto для создания комментария
      * @return  Строка "Update comment id-комментария"
      */
     public ResponseEntity<?> updateComment(Long id, CreateComment comment) {
@@ -80,8 +79,8 @@ public class CommentService {
     }
     /**
      * Удаление комментария по id
-     * @param id идентификатор удаляемого комментария
-     * @return строка "Delete comment id-комментария"
+     * @param id Id удаляемого комментария
+     * @return Строка "Delete comment id-комментария"
      */
     public ResponseEntity<?> deleteComment(Long id){
         if (!commentRepository.findById(id).isPresent()){

@@ -19,9 +19,9 @@ public class PostController {
         return postService.deletePost(id);
     }
 
-    @PostMapping("create-post")
-    public ResponseEntity<?> createNewPost(@RequestBody CreatePost requestPost) {
-        return postService.createNewPost(requestPost);
+    @PostMapping("create-post/{authorId}")
+    public ResponseEntity<?> createNewPost(@PathVariable Long authorId, @RequestBody CreatePost requestPost) {
+        return postService.createNewPost(authorId, requestPost);
     }
 
     @PutMapping("update-post/{id}")

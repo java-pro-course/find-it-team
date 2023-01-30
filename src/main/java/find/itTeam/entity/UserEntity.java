@@ -29,7 +29,7 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<PostEntity> posts;
 
     @OneToOne(mappedBy = "user")
