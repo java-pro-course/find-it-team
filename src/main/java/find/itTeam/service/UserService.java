@@ -47,6 +47,12 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Проверка email на содержание пробелов
+        if (user.getEmail().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The email must not contains space!");
+        }
         //Проверка email на содержание @(Почтовой собаки) и .(точки)
         if (!user.getEmail().contains("@") || !user.getEmail().contains(".")) {
             return ResponseEntity
@@ -60,6 +66,12 @@ public class UserService {
 //                    .body("User with that email already exists!");
 //        }
         //Мы заботимся о безопасности наших пользователей)))
+        //Проверка пароля на содержание пробелов
+        if (user.getPassword().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must not contains space!");
+        }
         //Проверка пароля на содержание в нём имени или фамилии пользователя
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
                 || user.getPassword().toLowerCase().contains(user.getSurname().toLowerCase())) {
@@ -86,6 +98,43 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
+        }
+        //Проверка пароля на содержание специальных символов
+        if (!user.getPassword().contains("-")
+                && !user.getPassword().contains("+")
+                && !user.getPassword().contains("_")
+                && !user.getPassword().contains("=")
+                && !user.getPassword().contains("/")
+                && !user.getPassword().contains("*")
+                && !user.getPassword().contains(")")
+                && !user.getPassword().contains("(")
+                && !user.getPassword().contains("\\")
+                && !user.getPassword().contains(">")
+                && !user.getPassword().contains("<")
+                && !user.getPassword().contains(",")
+                && !user.getPassword().contains(".")
+                && !user.getPassword().contains("?")
+                && !user.getPassword().contains(";")
+                && !user.getPassword().contains(":")
+                && !user.getPassword().contains("\"")
+                && !user.getPassword().contains("'")
+                && !user.getPassword().contains("!")
+                && !user.getPassword().contains("@")
+                && !user.getPassword().contains("#")
+                && !user.getPassword().contains("№")
+                && !user.getPassword().contains("$")
+                && !user.getPassword().contains("%")
+                && !user.getPassword().contains("^")
+                && !user.getPassword().contains("&")
+                && !user.getPassword().contains("{")
+                && !user.getPassword().contains("}")
+                && !user.getPassword().contains("[")
+                && !user.getPassword().contains("]")
+                && !user.getPassword().contains("~")
+                && !user.getPassword().contains("`")){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain special characters!");
         }
 
         UserEntity newUser = new UserEntity()
@@ -137,6 +186,12 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Проверка email на содержание пробелов
+        if (user.getEmail().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The email must not contains space!");
+        }
         //Проверка email на содержание @(Почтовой собаки) и .(точки)
         if (!user.getEmail().contains("@") || !user.getEmail().contains(".")) {
             return ResponseEntity
@@ -150,6 +205,12 @@ public class UserService {
 //                    .body("User with that email already exists!");
 //        }
         //Мы заботимся о безопасности наших пользователей)))
+        //Проверка пароля на содержание пробелов
+        if (user.getPassword().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must not contains space!");
+        }
         //Проверка пароля на содержание в нём имени или фамилии пользователя
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
                 || user.getPassword().toLowerCase().contains(user.getSurname().toLowerCase())) {
@@ -176,6 +237,43 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
+        }
+        //Проверка пароля на содержание специальных символов
+        if (!user.getPassword().contains("-")
+                && !user.getPassword().contains("+")
+                && !user.getPassword().contains("_")
+                && !user.getPassword().contains("=")
+                && !user.getPassword().contains("/")
+                && !user.getPassword().contains("*")
+                && !user.getPassword().contains(")")
+                && !user.getPassword().contains("(")
+                && !user.getPassword().contains("\\")
+                && !user.getPassword().contains(">")
+                && !user.getPassword().contains("<")
+                && !user.getPassword().contains(",")
+                && !user.getPassword().contains(".")
+                && !user.getPassword().contains("?")
+                && !user.getPassword().contains(";")
+                && !user.getPassword().contains(":")
+                && !user.getPassword().contains("\"")
+                && !user.getPassword().contains("'")
+                && !user.getPassword().contains("!")
+                && !user.getPassword().contains("@")
+                && !user.getPassword().contains("#")
+                && !user.getPassword().contains("№")
+                && !user.getPassword().contains("$")
+                && !user.getPassword().contains("%")
+                && !user.getPassword().contains("^")
+                && !user.getPassword().contains("&")
+                && !user.getPassword().contains("{")
+                && !user.getPassword().contains("}")
+                && !user.getPassword().contains("[")
+                && !user.getPassword().contains("]")
+                && !user.getPassword().contains("~")
+                && !user.getPassword().contains("`")){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain special characters!");
         }
         //Обновление пользователя
         userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
@@ -274,20 +372,21 @@ public class UserService {
     }
 
     /**
-     * Регистрация пользователя
-     *
-     * @param name Имя пользователя
+      Регистрация пользователя
+      @param name Имя пользователя
      * @param surname Фамилия пользователя
      * @param email Эл. почта пользователя (Правила:
      *              1)Должна содержать @(почтовую собаку).
-     *              2)Должна содержать .(точку)).
+     *              2)Должна содержать .(точку))
+     *              3)Не должна содержать пробелы.
      * @param pass Пароль пользователя (Правила составления:
      *             1)Должен содержать хотя бы одну цифру.
      *             2)Должен содержать хотя бы один специальный символ.
      *             3)Не должен содержать имя или фамилию.
      *             4)Должна быть хоть одна заглавная и строчная буквы)
+     *             5)Не должен содержать пробелы.
      * @return Результат
-     */
+     **/
 //    public ResponseEntity<?> registration(String name, String surname, String email, String pass){
 ////        if(userRepository.findByEmail(email).getEmail().equals(email)){
 ////            return ResponseEntity
