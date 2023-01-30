@@ -26,7 +26,7 @@ public class RatingService {
      * @param rating Dto для рейтинга
      * @param userId Id пользователя
      * @param devId Id разработчика
-     * @return Успешное/Неуспешное оценвание
+     * @return Успешное/Неуспешное оценивание
      */
     public ResponseEntity<?> addRating(Rating rating, Long userId, Long devId){
         Optional<UserEntity> user = userRepository.findById(userId);
@@ -34,19 +34,19 @@ public class RatingService {
         if (!user.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Fail");
+                    .body("The user does not exist!");
         }
         Optional<DeveloperEntity> dev = developerRepository.findById(devId);
         //Проверка на существование разработчика
         if (!dev.isPresent()) {
                 return ResponseEntity
                         .status(HttpStatus.BAD_REQUEST)
-                        .body("Fail");
+                        .body("You don't exist!😁");
             }
-        if (rating.getRating() == 0){
+        if (rating.getRating() < 1 || rating.getRating() > 5){
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Fail");
+                    .body("Rating = 1-5. Not 0, not 6, not 999!");
         }
         RatingEntity newRating = new RatingEntity()
                 .setUser(user.get())
@@ -72,15 +72,15 @@ public class RatingService {
                    .status(HttpStatus.BAD_REQUEST)
                    .body(String.format("Rating %d doesn't exist...", id));
        }
-        if (rating.getRating() == 0){
+        if (rating.getRating() < 1 || rating.getRating() > 5){
            return ResponseEntity
                    .status(HttpStatus.BAD_REQUEST)
-                   .body("Fail");
+                   .body("Rating = 1-5. Not 0, not 6, not 999!");
        }
        ratingRepository.updateById(rating.getRating(), id);
 
        return ResponseEntity
                .status(HttpStatus.OK)
-               .body(String.format("Update rating %d", id));
+               .body(String.format("Updated rating %d", id));
     }
 }
