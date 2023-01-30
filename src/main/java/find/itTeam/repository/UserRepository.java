@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    boolean existByEmail(String email);
+    //boolean existByEmail(String email);
 
     /**
      * Метод для обработки запроса на обновление пользователя

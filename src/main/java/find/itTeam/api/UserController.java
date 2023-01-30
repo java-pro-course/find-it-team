@@ -19,10 +19,10 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @PostMapping("create-user")
-    public ResponseEntity<?> createUser(@RequestBody CreateUser requestUser) {
-        return userService.createNewUser(requestUser);
-    }
+//    @PostMapping("create-user")
+//    public ResponseEntity<?> createUser(@RequestBody CreateUser requestUser) {
+//        return userService.createNewUser(requestUser);
+//    }
 
     @PutMapping("update-user/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody CreateUser user) {
@@ -41,6 +41,11 @@ public class UserController {
 
     @PostMapping("register-user")
     public ResponseEntity<?> register(@RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String pass){
-        return userService.registration(name, surname, email, pass);
+        CreateUser createUser = new CreateUser()
+                .setName(name)
+                .setSurname(surname)
+                .setEmail(email)
+                .setPassword(pass);
+        return userService.registration(createUser);
     }
 }

@@ -18,7 +18,7 @@ public class UserService {
      * Создание пользователя
      * @param user Данные нового пользователя
      */
-    public ResponseEntity<?> createNewUser(CreateUser user) {
+    public ResponseEntity<?> registration(CreateUser user) {
         //Проверки всех данных на null
         if (user.getName() == null) {
             return ResponseEntity
@@ -54,11 +54,11 @@ public class UserService {
                     .body("Invalid email!");
         }
         //Проверка, не используется ли этот email у другого пользователя
-        if (!userRepository.existByEmail(user.getEmail())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("User with that email already exists!");
-        }
+//        if (!userRepository.existByEmail(user.getEmail())) {
+//            return ResponseEntity
+//                    .status(HttpStatus.CONFLICT)
+//                    .body("User with that email already exists!");
+//        }
         //Мы заботимся о безопасности наших пользователей)))
         //Проверка пароля на содержание в нём имени или фамилии пользователя
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
@@ -144,11 +144,11 @@ public class UserService {
                     .body("Invalid email!");
         }
         //Проверка, не используется ли этот email у другого пользователя
-        if (!userRepository.existByEmail(user.getEmail())) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("User with that email already exists!");
-        }
+//        if (!userRepository.existByEmail(user.getEmail())) {
+//            return ResponseEntity
+//                    .status(HttpStatus.CONFLICT)
+//                    .body("User with that email already exists!");
+//        }
         //Мы заботимся о безопасности наших пользователей)))
         //Проверка пароля на содержание в нём имени или фамилии пользователя
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
@@ -224,11 +224,11 @@ public class UserService {
                     .body("The user with that id does not exist!");
         }
         //Проверка на существование пользователя с таким email
-        if (!userRepository.existByEmail(email)) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("The user with that email does not exist!");
-        }
+//        if (!userRepository.existByEmail(email)) {
+//            return ResponseEntity
+//                    .status(HttpStatus.NOT_FOUND)
+//                    .body("The user with that email does not exist!");
+//        }
         //Создание UserEntity
         UserEntity user = userRepository.findById(id).get();
         //Проверка правильности пароля
@@ -288,27 +288,27 @@ public class UserService {
      *             4)Должна быть хоть одна заглавная и строчная буквы)
      * @return Результат
      */
-    public ResponseEntity<?> registration(String name, String surname, String email, String pass){
-//        if(userRepository.findByEmail(email).getEmail().equals(email)){
-//            return ResponseEntity
-//                    .status(HttpStatus.NOT_FOUND)
-//                    .body("Fail!");
-//        }
-
-        CreateUser user = new CreateUser()
-                        .setName(name)
-                        .setSurname(surname)
-                        .setEmail(email)
-                        .setPassword(pass);
-
-        //Создание нового пользователя
-        createNewUser(user);
-
-        //Успешная регистрация!
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Successful registration!");
-    }
-
-    //Не нужно слишком подробно расписывать каждый элемент!
+//    public ResponseEntity<?> registration(String name, String surname, String email, String pass){
+////        if(userRepository.findByEmail(email).getEmail().equals(email)){
+////            return ResponseEntity
+////                    .status(HttpStatus.NOT_FOUND)
+////                    .body("Fail!");
+////        }
+//
+//        CreateUser user = new CreateUser()
+//                        .setName(name)
+//                        .setSurname(surname)
+//                        .setEmail(email)
+//                        .setPassword(pass);
+//
+//        //Создание нового пользователя
+//        createNewUser(user);
+//
+//        //Успешная регистрация!
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(createNewUser(user));
+//    }
+//
+//    //Не нужно слишком подробно расписывать каждый элемент!
 }
