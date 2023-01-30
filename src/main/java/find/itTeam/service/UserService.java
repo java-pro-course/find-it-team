@@ -17,7 +17,7 @@ public class UserService {
     /**
      * Создание пользователя
      *
-     * @param user данные нового пользователя
+     * @param user Данные нового пользователя
      */
     public ResponseEntity<?> createNewUser(CreateUser user) {
         //Проверки(куча проверок)
@@ -125,8 +125,8 @@ public class UserService {
      * Обновление пользователя по id
      *
      * @param id   ID обновляемого пользователя
-     * @param user обновляемый пользователь
-     * @return подтверждение действия
+     * @param user Обновляемый пользователь
+     * @return Успешное/Неуспешное обновление
      */
     @Transactional
     public ResponseEntity<?> updateUser(Long id, CreateUser user) {
@@ -224,9 +224,9 @@ public class UserService {
     /**
      * Вход пользователя по email и паролю
      *
-     * @param email эл. почта пользователя, который входит в свой аккаунт
-     * @param pass  пароль, того же пользователя
-     * @return подтверждение действия
+     * @param email Эл. почта пользователя, который входит в свой аккаунт
+     * @param pass  Пароль, того же пользователя
+     * @return Успешный/Неуспешный вход
      */
     public ResponseEntity<?> login(Long id, String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
@@ -250,7 +250,7 @@ public class UserService {
      * Вывод публичной информации пользователя по id
      *
      * @param id ID пользователя
-     * @return информация
+     * @return Информация об пользователе
      */
     public ResponseEntity<?> getUserInfo(Long id) {
         if (!userRepository.findById(id).isPresent()) {
@@ -277,17 +277,17 @@ public class UserService {
     /**
      * Регистрация пользователя
      *
-     * @param name имя пользователя
-     * @param surname фамилия пользователя
-     * @param email эл. почта пользователя (Правила:
+     * @param name Имя пользователя
+     * @param surname Фамилия пользователя
+     * @param email Эл. почта пользователя (Правила:
      *              1)Должна содержать @(почтовую собаку).
      *              2)Должна содержать .(точку)).
-     * @param pass пароль пользователя (Правила составления:
+     * @param pass Пароль пользователя (Правила составления:
      *             1)Должен содержать хотя бы одну цифру.
      *             2)Должен содержать хотя бы один специальный символ.
      *             3)Не должен содержать имя или фамилию.
-     *             4)Должена быть хоть одна заглавная и строчная буквы)
-     * @return результат
+     *             4)Должна быть хоть одна заглавная и строчная буквы)
+     * @return Результат
      */
     public ResponseEntity<?> registration(String name, String surname, String email, String pass){
 //        if(userRepository.findByEmail(email).getEmail().equals(email)){
