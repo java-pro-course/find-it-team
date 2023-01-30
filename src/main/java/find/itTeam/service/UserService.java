@@ -84,6 +84,30 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
         }
+        if (!user.getPassword().contains("+")
+                && !user.getPassword().contains("-")
+                && !user.getPassword().contains("=")
+                && !user.getPassword().contains("\\")
+                && !user.getPassword().contains("|")
+                && !user.getPassword().contains("?")
+                && !user.getPassword().contains("&")
+                && !user.getPassword().contains("(")
+                && !user.getPassword().contains(")")
+                && !user.getPassword().contains("/")
+                && !user.getPassword().contains("*")
+                && !user.getPassword().contains(">")
+                && !user.getPassword().contains("<")
+                && !user.getPassword().contains("!")
+                && !user.getPassword().contains("~")
+                && !user.getPassword().contains("@")
+                && !user.getPassword().contains("#")
+                && !user.getPassword().contains("$")
+                && !user.getPassword().contains("^")
+                && !user.getPassword().contains("%") ){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain special characters!");
+        }
 
         UserEntity newUser = new UserEntity()
                 .setName(user.getName())
@@ -253,10 +277,16 @@ public class UserService {
     /**
      * Регистрация пользователя
      *
-     * @param name
-     * @param surname
-     * @param email
-     * @param pass
+     * @param name имя пользователя
+     * @param surname фамилия пользователя
+     * @param email эл. почта пользователя (Правила:
+     *              1)Должна содержать @(почтовую собаку).
+     *              2)Должна содержать .(точку)).
+     * @param pass пароль пользователя (Правила составления:
+     *             1)Должен содержать хотя бы одну цифру.
+     *             2)Должен содержать хотя бы один специальный символ.
+     *             3)Не должен содержать имя или фамилию.
+     *             4)Должена быть хоть одна заглавная и строчная буквы)
      * @return результат
      */
     public ResponseEntity<?> registration(String name, String surname, String email, String pass){
