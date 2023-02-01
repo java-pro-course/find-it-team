@@ -48,6 +48,38 @@ public class UserService {
                     .body("None of the fields must not be empty!");
         }
         //Тут проверка на пробелы и цифры в имени и фамилии
+        if (!user.getName().contains("0")
+                && !user.getName().contains(" ")
+                && !user.getName().contains("1")
+                && !user.getName().contains("2")
+                && !user.getName().contains("3")
+                && !user.getName().contains("4")
+                && !user.getName().contains("5")
+                && !user.getName().contains("6")
+                && !user.getName().contains("7")
+                && !user.getName().contains("8")
+                && !user.getName().contains("9") ) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The name must not contain numbers and spaces!");
+        }
+        if (!user.getSurname().contains("0")
+                && !user.getSurname().contains(" ")
+                && !user.getSurname().contains("1")
+                && !user.getSurname().contains("2")
+                && !user.getSurname().contains("3")
+                && !user.getSurname().contains("4")
+                && !user.getSurname().contains("5")
+                && !user.getSurname().contains("6")
+                && !user.getSurname().contains("7")
+                && !user.getSurname().contains("8")
+                && !user.getSurname().contains("9") ) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The surname must not contain numbers and spaces!");
+        }
         //Проверка email на содержание пробелов
         if (user.getEmail().contains(" ")) {
             return ResponseEntity
@@ -188,6 +220,38 @@ public class UserService {
                     .body("None of the fields must not be empty!");
         }
         //Тут проверка на пробелы и цифры в имени и фамилии
+        if (!user.getName().contains("0")
+                && !user.getName().contains(" ")
+                && !user.getName().contains("1")
+                && !user.getName().contains("2")
+                && !user.getName().contains("3")
+                && !user.getName().contains("4")
+                && !user.getName().contains("5")
+                && !user.getName().contains("6")
+                && !user.getName().contains("7")
+                && !user.getName().contains("8")
+                && !user.getName().contains("9") ) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The name must not contain numbers and spaces!");
+        }
+        if (!user.getSurname().contains("0")
+                && !user.getSurname().contains(" ")
+                && !user.getSurname().contains("1")
+                && !user.getSurname().contains("2")
+                && !user.getSurname().contains("3")
+                && !user.getSurname().contains("4")
+                && !user.getSurname().contains("5")
+                && !user.getSurname().contains("6")
+                && !user.getSurname().contains("7")
+                && !user.getSurname().contains("8")
+                && !user.getSurname().contains("9") ) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The surname must not contain numbers and spaces!");
+        }
         //Проверка email на содержание пробелов
         if (user.getEmail().contains(" ")) {
             return ResponseEntity
