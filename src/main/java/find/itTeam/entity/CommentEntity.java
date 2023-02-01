@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-// скажите че не так потому что у меня не показывает ошибки
+// скажите что не так потому что у меня не показывает ошибки
 
 @Entity
 @Table(schema = "finditteam", name = "comment")

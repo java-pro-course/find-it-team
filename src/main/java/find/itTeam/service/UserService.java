@@ -47,6 +47,7 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Тут проверка на пробелы и цифры в имени и фамилии
         //Проверка email на содержание пробелов
         if (user.getEmail().contains(" ")) {
             return ResponseEntity
@@ -60,11 +61,11 @@ public class UserService {
                     .body("Invalid email!");
         }
         //Проверка, не используется ли этот email у другого пользователя
-//        if (!userRepository.existByEmail(user.getEmail())) {
-//            return ResponseEntity
-//                    .status(HttpStatus.CONFLICT)
-//                    .body("User with that email already exists!");
-//        }
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("User with that email already exists!");
+        }
         //Мы заботимся о безопасности наших пользователей)))
         //Проверка пароля на содержание пробелов
         if (user.getPassword().contains(" ")) {
@@ -186,6 +187,7 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Тут проверка на пробелы и цифры в имени и фамилии
         //Проверка email на содержание пробелов
         if (user.getEmail().contains(" ")) {
             return ResponseEntity
@@ -199,11 +201,11 @@ public class UserService {
                     .body("Invalid email!");
         }
         //Проверка, не используется ли этот email у другого пользователя
-//        if (!userRepository.existByEmail(user.getEmail())) {
-//            return ResponseEntity
-//                    .status(HttpStatus.CONFLICT)
-//                    .body("User with that email already exists!");
-//        }
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("User with that email already exists!");
+        }
         //Мы заботимся о безопасности наших пользователей)))
         //Проверка пароля на содержание пробелов
         if (user.getPassword().contains(" ")) {
@@ -322,11 +324,11 @@ public class UserService {
                     .body("The user with that id does not exist!");
         }
         //Проверка на существование пользователя с таким email
-//        if (!userRepository.existByEmail(email)) {
-//            return ResponseEntity
-//                    .status(HttpStatus.NOT_FOUND)
-//                    .body("The user with that email does not exist!");
-//        }
+        if (userRepository.findByEmail(email) != null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("The user with that email does not exist!");
+        }
         //Создание UserEntity
         UserEntity user = userRepository.findById(id).get();
         //Проверка правильности пароля
