@@ -42,12 +42,17 @@ public class CommentService {
                     .setText(comment.getText())
                     .setDate(LocalDate.now())
                     .setPost(post.get());
+        commentRepository.save(newComment);
 
-        CommentEntity commentSave = commentRepository.save(newComment);
-
+        String result = String.format(
+                        "Comment successfully was created!\n" +
+                        "Id: %d\n" +
+                        "Text: %s\n" +
+                        "Post_id: %s\n ",
+                newComment.getId(), newComment.getText(), postId);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(commentSave);
+                .body(result);
     }
 
     /**
