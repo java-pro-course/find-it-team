@@ -5,6 +5,7 @@ import find.itTeam.service.UserService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 /**
  * Controller для пользователя
  */
@@ -29,17 +30,17 @@ public class UserController {
     }
 
     @GetMapping("get-user-info/{id}")
-    public ResponseEntity<?> getUserInfo(@PathVariable Long id){
+    public ResponseEntity<?> getUserInfo(@PathVariable Long id) {
         return userService.getUserInfo(id);
     }
 
     @GetMapping("login")
-    public ResponseEntity<?> login(@RequestParam Long id, @RequestParam String email, @RequestParam String pass){
+    public ResponseEntity<?> login(@RequestParam Long id, @RequestParam String email, @RequestParam String pass) {
         return userService.login(id, email, pass);
     }
 
     @PostMapping("register-user")
-    public ResponseEntity<?> register(@RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String pass){
+    public ResponseEntity<?> register(@RequestParam String name, @RequestParam String surname, @RequestParam String email, @RequestParam String pass) {
         CreateUser createUser = new CreateUser()
                 .setName(name)
                 .setSurname(surname)
