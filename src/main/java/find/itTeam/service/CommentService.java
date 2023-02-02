@@ -36,7 +36,7 @@ public class CommentService {
         if (comment.getText().equals("")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Fail");
+                    .body("Comment must not be empty!");
         }
         CommentEntity newComment = new CommentEntity()
                     .setText(comment.getText())
@@ -69,7 +69,7 @@ public class CommentService {
         if (comment.getText().equals("")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("Fail");
+                    .body("Comment must not be empty!");
         }
         commentRepository.updateById(comment.getText(), LocalDate.now(), id);
 
