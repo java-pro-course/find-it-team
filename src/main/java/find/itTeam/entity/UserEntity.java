@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Entity РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+ * Entity для пользователя
  */
 @Entity
 @Table(schema = "finditteam", name = "user")
@@ -32,6 +32,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     private List<PostEntity> posts;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+    private List<CommentEntity> comments;
+    
     @OneToOne(mappedBy = "user")
     private RatingEntity rating;
 }
