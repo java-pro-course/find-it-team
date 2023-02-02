@@ -391,7 +391,7 @@ public class UserService {
                     .body("The user with that id does not exist!");
         }
         //Проверка на существование пользователя с таким email
-        if (userRepository.findByEmail(email) != null) {
+        if (userRepository.findByEmail(email) == null) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("The user with that email does not exist!");
