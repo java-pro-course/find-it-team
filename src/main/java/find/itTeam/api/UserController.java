@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping("login")
-    public ResponseEntity<?> login(@RequestParam Long id, @RequestParam String email, @RequestParam String pass){
-        return userService.login(id, email, pass);
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String pass){
+        return userService.login(email, pass);
     }
 
     @PostMapping("register-user")

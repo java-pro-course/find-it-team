@@ -84,10 +84,10 @@ public class UserService {
      * @param pass
      * @return результат
      */
-    public ResponseEntity<?> login(Long id, String email, String pass) {
+    public ResponseEntity<?> login(String email, String pass) {
         UserEntity user = userRepository.findByEmail(email);
 
-        if (!userRepository.findById(id).isPresent()){
+        if (!userRepository.findById(user.getId()).isPresent()){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("The user is not exist!");
@@ -141,11 +141,11 @@ public class UserService {
      * @return результат
      */
     public ResponseEntity<?> registration(String name, String surname, String email, String pass){
-//        if(userRepository.findByEmail(email).getEmail().equals(email)){
-//            return ResponseEntity
-//                    .status(HttpStatus.NOT_FOUND)
-//                    .body("Fail!");
-//        }
+        if(!(userRepository.findByEmail(email) == null)){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Fail!");
+        }
 
         CreateUser user = new CreateUser()
                         .setName(name)
