@@ -136,4 +136,72 @@ public class DeveloperService {
                 .status(HttpStatus.OK)
                 .body("Developer was deleted!");
     }
-}
+
+    public ResponseEntity<?> updateDev(CreateDeveloper updateDev, Long id) {
+        Optional<DeveloperEntity> developerEntity = developerRepository.findById(id);
+        if (!developerEntity.isPresent()) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Developer doesn't exist!");
+        }
+        //проверки, проверки и еще раз проверки
+        if (updateDev.getDevRole() == null
+                || updateDev.getCity() == null
+                || updateDev.getDevelopmentArea() == null
+                || updateDev.getExperience() == null
+                || updateDev.getLanguages() == null
+                || updateDev.getEmail() == null
+                || updateDev.getGithubLink() == null
+                || updateDev.getMainJob() == null
+                || updateDev.getName() == null
+                || updateDev.getProjects() == null
+                || updateDev.getClass() == null
+                || updateDev.getSurname() == null
+                || updateDev.getPassword() == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("All fields must be filled in");
+        }
+        if (!updateDev.getEmail().contains("@") || !updateDev.getEmail().contains(".")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid email!");
+        }
+        if (developerRepository.findByEmail(updateDev.getEmail()) != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("User with that email already exists!");
+        }
+        if (updateDev.getPassword().toLowerCase().contains(updateDev.getName().toLowerCase())
+                || updateDev.getPassword().toLowerCase().contains(updateDev.getSurname().toLowerCase())) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must not contains your name or your surname! It's not secure!");
+        }
+        if (updateDev.getPassword().equals(updateDev.getPassword().toLowerCase()) || updateDev.getPassword().equals(updateDev.getPassword().toUpperCase())) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain uppercase and lowercase letter!");
+        }
+        if (!updateDev.getPassword().contains("0")
+                && !updateDev.getPassword().contains("1")
+                && !updateDev.getPassword().contains("2")
+                && !updateDev.getPassword().contains("3")
+                && !updateDev.getPassword().contains("4")
+                && !updateDev.getPassword().contains("5")
+                && !updateDev.getPassword().contains("6")
+                && !updateDev.getPassword().contains("7")
+                && !updateDev.getPassword().contains("8")
+                && !updateDev.getPassword().contains("9") ){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must contain numbers!");
+        }
+
+     developerRepository.updateDevById(updateDev.getName(), updateDev.getSurname(), updateDev.getEmail(), updateDev.getPassword(), updateDev.getProjects(), updateDev.getGithubLink(), updateDev.getDevRole(), updateDev.getLanguages(), updateDev.getDevelopmentArea(), updateDev.getExperience(), updateDev.getCity(), updateDev.getMainJob(), id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("Update developer %s", id));
+    }
+    }

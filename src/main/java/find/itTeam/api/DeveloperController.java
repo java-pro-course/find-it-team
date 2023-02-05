@@ -33,5 +33,10 @@ public class DeveloperController {
     public ResponseEntity<?> deleteDevById(@PathVariable Long id){
         return developerService.deleteDevById(id);
     }
+
+    @PutMapping("update-developer-by-id/{id}")
+    public ResponseEntity<?> updateDevById(@RequestBody CreateDeveloper updateDev, @PathVariable Long id){
+        return developerService.updateDev(updateDev, id);
+    }
 }
 
