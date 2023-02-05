@@ -12,6 +12,22 @@ import java.util.ArrayList;
 public interface DeveloperRepository extends JpaRepository<DeveloperEntity, Long> {
     DeveloperEntity findByEmail(String email);
 
+    /**
+     * Метод для обработки запроса на изменение разработчика
+     * @param name имя
+     * @param surname фамилия
+     * @param email email
+     * @param password пароль
+     * @param projects проекты (список)
+     * @param githubLink ссылка на гитхаб (проект)
+     * @param devRole роль разработчика в проекте
+     * @param languages языки (программирования)
+     * @param developmentArea специализация
+     * @param experience опыт (или стаж работы)
+     * @param city город
+     * @param mainJob основное место работы (есть или нет)
+     * @param id ну и id
+     */
     @Modifying
     @Query("UPDATE DeveloperEntity updateDev SET updateDev.name = ?1, updateDev.surname = ?2, updateDev.email = ?3, updateDev.password = ?4, updateDev.projects = ?5, updateDev.githubLink = ?6, updateDev.devRole = ?7, updateDev.languages = ?8, updateDev.developmentArea = ?9, updateDev.experience = ?10, updateDev.city = ?11, updateDev.mainJob = ?12" +
             "WHERE updateDev.id = ?13")
