@@ -137,6 +137,12 @@ public class DeveloperService {
                 .body("Developer was deleted!");
     }
 
+    /**
+     * возможность изменить разработчика
+     * @param updateDev параметры
+     * @param id ну и id
+     * @return обновленного разработчика
+     */
     public ResponseEntity<?> updateDev(CreateDeveloper updateDev, Long id) {
         Optional<DeveloperEntity> developerEntity = developerRepository.findById(id);
         if (!developerEntity.isPresent()) {
@@ -144,7 +150,9 @@ public class DeveloperService {
                     .status(HttpStatus.NOT_FOUND)
                     .body("Developer doesn't exist!");
         }
-        //проверки, проверки и еще раз проверки
+        /** проверки, проверки и еще раз проверки
+         */
+
         if (updateDev.getDevRole() == null
                 || updateDev.getCity() == null
                 || updateDev.getDevelopmentArea() == null
