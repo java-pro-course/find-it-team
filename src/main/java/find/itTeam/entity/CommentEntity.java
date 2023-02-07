@@ -8,7 +8,7 @@ import java.time.LocalDate;
 // скажите что не так потому что у меня не показывает ошибки
 
 @Entity
-@Table(schema = "finditteam", name = "comment")
+@Table(schema = "finditteam_second", name = "comment")
 @Data
 @Accessors(chain = true)
 public class CommentEntity {

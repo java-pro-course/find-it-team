@@ -11,3 +11,6 @@ databaseChangeLog:
   - include:
       file: post.yml
       relativeToChangelogFile: true
+  - include:
+      file: comment.yml
+      relativeToChangelogFile: true
