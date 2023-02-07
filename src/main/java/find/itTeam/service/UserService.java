@@ -4,13 +4,10 @@ import find.itTeam.dto.CreateUser;
 import find.itTeam.entity.UserEntity;
 import find.itTeam.repository.UserRepository;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-
-import static org.springframework.jdbc.support.JdbcUtils.isNumeric;
 
 @Service
 @Data
@@ -214,7 +211,7 @@ public class UserService {
                     .body("The password must contain uppercase and lowercase letters!");
         }
 
-        String symbols = "§±!#$%&()*+,-./0123456789:;<=>?@[]^_`{|}~\"\'\\";
+        String symbols = "§±!#$%&()*+,-./0123456789:;<=>?@[]^_`{|}~\"'\\";
         //Символы пробелы и т.д. в пароле
         if (!lettersCheck(symbols, user.getPassword())) {
             return ResponseEntity
