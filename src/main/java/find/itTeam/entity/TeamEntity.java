@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
-@Table(schema = "finditteam", name = "team")
+@Table(schema = "finditteam_second", name = "team")
 @Data
 @Accessors(chain = true)
 public class TeamEntity {

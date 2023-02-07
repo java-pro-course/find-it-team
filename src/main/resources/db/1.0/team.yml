@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - logicalFilePath: 1.0/team
+  - changeSet:
+      id: team-0
+      author: svarog916
+      changes:
+        - createTable:
+            schemaName: finditteam_second # вот это надо менять
+            tableName: team
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: developers_id
+                  type: bytea
+                  constraints:
+                    nullable: false

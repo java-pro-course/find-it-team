@@ -5,3 +5,6 @@ databaseChangeLog:
   - include:
       file: developer.yml
       relativeToChangelogFile: true
+  - include:
+      file: team.yml
+      relativeToChangelogFile: true
