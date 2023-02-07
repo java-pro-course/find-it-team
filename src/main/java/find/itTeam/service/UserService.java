@@ -51,7 +51,11 @@ public class UserService {
      */
     @Transactional
     public ResponseEntity<?> updateUser(Long id, CreateUser user) {
-        bigCheck(user);
+        if(bigCheck(user).getBody().toString().contains("!")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(bigCheck(user).getBody());
+        }
 
         userRepository.updateById(user.getName(), user.getSurname(), user.getEmail(), user.getPassword(), id);
 
@@ -109,8 +113,8 @@ public class UserService {
     /**
      * Вывод публичной информации пользователя по id
      *
-     * @param id ID пользователя
-     * @return Информация об пользователе
+     * @param id
+     * @return Информация о пользователе
      */
     public ResponseEntity<?> getUserInfo(Long id) {
         if (!userRepository.findById(id).isPresent()) {
@@ -152,27 +156,13 @@ public class UserService {
      * @return Результат
      **/
     public ResponseEntity<?> registration(String name, String surname, String email, String pass) {
-        if (userRepository.findByEmail(email) != null) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Fail!");
-        }
-
-        CreateUser user = new CreateUser()
+        CreateUser newUser = new CreateUser()
                 .setName(name)
                 .setSurname(surname)
                 .setEmail(email)
                 .setPassword(pass);
 
-        bigCheck(user);
-
-
-        createNewUser(user);
-
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(createNewUser(user));
+        return createNewUser(newUser);
     }
 
     /**
@@ -180,16 +170,19 @@ public class UserService {
      *
      * @param current строка для сравнения
      * @param check проверяемая строка
-     * @return
+     * @return true/false
      */
-    private boolean lettersCheck(String current, String check) {
+    public static boolean lettersCheck(String current, String check) {
+        boolean result = false;
         for (int i = 0; i < check.length(); i++) {
             for (int j = 0; j < current.length(); j++) {
                 String a = String.valueOf(current.charAt(j));
-                return check.contains(a);
+                if(check.contains(a)){
+                    result = true;
+                }
             }
         }
-        return true;
+        return result;
     }
 
     /**
@@ -213,7 +206,7 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must not contain your name or your surname! It's not secure!");
         }
-        //Заглавные буквы
+        //Заглавные буквы в пароле
         if (user.getPassword().equals(user.getPassword().toLowerCase())
                 || user.getPassword().equals(user.getPassword().toUpperCase())) {
             return ResponseEntity
@@ -221,12 +214,18 @@ public class UserService {
                     .body("The password must contain uppercase and lowercase letters!");
         }
 
-        String symbols = "!#$%&()*+,-./0123456789:;<=>?@[]^_`{|}~";
-        //Символы пробелы и т.д.
+        String symbols = "§±!#$%&()*+,-./0123456789:;<=>?@[]^_`{|}~\"\'\\";
+        //Символы пробелы и т.д. в пароле
         if (!lettersCheck(symbols, user.getPassword())) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Provide your password with symbols and numbers!");
+        }
+        //Пробелы в пароле
+        if (user.getPassword().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("The password must not contain spaces!");
         }
         //Корректность почты
         if (!user.getEmail().contains("@") || !user.getEmail().contains(".")) {
