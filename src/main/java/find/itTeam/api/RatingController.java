@@ -1,6 +1,5 @@
 package find.itTeam.api;
 
-import find.itTeam.dto.Rating;
 import find.itTeam.service.RatingService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class RatingController {
     private final RatingService ratingService;
 
-    @PostMapping("add-rating/{userId}/{devId}")
-    public ResponseEntity<?> addRating(Long userId, @RequestBody Rating rating, Long devId){
-        return ratingService.addRating(rating, userId, devId);
+    @GetMapping("add-rating/{userId}/{devId}/{rating}")
+    public ResponseEntity<?> addRating(@PathVariable Long userId, int rating, Long devId){
+        return ratingService.addRating(userId, rating, devId);
     }
     @GetMapping("update-rating/{id}")
-    public ResponseEntity<?> updateRating(@PathVariable Long id, @RequestBody Rating rating){
+    public ResponseEntity<?> updateRating(@PathVariable Long id, int rating){
         return ratingService.updateRating(id, rating);
 
     }

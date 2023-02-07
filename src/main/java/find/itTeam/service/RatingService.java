@@ -1,6 +1,5 @@
 package find.itTeam.service;
 
-import find.itTeam.dto.Rating;
 import find.itTeam.entity.DeveloperEntity;
 import find.itTeam.entity.RatingEntity;
 import find.itTeam.entity.UserEntity;
@@ -28,7 +27,7 @@ public class RatingService {
      * @param devId Id разработчика
      * @return Успешное/Неуспешное оценивание
      */
-    public ResponseEntity<?> addRating(Rating rating, Long userId, Long devId){
+    public ResponseEntity<?> addRating(Long userId, int rating, Long devId){
         Optional<UserEntity> user = userRepository.findById(userId);
         //проверка на существование пользователя (на всякий)
         if (!user.isPresent()) {
@@ -43,7 +42,7 @@ public class RatingService {
                         .status(HttpStatus.BAD_REQUEST)
                         .body("You don't exist!😁");
             }
-        if (rating.getRating() < 1 || rating.getRating() > 5){
+        if (rating < 1 || rating > 5){
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Rating = 1-5. Not 0, not 6, not 999!");
@@ -51,7 +50,7 @@ public class RatingService {
         RatingEntity newRating = new RatingEntity()
                 .setUser(user.get())
                 .setDeveloper(dev.get())
-                .setRating(rating.getRating());
+                .setRating(rating);
 
         RatingEntity ratingSave = ratingRepository.save(newRating);
             return ResponseEntity
@@ -65,19 +64,19 @@ public class RatingService {
      * @param rating Dto для рейтинга
      * @return Подтверждение об обновлении
      */
-    public ResponseEntity<?> updateRating(Long id, Rating rating){
+    public ResponseEntity<?> updateRating(Long id, int rating){
        Optional<RatingEntity> ratingEntity = ratingRepository.findById(id);
        if (!ratingEntity.isPresent()){
            return ResponseEntity
                    .status(HttpStatus.BAD_REQUEST)
                    .body(String.format("Rating %d doesn't exist...", id));
        }
-        if (rating.getRating() < 1 || rating.getRating() > 5){
+        if (rating < 1 || rating > 5){
            return ResponseEntity
                    .status(HttpStatus.BAD_REQUEST)
                    .body("Rating = 1-5. Not 0, not 6, not 999!");
        }
-       ratingRepository.updateById(rating.getRating(), id);
+       ratingRepository.updateById(rating, id);
 
        return ResponseEntity
                .status(HttpStatus.OK)
