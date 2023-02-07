@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@Table(schema = "finditteam", name = "post")
+@Table(schema = "finditteam_second", name = "post")
 @Accessors(chain = true)
 public class PostEntity {
     @Id
@@ -24,15 +24,13 @@ public class PostEntity {
     @Column(name = "datetime")
     private LocalDate dateTime;
 
-    @Column(name = "post_status")
+    @Column(name = "status")
     private String postStatus;
 
-    // todo liquibase скрипт доделать
-    @JoinColumn(name = "author_user_id")
+    @JoinColumn(name = "author_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity author;
 
-    // todo (для учеников) здесь колонку НЕ добавляем, пишем только ответную часть
     @OneToMany(mappedBy = "post")
     private List<CommentEntity> comments;
 }
