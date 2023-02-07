@@ -5,7 +5,7 @@ databaseChangeLog:
       author: svarog916
       changes:
         - createTable:
-            schemaName: finditteam_second # вот это надо менять
+            schemaName: finditteam_second
             tableName: developer
             columns:
               - column:

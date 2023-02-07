@@ -5,16 +5,16 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "finditteam", name = "tags")
+@Table(schema = "finditteam_second", name = "tags")
 @Data
 @Accessors(chain = true)
 public class TagsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "tag")
-    String tag;
+    private String tag;
 
     @JoinColumn(name = "developer_id")
     @ManyToOne(cascade = CascadeType.PERSIST)
