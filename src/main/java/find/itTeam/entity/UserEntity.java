@@ -9,7 +9,7 @@ import java.util.List;
  * Entity для пользователя
  */
 @Entity
-@Table(schema = "finditteamSecond", name = "user")
+@Table(schema = "finditteam_second", name = "user")
 @Data
 @Accessors(chain = true)
 public class UserEntity {

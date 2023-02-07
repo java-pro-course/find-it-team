@@ -10,7 +10,7 @@ import java.util.List;
  * Entity для программиста
  */
 @Entity
-@Table(schema = "finditteam", name = "developer")
+@Table(schema = "finditteam_second", name = "developer")
 @Data
 @Accessors(chain = true)
 public class DeveloperEntity {
