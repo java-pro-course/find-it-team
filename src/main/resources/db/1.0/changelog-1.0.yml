@@ -17,3 +17,6 @@ databaseChangeLog:
   - include:
       file: tags.yml
       relativeToChangelogFile: true
+  - include:
+      file: rating.yml
+      relativeToChangelogFile: true
