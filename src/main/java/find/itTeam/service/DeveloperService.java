@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -43,7 +45,7 @@ public class DeveloperService {
         if (developerRepository.findByEmail(rq.getEmail()) != null) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
-                    .body("User with that email already exists!");
+                    .body("Developer with that email already exists!");
         }
         //Мы заботимся о безопасности наших разрабов)))
         if (rq.getPassword().toLowerCase().contains(rq.getName().toLowerCase())
@@ -143,6 +145,7 @@ public class DeveloperService {
      * @param id ну и id
      * @return обновленного разработчика
      */
+    @Transactional
     public ResponseEntity<?> updateDev(CreateDeveloper updateDev, Long id) {
         Optional<DeveloperEntity> developerEntity = developerRepository.findById(id);
         if (!developerEntity.isPresent()) {
@@ -150,8 +153,7 @@ public class DeveloperService {
                     .status(HttpStatus.NOT_FOUND)
                     .body("Developer doesn't exist!");
         }
-        /** проверки, проверки и еще раз проверки
-         */
+        // проверки, проверки и еще раз проверки
 
         if (updateDev.getDevRole() == null
                 || updateDev.getCity() == null
@@ -174,11 +176,6 @@ public class DeveloperService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Invalid email!");
-        }
-        if (developerRepository.findByEmail(updateDev.getEmail()) != null) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("User with that email already exists!");
         }
         if (updateDev.getPassword().toLowerCase().contains(updateDev.getName().toLowerCase())
                 || updateDev.getPassword().toLowerCase().contains(updateDev.getSurname().toLowerCase())) {
