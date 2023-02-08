@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ public class DeveloperService {
     public ResponseEntity<?> createTeamDeveloper(CreateDeveloper rq) {
         //проверка на null
         if (rq.getName() == null || rq.getSurname() == null
-                || rq.getEmail() == null ||rq.getPassword() == null
+                || rq.getEmail() == null || rq.getPassword() == null
                 || rq.getProjects() == null || rq.getGithubLink() == null
                 || rq.getDevRole() == null || rq.getLanguages() == null
                 || rq.getDevelopmentArea() == null || rq.getExperience() == null
@@ -54,7 +53,8 @@ public class DeveloperService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must not contains your name or your surname! It's not secure!");
         }
-        if (rq.getPassword().equals(rq.getPassword().toLowerCase()) || rq.getPassword().equals(rq.getPassword().toUpperCase())) {
+        if (rq.getPassword().equals(rq.getPassword().toLowerCase())
+                || rq.getPassword().equals(rq.getPassword().toUpperCase())) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain uppercase and lowercase letter!");
@@ -68,7 +68,7 @@ public class DeveloperService {
                 && !rq.getPassword().contains("6")
                 && !rq.getPassword().contains("7")
                 && !rq.getPassword().contains("8")
-                && !rq.getPassword().contains("9") ){
+                && !rq.getPassword().contains("9")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
@@ -103,7 +103,7 @@ public class DeveloperService {
      */
 
     public ResponseEntity<?> infoAboutDeveloperInTeam(Long id) {
-        if (!developerRepository.findById(id).isPresent()){
+        if (!developerRepository.findById(id).isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("The developer does not exist!");
@@ -116,7 +116,7 @@ public class DeveloperService {
     }
 
     public ResponseEntity<?> getAllDev() {
-        if (developerRepository.findAll().isEmpty()){
+        if (developerRepository.findAll().isEmpty()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("No developers yet...");
@@ -127,7 +127,7 @@ public class DeveloperService {
     }
 
     public ResponseEntity<?> deleteDevById(Long id) {
-        if (!developerRepository.findById(id).isPresent()){
+        if (!developerRepository.findById(id).isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
                     .body("The developer does not exist");
@@ -141,8 +141,9 @@ public class DeveloperService {
 
     /**
      * возможность изменить разработчика
+     *
      * @param updateDev параметры
-     * @param id ну и id
+     * @param id        ну и id
      * @return обновленного разработчика
      */
     @Transactional
@@ -183,7 +184,8 @@ public class DeveloperService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must not contains your name or your surname! It's not secure!");
         }
-        if (updateDev.getPassword().equals(updateDev.getPassword().toLowerCase()) || updateDev.getPassword().equals(updateDev.getPassword().toUpperCase())) {
+        if (updateDev.getPassword().equals(updateDev.getPassword().toLowerCase())
+                || updateDev.getPassword().equals(updateDev.getPassword().toUpperCase())) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain uppercase and lowercase letter!");
@@ -197,16 +199,28 @@ public class DeveloperService {
                 && !updateDev.getPassword().contains("6")
                 && !updateDev.getPassword().contains("7")
                 && !updateDev.getPassword().contains("8")
-                && !updateDev.getPassword().contains("9") ){
+                && !updateDev.getPassword().contains("9")) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("The password must contain numbers!");
         }
 
-     developerRepository.updateDevById(updateDev.getName(), updateDev.getSurname(), updateDev.getEmail(), updateDev.getPassword(), updateDev.getProjects(), updateDev.getGithubLink(), updateDev.getDevRole(), updateDev.getLanguages(), updateDev.getDevelopmentArea(), updateDev.getExperience(), updateDev.getCity(), updateDev.getMainJob(), id);
+        developerRepository.updateDevById(updateDev.getName(),
+                updateDev.getSurname(),
+                updateDev.getEmail(),
+                updateDev.getPassword(),
+                updateDev.getProjects(),
+                updateDev.getGithubLink(),
+                updateDev.getDevRole(),
+                updateDev.getLanguages(),
+                updateDev.getDevelopmentArea(),
+                updateDev.getExperience(),
+                updateDev.getCity(),
+                updateDev.getMainJob(),
+                id);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(String.format("Update developer %s", id));
     }
-    }
+}
