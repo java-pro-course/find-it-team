@@ -82,4 +82,16 @@ public class RatingService {
                .status(HttpStatus.OK)
                .body(String.format("Updated rating %d", id));
     }
+
+    public ResponseEntity<?> deleteRating(Long id) {
+        if (!ratingRepository.findById(id).isPresent()){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(String.format("Rating %d doesn't exist...", id));
+        }
+        ratingRepository.deleteById(id);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(String.format("Deleted rating %d", id));
+    }
 }

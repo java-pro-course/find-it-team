@@ -22,4 +22,8 @@ public class RatingController {
         return ratingService.updateRating(id, rating);
 
     }
+    @GetMapping("delete-rating/{id}")
+    public ResponseEntity<?> deleteRating(@PathVariable Long id){
+        return ratingService.deleteRating(id);
+    }
 }
