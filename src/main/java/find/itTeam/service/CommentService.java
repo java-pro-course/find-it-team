@@ -9,6 +9,8 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -62,6 +64,7 @@ public class CommentService {
      * @param comment Dto для создания комментария
      * @return  Строка "Update comment id-комментария"
      */
+    @Transactional
     public ResponseEntity<?> updateComment(Long id, CreateComment comment) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(id);
 

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -64,6 +65,7 @@ public class RatingService {
      * @param rating Dto для рейтинга
      * @return Подтверждение об обновлении
      */
+    @Transactional
     public ResponseEntity<?> updateRating(Long id, int rating){
        Optional<RatingEntity> ratingEntity = ratingRepository.findById(id);
        if (!ratingEntity.isPresent()){

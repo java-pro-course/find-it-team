@@ -8,6 +8,8 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -46,6 +48,7 @@ public class PostService {
      * @param post Пост, который хочет изменить пользователь
      * @return Изменённый пост
      */
+    @Transactional
     public ResponseEntity<?> updatePost(CreatePost post, Long id) {
         Optional<PostEntity> postEntity = postRepository.findById(id);
         if (!postEntity.isPresent()) {
