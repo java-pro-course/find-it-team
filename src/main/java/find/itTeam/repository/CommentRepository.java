@@ -17,7 +17,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long>{
      * @param id id комментария
      */
     @Modifying
-    @Query("UPDATE CommentEntity comment SET comment.text = ?1, comment.date = ?2" +
+    @Query("UPDATE CommentEntity comment SET comment.text = ?1, comment.date = ?2 " +
             "WHERE comment.id = ?3")
     void updateById(String text, LocalDate date, Long id);
 }
