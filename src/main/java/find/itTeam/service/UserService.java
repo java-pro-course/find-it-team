@@ -26,6 +26,12 @@ public class UserService {
                     .body(bigCheck(user).getBody());
         }
 
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("User with that email already exists!");
+        }
+
             UserEntity newUser = new UserEntity()
                     .setName(user.getName())
                     .setSurname(user.getSurname())
@@ -196,6 +202,18 @@ public class UserService {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("None of the fields must not be empty!");
         }
+        //Пробелы в имени
+        if (user.getName().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Your name must not contain spaces!");
+        }
+        //Пробелы в фамилии
+        if (user.getSurname().contains(" ")) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Your surname must not contain spaces!");
+        }
         //Содержание имени или фамилии в пароле
         if (user.getPassword().toLowerCase().contains(user.getName().toLowerCase())
                 || user.getPassword().toLowerCase().contains(user.getSurname().toLowerCase())) {
@@ -229,12 +247,6 @@ public class UserService {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Invalid email!");
-        }
-        //Похожий пользователь
-        if (userRepository.findByEmail(user.getEmail()) != null) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body("User with that email already exists!");
         }
         //Пробелы в почте
         if (user.getEmail().contains(" ")) {
