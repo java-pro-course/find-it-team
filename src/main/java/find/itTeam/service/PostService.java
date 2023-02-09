@@ -8,7 +8,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -31,15 +30,23 @@ public class PostService {
                     .status(HttpStatus.NOT_FOUND)
                     .body("The author does not exist!");
         }
+
+        if (post.getContent() == null) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Content must not be null!");
+
+        }
+
         PostEntity newPost = new PostEntity()
                 .setContent(post.getContent())
                 .setDateTime(LocalDate.now())
                 .setPostStatus("Not edited")
                 .setAuthor(userRepository.findById(authorId).get());
 
-        postRepository.save(newPost);
-
-        return ResponseEntity.status(HttpStatus.OK).body(newPost);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(postRepository.save(newPost));
     }
 
     /**
@@ -63,7 +70,10 @@ public class PostService {
 
         }
 
-        postRepository.updateById(post.getContent(), LocalDate.now(), "Edited", id);
+        postRepository.updateById(post.getContent(),
+                LocalDate.now(),
+                "Edited",
+                id);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
