@@ -9,7 +9,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -56,7 +55,6 @@ public class CommentService {
                 .status(HttpStatus.OK)
                 .body(result);
     }
-
     /**
      * Изменение комментария по id
      *
@@ -67,7 +65,6 @@ public class CommentService {
     @Transactional
     public ResponseEntity<?> updateComment(Long id, CreateComment comment) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(id);
-
         if (!commentEntity.isPresent()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
